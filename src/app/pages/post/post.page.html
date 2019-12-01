@@ -1,0 +1,207 @@
+<ion-header>
+  <ion-toolbar color ="success">
+    <ion-title>Grupo Familiar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-radio-group>
+            <ion-list-header>
+              <ion-label>Padre</ion-label>
+            </ion-list-header>
+        
+            <ion-item>
+              <ion-label>Vivo</ion-label>
+              <ion-radio slot="start" value="vivoPadre" checked></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>Fallecido</ion-label>
+              <ion-radio slot="start" value="fallPadre"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-radio-group>
+            <ion-list-header>
+              <ion-label>Madre</ion-label>
+            </ion-list-header>
+        
+            <ion-item>
+              <ion-label>Viva</ion-label>
+              <ion-radio slot="start" value="vivoMadre" checked></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>Fallecida</ion-label>
+              <ion-radio slot="start" value="fallMadre"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+      <ion-col>
+        <ion-list>
+          <ion-radio-group>
+            <ion-list-header>
+              <ion-label>Situacion Conyugal</ion-label>
+            </ion-list-header>
+        
+            <ion-item>
+              <ion-label>Juntos</ion-label>
+              <ion-radio slot="start" value="juntos" checked></ion-radio>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Separados</ion-label>
+              <ion-radio slot="start" value="separados"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <!--Aqui termina la Situacion Conyugal-->
+    
+      <ion-col size=5>
+          <ion-list-header>
+              <ion-title>Hermanos</ion-title>
+          </ion-list-header>
+      </ion-col>
+    <!--1-->
+    <ion-row>
+      <ion-col size=6>
+          <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+      </ion-col>
+      <ion-col size=2>
+          <ion-item>
+              <ion-label position="floating">Edad</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--2-->
+    <ion-row>
+        <ion-col size=6>
+            <ion-item>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+        </ion-col>
+        <ion-col size=2>
+            <ion-item>
+                <ion-label position="floating">Edad</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+        </ion-col>
+      </ion-row>
+      <!--3-->
+      <ion-row>
+          <ion-col size=6>
+              <ion-item>
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col size=2>
+              <ion-item>
+                  <ion-label position="floating">Edad</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+      <!--4-->
+      <ion-row>
+          <ion-col size=6>
+              <ion-item>
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col size=2>
+              <ion-item>
+                  <ion-label position="floating">Edad</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+      <!--5-->
+      <ion-row>
+          <ion-col size=6>
+              <ion-item>
+                  <ion-label position="floating">Nombre</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col size=2>
+              <ion-item>
+                  <ion-label position="floating">Edad</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+    <!--/////////////////////////////////////////////////////////////////////////////////////////////////////-->
+            <ion-list-header>
+                <ion-title>Otros integrantes</ion-title>
+            </ion-list-header>
+          
+        <ion-row>
+          <ion-col size=3.7>
+            <ion-item>
+              <ion-label >Abuelo</ion-label>
+                <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+                  <ion-select-option value="abuePaterno">Paterno</ion-select-option>
+                  <ion-select-option value="abueMaterno">Materno</ion-select-option>
+                </ion-select>
+              </ion-item>
+          </ion-col>
+          <ion-col size=3.7>
+            <ion-item>
+            <ion-label>Abuela</ion-label>
+            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option value="abuePaterna">Paterna</ion-select-option>
+              <ion-select-option value="abueMaterna">Materna</ion-select-option>
+            </ion-select>
+          </ion-item>
+          </ion-col>
+          </ion-row>
+
+        <ion-row>
+          <ion-col size=3.7>
+            <ion-item>
+              <ion-label >Tio(s)</ion-label>
+                <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+                  <ion-select-option value="siTio">Si</ion-select-option>
+                  <ion-select-option value="noTio">No</ion-select-option>
+                </ion-select>
+              </ion-item>
+          </ion-col>
+          <ion-col size=3.7>
+            <ion-item>
+            <ion-label>Primo(s)</ion-label>
+            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option value="siPrimo">Si</ion-select-option>
+              <ion-select-option value="noPrimo">No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          </ion-col>
+          </ion-row>
+
+          <ion-list-header>
+              <ion-title>Observaciones</ion-title>
+          </ion-list-header>
+            <ion-item>
+                <ion-textarea placeholder=""></ion-textarea>
+              </ion-item>
+
+            <ion-button>Aceptar</ion-button>
+            <ion-button>Cancelar</ion-button>
+  </ion-grid>
+</ion-content>

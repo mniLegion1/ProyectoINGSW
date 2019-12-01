@@ -1,0 +1,186 @@
+<ion-header>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      </ion-buttons>
+  <ion-title>Antecedentes Personales</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+
+
+<ion-content padding>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+        <ion-item>
+            <ion-label position="floating">Primer nombre</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+    </ion-col>
+    <ion-col>
+        <ion-item>
+            <ion-label position="floating">Primer nombre</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Apellido paterno</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Apellido materno</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+        <ion-item>
+            <ion-label position="floating">Direccion</ion-label>
+            <ion-input></ion-input>
+          </ion-item>
+        </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col>
+          <ion-item>
+              <ion-label position="floating">Comuna</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+          </ion-col>
+      <ion-col>
+          <ion-item>
+              <ion-label position="floating">Fono</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">RUT</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Correo Electronico</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Fecha de nacimiento</ion-label>
+              <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+            </ion-item>     
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                <ion-label>Fecha de ingreso</ion-label>
+                <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+              </ion-item>     
+            </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label>Sexo</ion-label>
+                  <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+                    <ion-select-option value="masc">Masculino</ion-select-option>
+                    <ion-select-option value="fem">Femenino</ion-select-option>
+                  </ion-select>
+              </ion-item>
+          </ion-col>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Edad menarquía</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <ion-item>
+                    <ion-label>Fecha de ingreso</ion-label>
+                    <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+                  </ion-item>
+              </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col>
+              <ion-item>
+                <ion-label position="floating">Actividad</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">Deporte</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+            </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Tiempo libre</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label position="floating">Rendimiento</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+        </ion-col>          
+      </ion-row>
+      <ion-row>
+        <ion-col size=5.5>
+            <ion-item>
+                <ion-label position="floating">Futuro</ion-label>
+                <ion-input></ion-input>
+              </ion-item>
+        </ion-col>
+          <ion-col>
+              <ion-button class="test">Datos familiares</ion-button>
+              <ion-button class="sectest">Antecedentes mórbidos</ion-button>
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col size=5.5>
+              <ion-item>
+                  <ion-label position="floating">Acompañante</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+          </ion-col>
+            <ion-col>
+                <ion-button class="test">Anamnesis</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label position="floating">Motivo consulta</ion-label>
+                    <ion-input></ion-input>
+                  </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size =6></ion-col>
+            <ion-button>Aceptar</ion-button>
+            <ion-button>Siguiente</ion-button>
+            <ion-button>Cancelar</ion-button>
+          </ion-row>
+
+
+
+
+</ion-grid>
+
+</ion-content>
