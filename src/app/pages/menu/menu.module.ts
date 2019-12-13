@@ -29,6 +29,13 @@ const routes: Routes = [
       {
         path: 'examenfisico',
         loadChildren: '../delete/delete.module#DeletePageModule'
+      },
+      {
+        path: 'examenlaboratorio',
+        loadChildren: '../vervidrio/vervidrio.module#VervidrioPageModule'
+      },
+      { path: 'pacientes',
+      loadChildren: '../verpaciente/verpaciente.module#VerpacientePageModule'
       }
     ]
   },

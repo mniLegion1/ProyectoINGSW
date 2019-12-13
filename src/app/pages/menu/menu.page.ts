@@ -26,6 +26,14 @@ export class MenuPage implements OnInit {
       url:'/menu/examenfisico'
     },
     {
+      title: 'Examen laboratorio',
+      url:'/menu/examenlaboratorio'
+    },
+    {
+      title: 'Pacientes',
+      url:'/menu/pacientes'
+    },
+    {
       title: 'Graficos',
       url:'/menu/pie-chart'
     }

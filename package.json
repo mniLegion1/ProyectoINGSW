@@ -29,13 +29,14 @@
     "core-js": "^2.5.4",
     "ng": "0.0.0",
     "ng2-charts": "^2.3.0",
-    "rxjs": "~6.5.1",
+    "rxjs": "^6.5.3",
+    "rxjs-compat": "^6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
+    "@angular-devkit/build-angular": "^0.801.3",
     "@angular-devkit/core": "~8.1.2",
     "@angular-devkit/schematics": "~8.1.2",
     "@angular/cli": "~8.1.2",
