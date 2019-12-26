@@ -1,6 +1,7 @@
 <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
 
 <ion-split-pane>
+  
 
   <ion-menu contentId="content">
     <ion-header>
@@ -10,6 +11,7 @@
     </ion-header>
 
     <ion-content>
+      <ion-slide>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
           <ion-item color="light" [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath === p.url">
@@ -17,6 +19,7 @@
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
+    </ion-slide>
       
     </ion-content>
   </ion-menu>

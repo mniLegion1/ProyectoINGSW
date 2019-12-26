@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="menu"></ion-back-button>
+    </ion-buttons>
     <ion-title>Grupo Familiar</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -7,64 +10,34 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-radio-group>
-            <ion-list-header>
-              <ion-label>Padre</ion-label>
-            </ion-list-header>
-        
-            <ion-item>
-              <ion-label>Vivo</ion-label>
-              <ion-radio slot="start" value="vivoPadre" checked></ion-radio>
-            </ion-item>
-        
-            <ion-item>
-              <ion-label>Fallecido</ion-label>
-              <ion-radio slot="start" value="fallPadre"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-list>
+      <ion-col size=3.85>
+        <ion-item>
+          <ion-label >Padre</ion-label>
+            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+              <ion-select-option value="vivoPadre">Vivo</ion-select-option>
+              <ion-select-option value="fallPadre">Fallecido</ion-select-option>
+            </ion-select>
+          </ion-item>
+      </ion-col>
+      <ion-col size=3.85>
+        <ion-item>
+        <ion-label>Madre</ion-label>
+        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+          <ion-select-option value="vivaMadre">Viva</ion-select-option>
+          <ion-select-option value="fallMadre">Fallecida</ion-select-option>
+        </ion-select>
+      </ion-item>
       </ion-col>
       <ion-col>
-        <ion-list>
-          <ion-radio-group>
-            <ion-list-header>
-              <ion-label>Madre</ion-label>
-            </ion-list-header>
-        
-            <ion-item>
-              <ion-label>Viva</ion-label>
-              <ion-radio slot="start" value="vivoMadre" checked></ion-radio>
-            </ion-item>
-        
-            <ion-item>
-              <ion-label>Fallecida</ion-label>
-              <ion-radio slot="start" value="fallMadre"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-list>
+        <ion-item>
+        <ion-label>Situacion Conyugal</ion-label>
+        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
+          <ion-select-option value="scjuntos">Juntos</ion-select-option>
+          <ion-select-option value="scseparados">Separados</ion-select-option>
+        </ion-select>
+      </ion-item>
       </ion-col>
-      <ion-col>
-        <ion-list>
-          <ion-radio-group>
-            <ion-list-header>
-              <ion-label>Situacion Conyugal</ion-label>
-            </ion-list-header>
-        
-            <ion-item>
-              <ion-label>Juntos</ion-label>
-              <ion-radio slot="start" value="juntos" checked></ion-radio>
-            </ion-item>
-
-            <ion-item>
-              <ion-label>Separados</ion-label>
-              <ion-radio slot="start" value="separados"></ion-radio>
-            </ion-item>
-          </ion-radio-group>
-        </ion-list>
-      </ion-col>
-    </ion-row>
+      </ion-row>
     <!--Aqui termina la Situacion Conyugal-->
     
       <ion-col size=5>

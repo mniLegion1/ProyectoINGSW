@@ -36,10 +36,14 @@ export class MenuPage implements OnInit {
     {
       title: 'Graficos',
       url:'/menu/pie-chart'
+    },
+    {
+      title: 'Test',
+      url:'/menu/test'
     }
   ];
 
-  selectedPath = '';
+  selectedPath = '/menu';
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: RouterEvent) => {

@@ -1,10 +1,19 @@
 import { DatetimeOptions } from '@ionic/core'
 import { Timestamp } from 'rxjs/internal/operators/timestamp'
 
+export class User{
+    email:string;
+    password:string;
+}
+
 export interface datosvidrios{
     cantKg: number
     dia: string
     fecha: Date
+}
+
+export interface grupofamiliar{
+    
 }
 
 export class datosvidrios{

@@ -8,9 +8,9 @@ import { Chart} from 'chart.js'
   styleUrls: ['./pie-chart.page.scss'],
 })
 export class PieChartPage implements OnInit {
-  @ViewChild('barCanvas') barCanvas;
-  @ViewChild('pieCanvas') pieCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
+  @ViewChild('barCanvas',null) barCanvas;
+  @ViewChild('pieCanvas',null) pieCanvas;
+  @ViewChild('lineCanvas',null) lineCanvas;
 
   barChart: any;
   pieChart: any;

@@ -7,7 +7,7 @@ import { MenuPage } from './menu.page';
 
 const routes: Routes = [
   {
-    path: 'menu',
+    path: '',
     component: MenuPage,
     children: [
       {
@@ -35,13 +35,12 @@ const routes: Routes = [
         loadChildren: '../vervidrio/vervidrio.module#VervidrioPageModule'
       },
       { path: 'pacientes',
-      loadChildren: '../verpaciente/verpaciente.module#VerpacientePageModule'
+        loadChildren: '../verpaciente/verpaciente.module#VerpacientePageModule'
+      },
+      { path: 'test',
+        loadChildren: '../addcustomer/addcustomer.module#AddcustomerPageModule'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/menu/'
   }
 ];
 
