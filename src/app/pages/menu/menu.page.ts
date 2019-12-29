@@ -43,7 +43,7 @@ export class MenuPage implements OnInit {
     }
   ];
 
-  selectedPath = '/menu';
+  selectedPath = '';
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: RouterEvent) => {

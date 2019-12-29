@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/servicios/api.service';
+import { User } from 'src/app/modelosapi/modelosapi.models';
 
 @Component({
   selector: 'app-test',
@@ -6,10 +9,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./test.page.scss'],
 })
 export class TestPage implements OnInit {
+  user:User = new User();
 
-  constructor() { }
+  constructor(private apiRest: ApiService, private router:Router) { }
 
   ngOnInit() {
   }
-
 }

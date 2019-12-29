@@ -13,12 +13,12 @@ export class VervidrioPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.VerVidrio();
+    //this.VerVidrio();
   }
 
   VerVidrio(){
-    this.api_service.VerVidrio().subscribe((Vidrios)=>{
+    /**this.api_service.VerVidrio().subscribe((Vidrios)=>{
       console.log(Vidrios[0].cantKg)
-  });
+  });**/
   }
 }

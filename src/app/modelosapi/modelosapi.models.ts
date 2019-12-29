@@ -1,15 +1,31 @@
 import { DatetimeOptions } from '@ionic/core'
 import { Timestamp } from 'rxjs/internal/operators/timestamp'
+import { __exportStar } from 'tslib';
 
 export class User{
     email:string;
     password:string;
 }
 
-export interface datosvidrios{
-    cantKg: number
-    dia: string
-    fecha: Date
+
+export class Paciente{
+    rut:number
+    nombres:string
+    apellidos:string
+    direccion:string
+    cor_elec:string
+    comuna:string
+    fono:string
+    sexo:boolean
+    edad_menarq:number
+    fec_menarq:Date
+    actividad:string
+    deporte:string
+    fec_ingreso:Date
+    tiem_lib:string
+    rendim:Float32Array
+    prof_futuro:string
+    
 }
 
 export interface grupofamiliar{

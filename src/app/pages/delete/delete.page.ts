@@ -15,15 +15,15 @@ export class DeletePage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.apiService.VerVidrio().subscribe((vidrios)=>{
+    /**this.apiService.VerVidrio().subscribe((vidrios)=>{
       this.vidrios = vidrios;
-   })
+   })**/
   }
   
-  EliminarVidrio(id_vidrios:number){
+  /**EliminarVidrio(id_vidrios:number){
     this.apiService.EliminarVidrio(id_vidrios).subscribe(data=>{ 
       this.ngOnInit();
     })
-  }
+  }**/
   
 }

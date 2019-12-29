@@ -11,12 +11,14 @@
     </ion-label>
     <ion-input type="text" [(ngModel)]="user.email"></ion-input>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">
       Contraseña
     </ion-label >
     <ion-input type="password" [(ngModel)]="user.password"></ion-input>
   </ion-item>
+  
   <ion-item-divider>
     <ion-button class="sectest" size="large" (click)="onLogin()">Ingresar</ion-button>
     <ion-button class="sectest" size="large" href="/register">Nuevo</ion-button>

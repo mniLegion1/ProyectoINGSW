@@ -16,11 +16,11 @@ export class PostPage implements OnInit {
     private route: Router
   ) { }
 
-  AgregarVidrio(){
+  /**AgregarVidrio(){
     this.apiRest.AgregarVidrio(this.datosvidrios).subscribe(res => {
       this.route.navigateByUrl("/get");
     })
-  }
+  }**/
 
   ngOnInit() {
   }

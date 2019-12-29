@@ -14,15 +14,15 @@ export class GetPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiService.VerVidrio().subscribe((vidrios)=>{
+    /**this.apiService.VerVidrio().subscribe((vidrios)=>{
       this.vidrios = vidrios; 
       console.log(vidrios);
    },error=>{
-   console.log("errorrrrrrr") })
+   console.log("errorrrrrrr") })**/
     
   }
   
-  EliminarVidrio(id_vidrios:number){
+  /**EliminarVidrio(id_vidrios:number){
     this.apiService.EliminarVidrio(id_vidrios).subscribe(data=>{
       alert("El contenedor ha sido eliminado")
       console.log(id_vidrios) 
@@ -30,5 +30,5 @@ export class GetPage implements OnInit {
     },error=>{ 
      console.log('errrooooooorrrr')  
     })
-  }
+  }**/
 }
