@@ -15,7 +15,20 @@ const routes: Routes = [
   { path: 'menu',
     loadChildren: './pages/menu/menu.module#MenuPageModule',
     //canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'antecedentespersonales',
+    loadChildren: './pages/get/get.module#GetPageModule',
+  },
+  {
+    path: 'grupofamiliar',
+    loadChildren: './pages/post/post.module#PostPageModule'
+  },
+  { path: 'pacientes',
+  loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule'
+    //canActivate: [AuthGuard]
+  },
+
 ];
 
 @NgModule({

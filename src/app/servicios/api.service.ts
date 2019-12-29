@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../modelosapi/modelosapi.models';
@@ -10,7 +10,8 @@ import { Paciente } from '../modelosapi/modelosapi.models';
 })
 export class ApiService {
   public isLogged:any = false;
-  api_url = "http://localhost:3000/consulta";
+  api_url = "";
+  
   constructor(public http: HttpClient,public afAuth:AngularFireAuth){
     afAuth.authState.subscribe(user => (this.isLogged = user));
   }
@@ -34,6 +35,8 @@ export class ApiService {
   }
 
   VerPaciente(): Observable <Paciente[]> {
-    return this.http.get<Paciente[]>(this.api_url)
+    return this.http.get<Paciente[]>("http://localhost:3600/pacientes");
+  } catch (error) {
+    console.log('No accede a la BD',error);
   }
 }

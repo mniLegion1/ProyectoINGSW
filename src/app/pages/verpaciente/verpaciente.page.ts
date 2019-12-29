@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/servicios/api.service';
+
 
 @Component({
   selector: 'app-verpaciente',
@@ -8,21 +12,17 @@ import { MenuController } from '@ionic/angular';
 })
 export class VerpacientePage implements OnInit {
 
-  constructor(private menu: MenuController) { }
+  paciente = new Array();
+
+  constructor(private apiRest: ApiService, private router:Router) {
+    this.apiRest.VerPaciente().subscribe(pacientes =>{
+      this.paciente = pacientes; 
+      console.log(pacientes);
+    },error=>{
+      console.log("Ha ocurrido un error durante la ejecucion")
+    })
+  }
+
   ngOnInit() {
   }
-  
-  openFirst(){
-    this.menu.enable(true,'first');
-    this.menu.open('first');
-  }
-  openEnd(){
-    this.menu.open('end')
-  }
-  openCustom(){
-    this.menu.enable(true,'custom');
-    this.menu.open('custom');
-  }
-  
-
 }

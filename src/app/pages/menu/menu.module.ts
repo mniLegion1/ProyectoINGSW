@@ -15,12 +15,12 @@ const routes: Routes = [
         loadChildren: '../pie-chart/pie-chart.module#PieChartPageModule'
       },
       {
-        path: 'grupofamiliar',
-        loadChildren: '../post/post.module#PostPageModule'
-      },
-      {
         path: 'antecedentespersonales',
         loadChildren: '../get/get.module#GetPageModule'
+      },
+      {
+        path: 'grupofamiliar',
+        loadChildren: './pages/post/post.module#PostPageModule',
       },
       {
         path: 'controlpaciente',

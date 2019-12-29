@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterEvent } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ApiService } from 'src/app/servicios/api.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,49 +10,20 @@ import { Router, RouterEvent } from '@angular/router';
 })
 export class MenuPage implements OnInit {
 
-  pages = [
-    {
-      title: 'Grupo familiar',
-      url: '/menu/grupofamiliar'
-    },
-    {
-      title: 'Antecedentes personales',
-      url: '/menu/antecedentespersonales'
-    },
-    {
-      title: 'Control paciente',
-      url: '/menu/controlpaciente'
-    },
-    {
-      title: 'Examen fisico',
-      url:'/menu/examenfisico'
-    },
-    {
-      title: 'Examen laboratorio',
-      url:'/menu/examenlaboratorio'
-    },
-    {
-      title: 'Pacientes',
-      url:'/menu/pacientes'
-    },
-    {
-      title: 'Graficos',
-      url:'/menu/pie-chart'
-    },
-    {
-      title: 'Test',
-      url:'/menu/test'
-    }
-  ];
 
   selectedPath = '';
 
-  constructor(private router: Router) {
+  constructor(private apiRest:ApiService, private router: Router,private afAuth:AngularFireAuth) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.selectedPath = event.url;
     });
   }
 
+  onLogout(){
+    console.log('Sesion cerrada');
+    this.afAuth.auth.signOut();
+    this.router.navigateByUrl('/login');
+  }
   ngOnInit() {
   }
 

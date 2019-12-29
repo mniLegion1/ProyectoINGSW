@@ -9,23 +9,22 @@ export class User{
 
 
 export class Paciente{
-    rut:number
-    nombres:string
-    apellidos:string
-    direccion:string
-    cor_elec:string
-    comuna:string
-    fono:string
-    sexo:boolean
-    edad_menarq:number
-    fec_menarq:Date
     actividad:string
+    apellidos:string
+    comuna:string
+    cor_elec:string
     deporte:string
+    direccion:string
+    edad_menarq:number
     fec_ingreso:Date
-    tiem_lib:string
-    rendim:Float32Array
+    fec_menarq:Date
+    fono:string
+    nombres:string
     prof_futuro:string
-    
+    rendim:Float32Array
+    rut:number
+    sexo:boolean
+    tiem_lib:string
 }
 
 export interface grupofamiliar{
