@@ -34,9 +34,15 @@ export class ApiService {
     }
   }
 
-  VerPaciente(): Observable <Paciente[]> {
-    return this.http.get<Paciente[]>("http://localhost:3600/pacientes");
+  VerPacientes(): Observable <Paciente[]> {
+    return this.http.get<Paciente[]>("http://localhost:3600/get");
   } catch (error) {
     console.log('No accede a la BD',error);
   }
+
+  //Digito verificador pendiente
+  /**async ModuloOnce(rut:number){
+    if(rut.leng)
+    
+  }**/
 }

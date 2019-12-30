@@ -20,7 +20,7 @@ const routes: Routes = [
       },
       {
         path: 'grupofamiliar',
-        loadChildren: './pages/post/post.module#PostPageModule',
+        loadChildren: '../post/post.module#PostPageModule',
       },
       {
         path: 'controlpaciente',

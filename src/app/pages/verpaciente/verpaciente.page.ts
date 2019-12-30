@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 import { Router } from '@angular/router';
@@ -13,11 +13,12 @@ import { ApiService } from 'src/app/servicios/api.service';
 export class VerpacientePage implements OnInit {
 
   paciente = new Array();
+  numero:number;
 
   constructor(private apiRest: ApiService, private router:Router) {
-    this.apiRest.VerPaciente().subscribe(pacientes =>{
-      this.paciente = pacientes; 
-      console.log(pacientes);
+    this.apiRest.VerPacientes().subscribe(pacientes =>{
+      this.paciente = pacientes;
+    //this.apiRest.ModuloOnce(this.numero);
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })

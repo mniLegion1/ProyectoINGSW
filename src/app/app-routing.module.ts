@@ -28,6 +28,10 @@ const routes: Routes = [
   loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule'
     //canActivate: [AuthGuard]
   },
+  {
+    path: 'perfilpaciente',
+    loadChildren: './pages/vervidrio/vervidrio.module#VervidrioPageModule'
+  }
 
 ];
 
