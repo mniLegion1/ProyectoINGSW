@@ -1,9 +1,7 @@
 import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
-import { MenuController } from '@ionic/angular';
-import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
-
+import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 
 @Component({
   selector: 'app-verpaciente',
@@ -12,6 +10,7 @@ import { ApiService } from 'src/app/servicios/api.service';
 })
 export class VerpacientePage implements OnInit {
 
+  public Paciente = new Array();
   paciente = new Array();
   numero:number;
 
@@ -25,5 +24,15 @@ export class VerpacientePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  EliminarPaciente(rut:number){
+    this.apiRest.EliminarPaciente(rut).subscribe(data=>{
+      alert("Paciente eliminado - Ionic")
+      console.log(rut)
+      this.ngOnInit();
+      }, error =>{
+      console.log('Error al eliminar paciente')
+    })
   }
 }

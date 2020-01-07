@@ -15,36 +15,22 @@
   <ion-row>
     <ion-col>
         <ion-item>
-            <ion-label position="floating">Primer nombre</ion-label>
-            <ion-input></ion-input>
+            <ion-label position="floating">Nombres</ion-label>
+            <ion-input type="text" [(ngModel)]="paciente.nombres"></ion-input>
           </ion-item>
     </ion-col>
     <ion-col>
         <ion-item>
-            <ion-label position="floating">Primer nombre</ion-label>
-            <ion-input></ion-input>
+            <ion-label position="floating">Apellidos</ion-label>
+            <ion-input type="text" [(ngModel)]="paciente.apellidos"></ion-input>
           </ion-item>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">Apellido paterno</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">Apellido materno</ion-label>
-        <ion-input></ion-input>
-      </ion-item>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>
         <ion-item>
             <ion-label position="floating">Direccion</ion-label>
-            <ion-input></ion-input>
+            <ion-input type="text" [(ngModel)]="paciente.direccion"></ion-input>
           </ion-item>
         </ion-col>
   </ion-row>
@@ -52,13 +38,13 @@
       <ion-col>
           <ion-item>
               <ion-label position="floating">Comuna</ion-label>
-              <ion-input></ion-input>
+              <ion-input type="text" [(ngModel)]="paciente.comuna"></ion-input>
             </ion-item>
           </ion-col>
       <ion-col>
           <ion-item>
               <ion-label position="floating">Fono</ion-label>
-              <ion-input></ion-input>
+              <ion-input type="text" [(ngModel)]="paciente.fono"></ion-input>
             </ion-item>
       </ion-col>
     </ion-row>
@@ -66,7 +52,7 @@
         <ion-col>
             <ion-item>
                 <ion-label position="floating">RUT</ion-label>
-                <ion-input></ion-input>
+                <ion-input type="text" [(ngModel)]="paciente.rut_paciente"></ion-input>
               </ion-item>
             </ion-col>
         <ion-col>
@@ -174,7 +160,7 @@
           </ion-row>
           <ion-row>
             <ion-col size =6></ion-col>
-            <ion-button>Aceptar</ion-button>
+            <ion-button (click)="AgregarPaciente()">Aceptar</ion-button>
             <ion-button>Siguiente</ion-button>
             <ion-button routerLink="/menu">Cancelar</ion-button>
           </ion-row>

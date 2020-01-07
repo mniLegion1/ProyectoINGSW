@@ -22,7 +22,7 @@ export class Paciente{
     nombres:string
     prof_futuro:string
     rendim:Float32Array
-    rut:number
+    rut_paciente:number
     sexo:boolean
     tiem_lib:string
 }

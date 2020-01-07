@@ -22,5 +22,7 @@ export class RegisterPage implements OnInit {
       console.log('Usuario creado correctamente');
       this.router.navigateByUrl('/login');
     }
+    else
+      alert("Los datos ingresados no son validos. Intentelo de nuevo");
   }
 }

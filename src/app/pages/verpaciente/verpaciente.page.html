@@ -1,20 +1,33 @@
 <ion-header>
   <ion-toolbar color="success">
       <ion-buttons slot="start">
-        <ion-button color ="tertiary" routerLink="/menu">Volver</ion-button>
+        <ion-button routerLink="/menu">Volver</ion-button>
         </ion-buttons>
     <ion-title>Pacientes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size=5.3>
+        Nombre
+      </ion-col>
+      <ion-col>
+        RUT
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list>
-    <ion-item button *ngFor="let paciente of paciente" routerLink="/perfilpaciente">
+    <ion-item button *ngFor="let paciente of paciente">
       <ion-label>
-          <h4>{{paciente.nombres}} {{paciente.apellidos}}</h4>
-          <h4>{{paciente.rut_paciente}}</h4>
-          <h3></h3>
-      </ion-label>      
+        {{paciente.nombres}} {{paciente.apellidos}} 
+      </ion-label>
+      <ion-label>
+        {{paciente.rut_paciente}}
+      </ion-label>
+      <ion-button color="medium" size="small">Actualizar</ion-button>
+      <ion-button color="medium" size="small" (click)="EliminarPaciente(paciente.rut_paciente)">Borrar</ion-button>
     </ion-item>
 </ion-list>
 </ion-content>

@@ -8,18 +8,18 @@ import { ApiService } from 'src/app/servicios/api.service';
   styleUrls: ['./vervidrio.page.scss'],
 })
 export class VervidrioPage implements OnInit {
+  paciente = new Array();
 
-  constructor(
-    public apiRest: ApiService
-  ) { }
+  constructor(private apiRest: ApiService, private router:Router) {
+    /**this.apiRest.PerfilPaciente().subscribe(pacientes =>{
+      this.paciente = pacientes;
+    //this.apiRest.ModuloOnce(this.numero);
+    },error=>{
+      console.log("Ha ocurrido un error durante la ejecucion")
+    })**/
+  }
 
   ngOnInit() {
     //this.VerVidrio();
-  }
-
-  VerVidrio(){
-    /**this.api_service.VerVidrio().subscribe((Vidrios)=>{
-      console.log(Vidrios[0].cantKg)
-  });**/
   }
 }

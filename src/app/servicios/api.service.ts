@@ -10,7 +10,6 @@ import { Paciente } from '../modelosapi/modelosapi.models';
 })
 export class ApiService {
   public isLogged:any = false;
-  api_url = "";
   
   constructor(public http: HttpClient,public afAuth:AngularFireAuth){
     afAuth.authState.subscribe(user => (this.isLogged = user));
@@ -35,9 +34,7 @@ export class ApiService {
   }
 
   VerPacientes(): Observable <Paciente[]> {
-    return this.http.get<Paciente[]>("http://localhost:3600/get");
-  } catch (error) {
-    console.log('No accede a la BD',error);
+    return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
   }
 
   //Digito verificador pendiente
@@ -45,4 +42,15 @@ export class ApiService {
     if(rut.leng)
     
   }**/
+
+  PerfilPaciente(rutpac:number): Observable<any>{
+    return this.http.get<Paciente[]>("http://localhost:5000/perfilpaciente/" + rutpac);
+  }
+
+  AgregarPaciente(Paciente: Paciente): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
+  }
+  EliminarPaciente(Paciente:number): Observable<any>{
+    return this.http.post<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente",Paciente)
+  }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
+import { Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-get',
@@ -7,28 +9,21 @@ import { ApiService } from 'src/app/servicios/api.service';
   styleUrls: ['./get.page.scss'],
 })
 export class GetPage implements OnInit {
-  public vidrios: Object
-  
-  constructor(
-    public apiService: ApiService
-  ) { }
+  errorMessage:string = '';
+  successMessage:string = '';
+  paciente:Paciente = new Paciente();
+
+  constructor(private apiRest: ApiService, private router:Router) { }
 
   ngOnInit() {
-    /**this.apiService.VerVidrio().subscribe((vidrios)=>{
-      this.vidrios = vidrios; 
-      console.log(vidrios);
-   },error=>{
-   console.log("errorrrrrrr") })**/
-    
   }
-  
-  /**EliminarVidrio(id_vidrios:number){
-    this.apiService.EliminarVidrio(id_vidrios).subscribe(data=>{
-      alert("El contenedor ha sido eliminado")
-      console.log(id_vidrios) 
-      this.ngOnInit();
-    },error=>{ 
-     console.log('errrooooooorrrr')  
-    })
-  }**/
+
+AgregarPaciente(){
+  this.apiRest.AgregarPaciente(this.paciente).subscribe(res => {
+    this.router.navigateByUrl('/pacientes');
+  }, err =>{
+    alert("El paciente no pudo registrarse");
+  })
+}
+
 }

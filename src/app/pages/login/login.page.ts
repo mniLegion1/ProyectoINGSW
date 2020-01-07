@@ -22,5 +22,8 @@ export class LoginPage implements OnInit {
       console.log('Logeado correctamente');
       this.router.navigateByUrl('/menu');
     }
+    else
+      alert("El usuario y/o contraseña son incorrectos");
+    
   }
 }
