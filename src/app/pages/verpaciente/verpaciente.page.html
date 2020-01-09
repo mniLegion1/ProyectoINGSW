@@ -24,7 +24,7 @@
         {{paciente.nombres}} {{paciente.apellidos}} 
       </ion-label>
       <ion-label>
-        {{paciente.rut_paciente}}
+        {{paciente.rut_paciente}}{{'-'}}{{paciente.dig_verif}}
       </ion-label>
       <ion-button color="medium" size="small">Actualizar</ion-button>
       <ion-button color="medium" size="small" (click)="EliminarPaciente(paciente.rut_paciente)">Borrar</ion-button>

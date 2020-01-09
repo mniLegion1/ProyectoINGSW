@@ -13,7 +13,6 @@ export class VervidrioPage implements OnInit {
   constructor(private apiRest: ApiService, private router:Router) {
     /**this.apiRest.PerfilPaciente().subscribe(pacientes =>{
       this.paciente = pacientes;
-    //this.apiRest.ModuloOnce(this.numero);
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })**/

@@ -14,22 +14,39 @@ export class Paciente{
     comuna:string
     cor_elec:string
     deporte:string
+    dig_verif:string
     direccion:string
     edad_menarq:number
     fec_ingreso:Date
     fec_menarq:Date
+    fec_nacim:Date
     fono:string
+    id_prevision:number
     nombres:string
     prof_futuro:string
+    rendimiento:Float32Array
+    rut_paciente:number
+    sexo:boolean
+    tiempo_libre:string
+}
+export class Prevision{
+    idPREVISION:number
+    desc_prevision:string
+}
+
+/**export class Pariente{
+    apellidos:string
+    comuna:string
+    fec_nac_pariente:Date
+    id_paciente:number
+    id_parentezco:string
+    nombres:string
+    peso_pariente:
     rendim:Float32Array
     rut_paciente:number
     sexo:boolean
     tiem_lib:string
-}
-
-export interface grupofamiliar{
-    
-}
+}**/
 
 export class datosvidrios{
     cantKg: number

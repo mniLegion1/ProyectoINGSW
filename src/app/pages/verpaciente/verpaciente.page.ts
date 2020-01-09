@@ -9,15 +9,11 @@ import { Paciente } from 'src/app/modelosapi/modelosapi.models';
   styleUrls: ['./verpaciente.page.scss'],
 })
 export class VerpacientePage implements OnInit {
-
-  public Paciente = new Array();
   paciente = new Array();
-  numero:number;
 
   constructor(private apiRest: ApiService, private router:Router) {
     this.apiRest.VerPacientes().subscribe(pacientes =>{
       this.paciente = pacientes;
-    //this.apiRest.ModuloOnce(this.numero);
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })
@@ -26,13 +22,14 @@ export class VerpacientePage implements OnInit {
   ngOnInit() {
   }
 
-  EliminarPaciente(rut:number){
-    this.apiRest.EliminarPaciente(rut).subscribe(data=>{
-      alert("Paciente eliminado - Ionic")
-      console.log(rut)
+  EliminarPaciente(rut_paciente:number){
+    this.apiRest.EliminarPaciente(rut_paciente).subscribe(data=>{
+      alert("Paciente eliminado")
+      console.log(rut_paciente)
       this.ngOnInit();
       }, error =>{
       console.log('Error al eliminar paciente')
     })
   }
+  
 }
