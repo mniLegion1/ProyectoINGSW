@@ -13,11 +13,11 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 def listPacientes():
     pacientes=[]
-    pacientes.append(thread)
+    pacientes.append()
     return pacientes
 
 #GET Pacientes
-@app.route('/pacientes', methods=['GET','POST'])
+@app.route('/pacientes', methods=['GET'])
 def getPacientes():
     try:
         connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
@@ -33,12 +33,12 @@ def getPacientes():
         print(records)
         connection.close()
         pacientes = jsonify(records)
-        return jsonify(records)
+        return pacientes
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
 #POST Paciente
-"""@app.route('/pacientes/ingresarpaciente', methods=['POST'])
+@app.route('/pacientes/ingresarpaciente', methods=['POST'])
 def postPaciente():
     if request.method == 'POST':
         data = request.get_json()
@@ -78,7 +78,7 @@ def postPaciente():
             return {"message": "Paciente creado"}
         except Exception as inst:
             print(inst)
-            return {"message": "Error"}"""
+            return {"message": "Error"}
 
 #GET Previsiones
 @app.route('/previsiones', methods=['GET'])
@@ -100,30 +100,25 @@ def getPrevisiones():
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
 #DELETE Paciente
-"""@app.route('/pacientes/eliminarpaciente/<int:rut_paciente>', methods=['GET'])
+@app.route('/pacientes/eliminarpaciente/<string:rut_paciente>', methods=['DELETE'])
 def deletePaciente(rut_paciente):
-    if request.method == 'GET':
-        data = request.get_json()
-        print(data)
-        rut_paciente = data['rut_paciente']
-        
-
+    if request.method == 'DELETE':
         try:
             connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
                                              database='medicinaingsw',
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-            query = "DELETE FROM medicinaingsw.paciente WHERE rut_paciente = %s"
-            values = (rut_paciente)
+            query = "DELETE FROM medicinaingsw.paciente WHERE rut_paciente = " + rut_paciente
             cursor = connection.cursor(dictionary=True)
-            cursor.execute(query, values)
+            cursor.execute(query)
             connection.commit()
             connection.close()
-            return {"message": "Paciente creado"}
         except Exception as inst:
             print(inst)
-            return {"message": "Error"}"""
+            return {"message": "Error"}
+
+#GET
 
 #GET Paciente
 """@app.route('/editarpaciente', methods=['POST'])

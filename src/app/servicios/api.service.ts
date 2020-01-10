@@ -45,7 +45,7 @@ export class ApiService {
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
   }
   EliminarPaciente(rutpac:number): Observable<any>{
-    return this.http.get<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
+    return this.http.delete<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
   }
   Prevision():Observable <Prevision[]> {
     return this.http.get<Prevision[]>("http://localhost:5000/previsiones");
