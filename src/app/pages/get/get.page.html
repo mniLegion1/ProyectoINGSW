@@ -149,27 +149,11 @@
                 <ion-input type="text" [(ngModel)]="paciente.prof_futuro"></ion-input>
               </ion-item>
         </ion-col>
-          <ion-col>
-              <ion-button class="test" routerLink="/grupofamiliar">Datos familiares</ion-button>
-              <ion-button class="sectest">Antecedentes mórbidos</ion-button>
-          </ion-col>
       </ion-row>
-      <ion-row>
-          <ion-col size=5.5>
-              <ion-item>
-                  <ion-label position="floating">NO</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-            <ion-col>
-                <ion-button class="test">Anamnesis</ion-button>
-            </ion-col>
-        </ion-row>
           <ion-row>
-            <ion-col size =6></ion-col>
-            <ion-button (click)="AgregarPaciente()">Aceptar</ion-button>
-            <ion-button>Siguiente</ion-button>
-            <ion-button routerLink="/menu">Cancelar</ion-button>
+            <ion-col></ion-col>
+            <ion-button size="large"(click)="AgregarPaciente()">Aceptar</ion-button>
+            <ion-button size="large"(click)="presentAlertConfirm()">Cancelar</ion-button>
           </ion-row>
 
 

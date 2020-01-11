@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
 import { Paciente, Prevision } from 'src/app/modelosapi/modelosapi.models';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-get',
@@ -13,7 +14,7 @@ export class GetPage implements OnInit {
   prevision = new Array(); 
   descr_prevision:string;
 
-  constructor(private apiRest: ApiService, private router:Router) {
+  constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
     this.apiRest.Prevision().subscribe(previsiones =>{
       this.prevision = previsiones;
     },error=>{
@@ -22,6 +23,30 @@ export class GetPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Ingreso de registro del paciente',
+      message: '¿Cancelar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.router.navigateByUrl('/menu');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 AgregarPaciente(){

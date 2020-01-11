@@ -2,6 +2,7 @@ import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
 import { Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-verpaciente',
@@ -11,7 +12,7 @@ import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 export class VerpacientePage implements OnInit {
   paciente = new Array();
 
-  constructor(private apiRest: ApiService, private router:Router) {
+  constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
     this.apiRest.VerPacientes().subscribe(pacientes =>{
       this.paciente = pacientes;
     },error=>{
@@ -22,13 +23,46 @@ export class VerpacientePage implements OnInit {
   ngOnInit() {
   }
 
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentAlertConfirm(rut_paciente:number) {
+    const alert = await this.alertController.create({
+      header: 'Eliminar registro del paciente',
+      message: '¿Está seguro que desea eliminar el registro de este paciente?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.EliminarPaciente(rut_paciente);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   EliminarPaciente(rut_paciente:number){
     this.apiRest.EliminarPaciente(rut_paciente).subscribe(data=>{
-      alert("Paciente eliminado")
-      console.log(rut_paciente)
-      this.ngOnInit();
       }, error =>{
-      console.log('Error al eliminar paciente')
+        alert("Paciente eliminado")
+        this.router.navigateByUrl('/menu')
     })
   }
   
