@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/servicios/api.service';
+import { Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-update',
@@ -6,10 +10,59 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update.page.scss'],
 })
 export class UpdatePage implements OnInit {
+  paciente:Paciente = new Paciente();
+  prevision = new Array();
+  sexo = new Array();
 
-  constructor() { }
+  constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
+              private apiRest: ApiService, private router:Router) {
+                this.apiRest.Prevision().subscribe(previsiones =>{
+                  this.prevision = previsiones;
+                },error=>{
+                  console.log("No previsiones")
+                })
+                this.apiRest.Sexo().subscribe(sexos =>{
+                  this.sexo = sexos;
+                }, error =>{
+                  console.log("No sexos")
+                })
+              }
 
   ngOnInit() {
+    console.log(JSON.parse(this.acRoute.snapshot.params.pacEditar))
+    this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacEditar))
   }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Actualizacion de registro del paciente',
+      message: 'Se cancelará la actualización del registro del paciente. ¿Desea continuar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.router.navigateByUrl('/pacientes');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  ActualizarPaciente(pac:Paciente){
+    this.apiRest.ActualizarPaciente(pac).subscribe(data=>{
+    }, error =>{
+      alert("Paciente eliminado")
+      this.router.navigateByUrl('/menu')
+  })
+}
 
 }

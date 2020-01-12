@@ -1,24 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Paciente, Prevision } from 'src/app/modelosapi/modelosapi.models';
-import { Router } from '@angular/router';
+import { Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-get',
   templateUrl: './get.page.html',
-  styleUrls: ['./get.page.scss'],
+  styleUrls: ['./get.page.scss']
 })
 export class GetPage implements OnInit {
-  paciente:Paciente = new Paciente();
-  prevision = new Array(); 
-  descr_prevision:string;
+  paciente:Paciente = new Paciente()
+  prevision = new Array();
+  sexo = new Array();
 
-  constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
+  constructor(private acRoute:ActivatedRoute, public alertController: AlertController, private apiRest: ApiService, private router:Router) {
     this.apiRest.Prevision().subscribe(previsiones =>{
       this.prevision = previsiones;
     },error=>{
-      console.log("Ha ocurrido un error durante la ejecucion")
+      console.log("No previsiones")
+    })
+    this.apiRest.Sexo().subscribe(sexos =>{
+      this.sexo = sexos;
+    }, error =>{
+      console.log("No sexos")
     })
   }
 
@@ -28,7 +33,7 @@ export class GetPage implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Ingreso de registro del paciente',
-      message: '¿Cancelar?',
+      message: 'Se cancelará el ingreso del registro del paciente. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',

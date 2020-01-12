@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-button color ="tertiary" routerLink="/menu">Volver</ion-button>
       </ion-buttons>
-  <ion-title>Antecedentes Personales</ion-title>
+  <ion-title>Ingresar datos del paciente</ion-title>
 </ion-toolbar>
 </ion-header>
 
@@ -40,7 +40,7 @@
     </ion-col>
       <ion-col>
         <ion-item>
-          <ion-label position="floating">Fono</ion-label>
+          <ion-label position="floating">Fono (+)</ion-label>
           <ion-input type="text" [(ngModel)]="paciente.fono"></ion-input>
         </ion-item>
       </ion-col>
@@ -96,8 +96,9 @@
               <ion-item>
                   <ion-label>Sexo</ion-label>
                   <ion-select [(ngModel)]="paciente.sexo" interface="popover">
-                    <ion-select-option value="1">Masculino</ion-select-option>
-                    <ion-select-option value="0">Femenino</ion-select-option>
+                    <ion-select-option *ngFor="let sexo of sexo" [value]="sexo.id_sexo">
+                        {{sexo.desc_sexo}}
+                    </ion-select-option>
                   </ion-select>
               </ion-item>
           </ion-col>

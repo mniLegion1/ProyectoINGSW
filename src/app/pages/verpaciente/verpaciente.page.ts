@@ -23,21 +23,10 @@ export class VerpacientePage implements OnInit {
   ngOnInit() {
   }
 
-  async presentAlert() {
-    const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Subtitle',
-      message: 'This is an alert message.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
   async presentAlertConfirm(rut_paciente:number) {
     const alert = await this.alertController.create({
       header: 'Eliminar registro del paciente',
-      message: '¿Está seguro que desea eliminar el registro de este paciente?',
+      message: 'Todos los datos relacionados a este paciente serán eliminados. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',
@@ -64,6 +53,11 @@ export class VerpacientePage implements OnInit {
         alert("Paciente eliminado")
         this.router.navigateByUrl('/menu')
     })
+  }
+
+  ActualizarPaciente(Paciente:Paciente){
+    this.router.navigate(['/actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
+    
   }
   
 }

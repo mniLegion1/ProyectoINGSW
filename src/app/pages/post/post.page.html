@@ -1,180 +1,108 @@
 <ion-header>
   <ion-toolbar color ="success">
     <ion-buttons slot="start">
-      <ion-button color ="tertiary" routerLink="/antecedentespersonales">Volver</ion-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Grupo Familiar</ion-title>
+    <ion-title>Prueba</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-header>
+  <ion-item>
+    <ion-label>MMMM</ion-label>
+    <ion-datetime displayFormat="MMMM" value="2012-12-15T13:47:20.789"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>MM DD YY</ion-label>
+    <ion-datetime displayFormat="MM DD YY" placeholder="Select Date"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Disabled</ion-label>
+    <ion-datetime id="dynamicDisabled" displayFormat="MM DD YY" disabled value="1994-12-15"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>YYYY</ion-label>
+    <ion-datetime [pickerOptions]="customPickerOptions" placeholder="Custom Options" displayFormat="YYYY" min="1981" max="2002"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="stacked">MMMM YY</ion-label>
+    <ion-datetime displayFormat="MMMM YY" min="1989-06-04" max="2004-08-23" value="1994-12-15T13:47:20.789"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">MM/DD/YYYY</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09" value="2002-09-23T15:03:46.789"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">MM/DD/YYYY</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" min="1994-03-14" max="2012-12-09"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>DDD. MMM DD, YY (custom locale)</ion-label>
+    <ion-datetime value="1995-04-15" min="1990-02" max="2000"
+      [dayShortNames]="customDayShortNames"
+      displayFormat="DDD. MMM DD, YY"
+      monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>D MMM YYYY H:mm</ion-label>
+    <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2010" value="2005-06-17T11:06Z"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>DDDD MMM D, YYYY</ion-label>
+    <ion-datetime displayFormat="DDDD MMM D, YYYY" min="2005" max="2016" value="2008-09-02"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>HH:mm</ion-label>
+    <ion-datetime displayFormat="HH:mm"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>h:mm a</ion-label>
+    <ion-datetime displayFormat="h:mm a"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>hh:mm A (15 min steps)</ion-label>
+    <ion-datetime displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Leap years, summer months</ion-label>
+    <ion-datetime displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" monthValues="6,7,8" [yearValues]="customYearValues"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Specific days/months/years</ion-label>
+    <ion-datetime monthValues="6,7,8" yearValues="2014,2015" dayValues="01,02,03,04,05,06,08,09,10, 11, 12, 13, 14" displayFormat="DD/MMM/YYYY"></ion-datetime>
+  </ion-item>
+  </ion-header>
+
+
+<ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col size=3.85>
-        <ion-item>
-          <ion-label >Padre</ion-label>
-            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-              <ion-select-option value="vivoPadre">Vivo</ion-select-option>
-              <ion-select-option value="fallPadre">Fallecido</ion-select-option>
-            </ion-select>
-          </ion-item>
-      </ion-col>
-      <ion-col size=3.85>
-        <ion-item>
-        <ion-label>Madre</ion-label>
-        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-          <ion-select-option value="vivaMadre">Viva</ion-select-option>
-          <ion-select-option value="fallMadre">Fallecida</ion-select-option>
-        </ion-select>
-      </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-        <ion-label>Situacion Conyugal</ion-label>
-        <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-          <ion-select-option value="scjuntos">Juntos</ion-select-option>
-          <ion-select-option value="scseparados">Separados</ion-select-option>
-        </ion-select>
-      </ion-item>
-      </ion-col>
-      </ion-row>
-    <!--Aqui termina la Situacion Conyugal-->
-    
-      <ion-col size=5>
-          <ion-list-header>
-              <ion-title>Hermanos</ion-title>
-          </ion-list-header>
-      </ion-col>
-    <!--1-->
-    <ion-row>
-      <ion-col size=6>
+        <ion-list-header>
+            <ion-title>Evolucion</ion-title>
+        </ion-list-header>
           <ion-item>
-              <ion-label position="floating">Nombre</ion-label>
-              <ion-input></ion-input>
+              <ion-textarea placeholder=""></ion-textarea>
             </ion-item>
-      </ion-col>
-      <ion-col size=2>
-          <ion-item>
-              <ion-label position="floating">Edad</ion-label>
-              <ion-input></ion-input>
-            </ion-item>
-      </ion-col>
-    </ion-row>
-    <!--2-->
-    <ion-row>
-        <ion-col size=6>
-            <ion-item>
-                <ion-label position="floating">Nombre</ion-label>
-                <ion-input></ion-input>
-              </ion-item>
-        </ion-col>
-        <ion-col size=2>
-            <ion-item>
-                <ion-label position="floating">Edad</ion-label>
-                <ion-input></ion-input>
-              </ion-item>
-        </ion-col>
-      </ion-row>
-      <!--3-->
-      <ion-row>
-          <ion-col size=6>
-              <ion-item>
-                  <ion-label position="floating">Nombre</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-          <ion-col size=2>
-              <ion-item>
-                  <ion-label position="floating">Edad</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-        </ion-row>
-      <!--4-->
-      <ion-row>
-          <ion-col size=6>
-              <ion-item>
-                  <ion-label position="floating">Nombre</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-          <ion-col size=2>
-              <ion-item>
-                  <ion-label position="floating">Edad</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-        </ion-row>
-      <!--5-->
-      <ion-row>
-          <ion-col size=6>
-              <ion-item>
-                  <ion-label position="floating">Nombre</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-          <ion-col size=2>
-              <ion-item>
-                  <ion-label position="floating">Edad</ion-label>
-                  <ion-input></ion-input>
-                </ion-item>
-          </ion-col>
-        </ion-row>
-    <!--/////////////////////////////////////////////////////////////////////////////////////////////////////-->
-            <ion-list-header>
-                <ion-title>Otros integrantes</ion-title>
-            </ion-list-header>
-          
-        <ion-row>
-          <ion-col size=3.7>
-            <ion-item>
-              <ion-label >Abuelo</ion-label>
-                <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-                  <ion-select-option value="abuePaterno">Paterno</ion-select-option>
-                  <ion-select-option value="abueMaterno">Materno</ion-select-option>
-                </ion-select>
-              </ion-item>
-          </ion-col>
-          <ion-col size=3.7>
-            <ion-item>
-            <ion-label>Abuela</ion-label>
-            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-              <ion-select-option value="abuePaterna">Paterna</ion-select-option>
-              <ion-select-option value="abueMaterna">Materna</ion-select-option>
-            </ion-select>
-          </ion-item>
-          </ion-col>
+            <ion-row>
+            <ion-col size=5.3></ion-col>
+            <ion-col>
+                <ion-button class="sectest">Composicion corporal</ion-button>
+                <ion-button class="sectest">Examenes laboratorio</ion-button>
+            </ion-col>
           </ion-row>
+  </ion-grid> 
 
-        <ion-row>
-          <ion-col size=3.7>
-            <ion-item>
-              <ion-label >Tio(s)</ion-label>
-                <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-                  <ion-select-option value="siTio">Si</ion-select-option>
-                  <ion-select-option value="noTio">No</ion-select-option>
-                </ion-select>
-              </ion-item>
-          </ion-col>
-          <ion-col size=3.7>
-            <ion-item>
-            <ion-label>Primo(s)</ion-label>
-            <ion-select [interfaceOptions]="customPopoverOptions" interface="popover">
-              <ion-select-option value="siPrimo">Si</ion-select-option>
-              <ion-select-option value="noPrimo">No</ion-select-option>
-            </ion-select>
-          </ion-item>
-          </ion-col>
-          </ion-row>
-
-          <ion-list-header>
-              <ion-title>Observaciones</ion-title>
-          </ion-list-header>
-            <ion-item>
-                <ion-textarea placeholder=""></ion-textarea>
-              </ion-item>
-
-            <ion-button routerLink="/antecedentespersonales">Aceptar</ion-button>
-            <ion-button>Cancelar</ion-button>
-  </ion-grid>
 </ion-content>

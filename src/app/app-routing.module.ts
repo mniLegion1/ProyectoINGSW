@@ -21,7 +21,7 @@ const routes: Routes = [
     loadChildren: './pages/get/get.module#GetPageModule',
   },
   {
-    path: 'grupofamiliar',
+    path: 'z',
     loadChildren: './pages/post/post.module#PostPageModule'
   },
   { path: 'pacientes',
@@ -31,6 +31,10 @@ const routes: Routes = [
   {
     path: 'perfilpaciente',
     loadChildren: './pages/vervidrio/vervidrio.module#VervidrioPageModule'
+  },
+  {
+    path: 'actualizarpaciente',
+    loadChildren: './pages/update/update.module#UpdatePageModule'
   }
 
 ];
