@@ -19,11 +19,11 @@ export class VerpacientePage implements OnInit {
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })
-    this.apiRest.VerParientes().subscribe(parientes =>{
+    /**this.apiRest.VerParientes().subscribe(parientes =>{
       this.pariente = parientes;
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
-    })
+    })**/
   }
 
   ngOnInit() {
@@ -56,7 +56,7 @@ export class VerpacientePage implements OnInit {
   EliminarPaciente(rut_paciente:number){
     this.apiRest.EliminarPaciente(rut_paciente).subscribe(data=>{
       }, error =>{
-        alert("Paciente eliminado")
+        alert("El registro del paciente ha sido eliminado")
         this.router.navigateByUrl('/menu')
     })
   }
@@ -67,7 +67,7 @@ export class VerpacientePage implements OnInit {
   }
 
   PerfilPaciente(Paciente:Paciente){
-    this.router.navigate(['/perfilpaciente', {pacEditar: JSON.stringify(Paciente)}])
+    this.router.navigate(['/perfilpaciente', {pacPerfil: JSON.stringify(Paciente)}])
     
   }
   

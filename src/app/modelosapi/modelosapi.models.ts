@@ -79,13 +79,11 @@ export class Paciente{
 export interface Pariente{    
     antec_enferm:string
     apellidos:string
-    dig_verif:string
     fec_nac_pariente:Date
     id_paciente:number
     id_parentezco:string
     nombres:string
     peso_pariente:number
-    rut_pariente:number
     talla_pariente:number
     sexo:string
     vivo_pariente:boolean

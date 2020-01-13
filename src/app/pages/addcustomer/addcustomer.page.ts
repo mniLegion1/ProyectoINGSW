@@ -38,7 +38,7 @@ export class AddcustomerPage implements OnInit {
   AgregarPariente(){
     this.apiRest.AgregarPariente(this.pariente).subscribe(res => {
       this.router.navigateByUrl('/pacientes');
-    alert("El paciente se ha agregado con exito");
+    alert("El pariente se ha agregado con exito");
     }, err =>{
       alert("El paciente no pudo registrarse. Revise que todos los campos estén llenados.");
     })

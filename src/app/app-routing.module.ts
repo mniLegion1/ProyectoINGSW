@@ -46,7 +46,8 @@ const routes: Routes = [
   },
   { path: 'verparientes',
     loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule'
-  }
+  },  { path: 'interconsulta', loadChildren: './pages/interconsulta/interconsulta.module#InterconsultaPageModule' }
+
 ];
 
 @NgModule({

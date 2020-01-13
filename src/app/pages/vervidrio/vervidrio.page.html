@@ -6,16 +6,41 @@
       <ion-title>Perfil paciente</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>{{paciente.nombres}} {{paciente.apellidos}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content padding>
-    <h4>{{paciente.nombres}} {{paciente.apellidos}}</h4>
-    <ion-label></ion-label>
-    <h3>{{paciente.rut_paciente}}{{'-'}}{{paciente.dig_verif}}</h3>
+  <h4><strong>RUT: </strong> {{paciente.rut_paciente}} {{'-'}} {{paciente.dig_verif}}</h4>
+  <ion-text>
+    <h4><strong>Direccion: </strong> {{paciente.direccion}} {{','}} {{paciente.comuna}}</h4>
+  </ion-text>
+  <ion-text>
+    <h4><strong>Fecha de nacimiento:</strong>{{paciente.fec_nacim | date: 'dd/MM/yyyy'}}&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha de ingreso: </strong>{{paciente.fec_ingreso | date: 'dd/MM/yyyy'}}</h4>
+  </ion-text>
+  <ion-text>
+    <h4><strong>Edad menarquia: </strong>{{paciente.edad_menarq}}&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha menarquia: </strong>{{paciente.fec_menarq | date: 'dd/MM/yyyy'}}</h4>
+        <h4><strong>Correo electronico: </strong>{{paciente.cor_elec}}&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fono: </strong>{{'+'}}{{paciente.fono}}</h4>
+          <h4><strong>Actividad: </strong>{{paciente.actividad}}&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Deporte: </strong>{{paciente.deporte}}</h4>
+            <h4><strong>Tiempo libre: </strong>{{paciente.tiempo_libre}}&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Futuro: </strong>{{paciente.prof_futuro}}</h4>
+  </ion-text>
+
+
+
+
+
 
     <ion-button (click)="AgregarPariente(paciente)">Agregar pariente</ion-button>
-    <ion-button routerLink="/verparientes">Parientes</ion-button>
-    <ion-button>Historial de controles</ion-button>
-    <ion-button>Registrar nuevo control</ion-button>
-    <ion-button>Registrar examen fisico</ion-button>
-    <ion-button>Registrar examen de laboratorio</ion-button>
+    <ion-button (click)="VerParientes(paciente)">Parientes</ion-button>
+    <ion-button (click)="IngresarInterconsulta">Ingresar interconsulta</ion-button>
+    <ion-button>Historial de examenes</ion-button>
+    <ion-button>Ingresar examen de laboratorio</ion-button>
 </ion-content>
