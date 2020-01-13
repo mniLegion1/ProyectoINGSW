@@ -37,14 +37,17 @@ export class ApiService {
   VerPacientes(): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
   }
+  VerParientes(rutpac:number): Observable <Pariente[]> {
+    return this.http.get<Pariente[]>("http://localhost:5000/parientes/" + rutpac);
+  }
   AgregarPaciente(Paciente: Paciente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
   }
   AgregarPariente(Pariente: Pariente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
   }
-  ActualizarPaciente(Paciente: Paciente): Observable<any>{
-    return this.http.post<any>("http://localhost:5000/pacientes/actualizarpaciente/",Paciente)
+  ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
+    return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
   }
   EliminarPaciente(rutpac:number): Observable<any>{
     return this.http.delete<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)

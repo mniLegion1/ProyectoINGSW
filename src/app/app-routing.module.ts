@@ -7,6 +7,10 @@ const routes: Routes = [
   { path: 'home',
     loadChildren: './pages/test/test.module#TestPageModule'
   },
+  {
+    path: 'pie',
+    loadChildren: './pages/pie-chart/pie-chart.module#PieChartPageModule'
+  },
   { path: 'register',
     loadChildren: './pages/register/register.module#RegisterPageModule'},
   { path: 'login',

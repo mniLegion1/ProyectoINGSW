@@ -57,12 +57,13 @@ export class UpdatePage implements OnInit {
     await alert.present();
   }
 
-  ActualizarPaciente(pac:Paciente){
-    this.apiRest.ActualizarPaciente(pac).subscribe(data=>{
+  ActualizarPaciente(pac:Paciente,rut:number){
+    this.apiRest.ActualizarPaciente(pac,rut).subscribe(data=>{
     }, error =>{
-      alert("Paciente eliminado")
-      this.router.navigateByUrl('/menu')
+      alert("Error al actualizar los datos del paciente")
   })
+  alert("Datos del paciente actualizados")
+  this.router.navigateByUrl('/menu')
 }
 
 }

@@ -11,10 +11,16 @@ import { AlertController } from '@ionic/angular';
 })
 export class VerpacientePage implements OnInit {
   paciente = new Array();
+  pariente = new Array();
 
   constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
     this.apiRest.VerPacientes().subscribe(pacientes =>{
       this.paciente = pacientes;
+    },error=>{
+      console.log("Ha ocurrido un error durante la ejecucion")
+    })
+    this.apiRest.VerParientes().subscribe(parientes =>{
+      this.pariente = parientes;
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })

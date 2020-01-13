@@ -23,4 +23,8 @@ export class VervidrioPage implements OnInit {
   AgregarPariente(Paciente:Paciente){
     this.router.navigate(['/antecedentespariente', {pariente: JSON.stringify(Paciente)}])
   }
+
+  VerParientes(id:number){
+    
+  }
 }
