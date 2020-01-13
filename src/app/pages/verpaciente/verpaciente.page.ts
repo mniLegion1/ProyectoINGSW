@@ -59,5 +59,10 @@ export class VerpacientePage implements OnInit {
     this.router.navigate(['/actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
     
   }
+
+  PerfilPaciente(Paciente:Paciente){
+    this.router.navigate(['/perfilpaciente', {pacEditar: JSON.stringify(Paciente)}])
+    
+  }
   
 }

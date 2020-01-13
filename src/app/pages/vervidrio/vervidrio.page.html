@@ -1,12 +1,21 @@
 <ion-header>
     <ion-toolbar color ="success">
       <ion-buttons slot="start">
-        <ion-button color ="tertiary" routerLink="/pacientes">Volver</ion-button>
+        <ion-button shape="round" routerLink="/pacientes"><ion-icon name="arrow-back"></ion-icon></ion-button>
       </ion-buttons>
       <ion-title>Perfil paciente</ion-title>
     </ion-toolbar>
   </ion-header>
 
-<ion-content>
+<ion-content padding>
     <h4>{{paciente.nombres}} {{paciente.apellidos}}</h4>
+    <ion-label></ion-label>
+    <h3>{{paciente.rut_paciente}}{{'-'}}{{paciente.dig_verif}}</h3>
+
+    <ion-button (click)="AgregarPariente(paciente)">Agregar pariente</ion-button>
+    <ion-button routerLink="/verparientes">Parientes</ion-button>
+    <ion-button>Historial de controles</ion-button>
+    <ion-button>Registrar nuevo control</ion-button>
+    <ion-button>Registrar examen fisico</ion-button>
+    <ion-button>Registrar examen de laboratorio</ion-button>
 </ion-content>

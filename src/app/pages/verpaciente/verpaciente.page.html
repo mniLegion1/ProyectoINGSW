@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="success">
       <ion-buttons slot="start">
-        <ion-button routerLink="/menu">Volver</ion-button>
+        <ion-button routerLink="/menu"><ion-icon name="arrow-back"></ion-icon></ion-button>
         </ion-buttons>
     <ion-title>Pacientes</ion-title>
   </ion-toolbar>
@@ -10,7 +10,7 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size=5.2>
+      <ion-col size=4.9>
         <ion-title>
         Nombre
       </ion-title>
@@ -23,14 +23,12 @@
     </ion-row>
   </ion-grid>
   <ion-list>
-    <ion-item button *ngFor="let paciente of paciente">
+    <ion-item *ngFor="let paciente of paciente">
       <ion-label>
         {{paciente.nombres}} {{paciente.apellidos}} 
       </ion-label>
-      <ion-label>
-        {{paciente.rut_paciente}}{{'-'}}{{paciente.dig_verif}}
-      </ion-label>
-      <ion-button color="primary" size="small">Actualizar</ion-button>
+      <ion-button color="medium" size="small" (click)="PerfilPaciente(paciente)">Perfil</ion-button>
+      <ion-button color="primary" size="small" (click)="ActualizarPaciente(paciente)">Actualizar</ion-button>
       <ion-button color="danger" size="small" (click)="presentAlertConfirm(paciente.rut_paciente)">Borrar</ion-button>
     </ion-item>
 </ion-list>

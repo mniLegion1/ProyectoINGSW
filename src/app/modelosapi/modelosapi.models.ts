@@ -76,6 +76,53 @@ export class Paciente{
     }
 }
 
+export interface Pariente{    
+    antec_enferm:string
+    apellidos:string
+    dig_verif:string
+    fec_nac_pariente:Date
+    id_paciente:number
+    id_parentezco:string
+    nombres:string
+    peso_pariente:number
+    rut_pariente:number
+    talla_pariente:number
+    sexo:string
+    vivo_pariente:boolean
+}
+
+export class Pariente{
+    antec_enferm:string
+    apellidos:string 
+    dig_verif:string 
+    fec_nac_pariente:Date
+    id_paciente:number
+    id_parentezco:string
+    nombres:string
+    peso_pariente:number
+    rut_pariente:number
+    sexo:string
+    talla_pariente:number
+    vivo_pariente:boolean
+
+    constructor(datos?:Pariente){
+        if(datos != null){
+            this.antec_enferm = datos.antec_enferm
+            this.apellidos = datos.apellidos
+            this.dig_verif = datos.dig_verif
+            this.fec_nac_pariente = datos.fec_nac_pariente
+            this.id_paciente = datos.id_paciente
+            this.id_parentezco = datos.id_parentezco
+            this.nombres = datos.nombres
+            this.peso_pariente = datos.peso_pariente
+            this.rut_pariente = datos.rut_pariente
+            this.sexo = datos.sexo
+            this.talla_pariente = datos.talla_pariente
+            this.vivo_pariente = datos.vivo_pariente
+        }   
+    }
+}
+
 export interface Prevision{
     idPREVISION:number
     desc_prevision:string
@@ -102,57 +149,26 @@ export class Sexo{
     desc_sexo:string
 
     constructor(datos?:Sexo){
-        this.id_sexo = datos.id_sexo
-        this.desc_sexo = datos.desc_sexo
+        if(datos != null){
+            this.id_sexo = datos.id_sexo
+            this.desc_sexo = datos.desc_sexo
+        }
     }
 }
 
-/**export class Pariente{
-    apellidos:string
-    comuna:string
-    fec_nac_pariente:Date
-    id_paciente:number
-    id_parentezco:string
-    nombres:string
-    peso_pariente:
-    rendim:Float32Array
-    rut_paciente:number
-    sexo:boolean
-    tiem_lib:string
-}**/
-
-export class datosvidrios{
-    cantKg: number
-    dia: string
-    fecha: Date
-    constructor(datos?: datosvidrios){
-        if(datos != null ){
-            this.cantKg=datos.cantKg
-            this.dia=datos.dia
-            this.fecha=datos.fecha
-            return
-        }
-            this.cantKg=this.cantKg
-            this.dia=this.dia
-            this.fecha=this.fecha
-            return
-    }
+export interface Parentezco{
+    idTIPO_PARENTEZCO:number
+    desc_parentezco:string
 }
 
-export class deposito_metales{
-    kilos: number
-    dia: string
-    fecha_ingreso: Date
-    constructor(datos?: deposito_metales){
-        if(datos != null ){
-            this.kilos=datos.kilos
-            this.dia=datos.dia
-            this.fecha_ingreso=datos.fecha_ingreso
-            return
+export class Parentezco{
+    idTIPO_PARENTEZCO:number
+    desc_parentezco:string
+
+    constructor(datos?:Parentezco){
+        if(datos != null){
+            this.idTIPO_PARENTEZCO = datos.idTIPO_PARENTEZCO
+            this.desc_parentezco = datos.desc_parentezco
         }
-            this.kilos=this.kilos
-            this.dia=this.dia
-            this.fecha_ingreso=this.fecha_ingreso
-            return
     }
 }

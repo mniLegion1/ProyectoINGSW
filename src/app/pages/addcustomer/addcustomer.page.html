@@ -1,25 +1,108 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Add Customer</ion-title>
-    <ion-buttons slot="primary">
-    	<ion-back-button text="Back" icon="" color="tertiary" fill="outline"></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar color ="success">
+      <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-title>Antecedentes pariente</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
+  <ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label position="floating">Nombres</ion-label>
+					<ion-input type="text" [(ngModel)]="pariente.nombres"></ion-input>
+				  </ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label position="floating">Apellidos</ion-label>
+					<ion-input type="text" [(ngModel)]="pariente.apellidos"></ion-input>
+				  </ion-item>
+			</ion-col>
+			<ion-col>
+				<ion-item>
+					<ion-label>Sexo</ion-label>
+					<ion-select [(ngModel)]="pariente.sexo" interface="popover">
+					  <ion-select-option *ngFor="let sexo of sexo" [value]="sexo.id_sexo">
+						  {{sexo.desc_sexo}}
+					  </ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+		  </ion-row>
+		  <ion-row>
+			<ion-col size=3>
+				<ion-item>
+					<ion-label position="floating">RUT</ion-label>
+					<ion-input type="text" [(ngModel)]="pariente.rut_pariente"></ion-input>
+				  </ion-item>
+				</ion-col>
+				<ion-col size=2>
+				  <ion-item>
+					  <ion-label position="floating">Digito verificador</ion-label>
+					  <ion-input type="text" [(ngModel)]="pariente.dig_verif"></ion-input>
+					</ion-item>
+				  </ion-col>
+				  <ion-col>
+					<ion-item>
+					  <ion-label >Fecha nacimiento</ion-label>
+					  <ion-input type="Date" [(ngModel)]="pariente.fec_nac_pariente " value="1900-01-01"></ion-input>
+					</ion-item>
+				  </ion-col>
+		  </ion-row>
+		  <ion-row>
+		  	<ion-col>
+				<ion-item>
+					<ion-label position="floating">Peso (Kg)</ion-label>
+					<ion-input type="number" [(ngModel)]="pariente.peso_pariente"></ion-input>
+				  </ion-item>
+			</ion-col>
+			<ion-col>
+			<ion-item>
+                <ion-label position="floating">Altura(m)</ion-label>
+                <ion-input type="number" [(ngModel)]="pariente.talla_pariente"></ion-input>
+			  </ion-item>
+			</ion-col>
+		  <ion-row>
+			  <ion-col>
 
-	<ion-item>
-		<ion-label position="floating"> Name </ion-label>
-		<ion-input type="text" [(ngModel)]="name_customer"></ion-input>
-	</ion-item>
-
-	<ion-item>
-		<ion-label position="floating"> Description </ion-label>
-		<ion-textarea [(ngModel)]="desc_customer"></ion-textarea>
-	</ion-item>
-
-	<ion-button expand="block" padding color="tertiary" *ngIf="!id" (click)="createdProses()" fill="outline">Submit</ion-button>
-	<ion-button expand="block" padding color="tertiary" *ngIf="id>=1" (click)="updateProses()" fill="outline">Update</ion-button>
-
+			  </ion-col>
+		  </ion-row>
+		  <ion-col>
+			<ion-item>
+				<ion-label>Tipo de parentezco</ion-label>
+				<ion-select [(ngModel)]="pariente.id_parentezco" interface="popover">
+				  <ion-select-option *ngFor="let parentezco of parentezco" [value]="parentezco.idTIPO_PARENTEZCO">
+					  {{parentezco.desc_parentezco}}
+				  </ion-select-option>
+				</ion-select>
+			</ion-item>
+		</ion-col>
+		  </ion-row>
+		 <ion-row> 
+		  <ion-col>
+		  <ion-item>
+			<ion-label>Defuncion</ion-label>
+			<ion-select [(ngModel)]="pariente.vivo_pariente" interface="popover">
+			  <ion-select-option value=1>Vivo</ion-select-option>
+			  <ion-select-option value=0>Muerto</ion-select-option>
+			</ion-select>
+		</ion-item>
+	</ion-col>
+	<ion-col>
+		<ion-item>
+			<ion-label position="floating">Antecedente de enfermedad</ion-label>
+			<ion-input type="text" [(ngModel)]="pariente.antec_enferm"></ion-input>
+		  </ion-item>
+		</ion-col>
+	
+</ion-row>
+		<ion-row>
+			<ion-col></ion-col>
+			<ion-button (click)="AddIndexPaciente(pariente)">Agregar pariente</ion-button>
+			<ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
+		</ion-row>
+	</ion-grid>
 </ion-content>

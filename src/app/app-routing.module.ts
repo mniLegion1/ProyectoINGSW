@@ -35,8 +35,14 @@ const routes: Routes = [
   {
     path: 'actualizarpaciente',
     loadChildren: './pages/update/update.module#UpdatePageModule'
+  },
+  {
+    path: 'antecedentespariente',
+    loadChildren: './pages/addcustomer/addcustomer.module#AddcustomerPageModule'
+  },
+  { path: 'verparientes',
+    loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule'
   }
-
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from '../modelosapi/modelosapi.models';
-import { Paciente, Prevision, Sexo } from '../modelosapi/modelosapi.models';
+import { Paciente, Prevision, Sexo, Pariente, Parentezco } from '../modelosapi/modelosapi.models';
 import {  } from '../modelosapi/modelosapi.models';
 
 @Injectable({
@@ -40,8 +40,11 @@ export class ApiService {
   AgregarPaciente(Paciente: Paciente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
   }
+  AgregarPariente(Pariente: Pariente): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
+  }
   ActualizarPaciente(Paciente: Paciente): Observable<any>{
-    return this.http.post<Paciente[]>("http://localhost:5000/pacientes/actualizarpaciente/",Paciente)
+    return this.http.post<any>("http://localhost:5000/pacientes/actualizarpaciente/",Paciente)
   }
   EliminarPaciente(rutpac:number): Observable<any>{
     return this.http.delete<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
@@ -51,5 +54,8 @@ export class ApiService {
   }
   Sexo():Observable <Sexo[]> {
     return this.http.get<Sexo[]>("http://localhost:5000/sexos");
+  }
+  Parentezco():Observable <Parentezco[]> {
+    return this.http.get<Parentezco[]>("http://localhost:5000/parentezcos");
   }
 }

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color ="success">
     <ion-buttons slot="start">
-      <ion-button color ="tertiary" routerLink="/pacientes">Volver</ion-button>
+      <ion-button color ="medium" routerLink="/pacientes">Volver</ion-button>
       </ion-buttons>
   <ion-title>Actualizar datos del paciente</ion-title>
 </ion-toolbar>
@@ -60,13 +60,13 @@
     <ion-row>
         <ion-col size=3>
             <ion-item>
-                <ion-label position="floating">RUT</ion-label>
+                <ion-label hidden position="floating">RUT</ion-label>
                 <ion-input type="text" [(ngModel)]="paciente.rut_paciente"></ion-input>
               </ion-item>
             </ion-col>
             <ion-col size=2>
               <ion-item>
-                  <ion-label position="floating">Digito verificador</ion-label>
+                  <ion-label hidden position="floating">Digito verificador</ion-label>
                   <ion-input type="text" [(ngModel)]="paciente.dig_verif"></ion-input>
                 </ion-item>
               </ion-col>

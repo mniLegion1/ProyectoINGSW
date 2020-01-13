@@ -80,6 +80,42 @@ def postPaciente():
             print(inst)
             return {"message": "Error"}
 
+#POST Pariente
+@app.route('/pacientes/ingresarpariente', methods=['POST'])
+def postPariente():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        antec_enferm = data['antec_enferm']
+        apellidos = data['apellidos']
+        dig_verif = data['dig_verif']
+        fec_nac_pariente = data['fec_nac_pariente']
+        id_paciente = data['id_paciente']
+        id_parentezco = data['id_parentezco']
+        nombres = data['nombres']
+        peso_pariente = data['peso_pariente']
+        rut_pariente = data['rut_pariente']
+        sexo = data['sexo']
+        talla_pariente = data['talla_pariente']
+        vivo_pariente = data['vivo_pariente']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = "INSERT INTO medicinaingsw.pariente (rut_pariente, dig_verif, nombres, apellidos, id_parentezco, peso_pariente, talla_pariente, fec_nac_pariente, sexo, vivo_pariente, antec_enferm, id_paciente) VALUES (%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = (rut_pariente, dig_verif, nombres, apellidos, id_parentezco, peso_pariente, talla_pariente, fec_nac_pariente, sexo, vivo_pariente, antec_enferm, id_paciente)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Paciente creado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
 #DELETE Paciente
 @app.route('/pacientes/eliminarpaciente/<string:rut>', methods=['DELETE'])
 def deletePaciente(rut):
@@ -99,13 +135,14 @@ def deletePaciente(rut):
             print(inst)
             return {"message": "Error"}
 
-#POST Paciente
-@app.route('/pacientes/actualizarpaciente/<string:rut_paciente>', methods=['PATCH'])
-def updatePaciente(rut_paciente):
-    if request.method == 'PATCH':
+#UPDATE Paciente
+@app.route('/pacientes/actualizarpaciente', methods=['POST'])
+def updatePaciente():
+    if request.method == 'POST':
         data = request.get_json()
         print(data)
         rut_paciente = data['rut_paciente']
+        dig_verif = data['dig_verif']
         nombres = data['nombres']
         apellidos = data['apellidos']
         direccion = data['direccion']
@@ -121,9 +158,8 @@ def updatePaciente(rut_paciente):
         deporte = data['deporte']
         fec_ingreso = data['fec_ingreso']
         tiempo_libre = data['tiempo_libre']
-        rendimiento = data['rendimiento']
+        rendimiento = data['rendimiento']   
         prof_futuro = data['prof_futuro']
-
 
         try:
             connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
@@ -131,8 +167,8 @@ def updatePaciente(rut_paciente):
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-            query = "UPDATE medicinaingsw.paciente SET nombres = %s, apellidos = %s, direccion = %s, cor_elec = %s, comuna = %s, fono = %s, id_prevision = %s, fec_nacim = %s, sexo = %s, edad_menarq = %s, fec_menarq = %s, actividad = %s, deporte = %s, fec_ingreso = %s, tiempo_libre = %s, rendimiento = %s, prof_futuro = %s WHERE rut_paciente = " + rut_paciente
-            values = (nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,fec_nacim,sexo,edad_menarq,fec_menarq,actividad,deporte,fec_ingreso,tiempo_libre,rendimiento,prof_futuro)
+            query = "UPDATE medicinaingsw.paciente (rut_paciente, dig_verif, nombres, apellidos, direccion, cor_elec, comuna, fono, id_prevision, fec_nacim, sexo, edad_menarq, fec_menarq, actividad, deporte, fec_ingreso, tiempo_libre, rendimiento, prof_futuro) VALUES (%s,%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = (rut_paciente,dig_verif,nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,fec_nacim,sexo,edad_menarq,fec_menarq,actividad,deporte,fec_ingreso,tiempo_libre,rendimiento,prof_futuro)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()
@@ -171,6 +207,25 @@ def getPrevisiones():
                                              port='3306',
                                              password='M1st2r.12354')
         query = """SELECT * from medicinaingsw.prevision"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
+
+#GET Parentezcos
+@app.route('/parentezcos', methods=['GET'])
+def getParentezcos():
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT * FROM medicinaingsw.tipo_parentezco"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()
