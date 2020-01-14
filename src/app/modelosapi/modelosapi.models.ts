@@ -261,3 +261,187 @@ export class Parentezco{
         }
     }
 }
+
+export interface Control{
+    id_control:number
+    fec_control:Date
+    edad:number
+    MG:number
+    MM:number
+    MB:number
+    GV:number
+    agua:number
+    imc:number
+    peso:number
+    talla:number
+    var_peso:number
+    var_talla:number
+    veloc_mas:number
+    veloc_talla:number
+    peso_acum:number
+    vello:number
+    mama:number
+    genital:number
+    test_izq:number
+    test_der:number
+    id_interconsulta:number
+    observaciones:string
+
+}
+
+export class Control{
+    id_control:number
+    fec_control:Date
+    edad:number
+    MG:number
+    MM:number
+    MB:number
+    GV:number
+    agua:number
+    imc:number
+    peso:number
+    talla:number
+    var_peso:number
+    var_talla:number
+    veloc_masa:number
+    veloc_talla:number
+    peso_acum:number
+    vello:number
+    mama:number
+    genital:number
+    test_izq:number
+    test_der:number
+    id_interconsulta:number
+    observaciones:string
+
+    constructor(datos?:Control){
+        if(datos != null){
+            this.id_control = datos.id_control
+            this.fec_control = datos.fec_control
+            this.edad = datos.edad
+            this.MG = datos.MG
+            this.MM = datos.MM
+            this.MB = datos.MB
+            this.GV = datos.GV
+            this.agua = datos.agua
+            this.imc = datos.imc
+            this.peso = datos.peso
+            this.talla = datos.talla
+            this.var_peso = datos.var_peso
+            this.var_talla = datos.var_talla
+            this.veloc_masa = datos.veloc_masa
+            this.veloc_talla = datos.veloc_talla
+            this.peso_acum = datos.peso_acum
+            this.vello = datos.vello
+            this.mama = datos.mama
+            this.genital = datos.genital
+            this.test_izq = datos.test_izq
+            this.test_der = datos.test_der
+            this.id_interconsulta = datos.id_interconsulta
+            this.observaciones = datos.observaciones
+        }
+    }
+}
+
+export interface Especialidad{
+    idESPECIALIDAD:number
+    desc_especilidad:number
+}
+
+export class Especialidad{
+    idESPECIALIDAD:number
+    desc_especilidad:number
+
+    constructor(datos?:Especialidad){
+        if(datos != null){
+            this.idESPECIALIDAD = datos.idESPECIALIDAD
+            this.desc_especilidad = datos.desc_especilidad
+        }
+    }
+}
+
+export interface Interconsulta{
+    idINTERCONSULTA:number
+    id_especialidad:number
+    motivo_intercon:string
+    fec_intercon:Date
+    id_paciente:number
+}
+
+export class Interconsulta{
+    idINTERCONSULTA:number
+    id_especialidad:number
+    motivo_intercon:string
+    fec_intercon:Date
+    id_paciente:number
+
+    constructor(datos?:Interconsulta){
+        if(datos != null){
+            this.idINTERCONSULTA = datos.idINTERCONSULTA
+            this.id_especialidad = datos.id_especialidad
+            this.motivo_intercon = datos.motivo_intercon
+            this.fec_intercon = datos.fec_intercon
+            this.id_paciente = datos.id_paciente
+        }
+    }
+}
+
+export interface Indicacion{
+    idINDICACION:number
+    desc_indicacion:number
+    id_interconsulta:number
+}
+
+export class Indicacion{
+    idINDICACION:number
+    desc_indicacion:number
+    id_interconsulta:number
+
+    constructor(datos?:Indicacion){
+        if(datos != null){
+            this.idINDICACION = datos.idINDICACION
+            this.desc_indicacion = datos.desc_indicacion
+            this.id_interconsulta = datos.id_interconsulta
+        } 
+    }
+}
+
+export interface Diagnostico{
+    idDIAGNOSTICO:number
+    desc_diagnostico:number
+    id_interconsulta:number
+}
+
+export class Diagnostico{
+    idDIAGNOSTICO:number
+    desc_diagnostico:number
+    id_interconsulta:number
+
+    constructor(datos?:Diagnostico){
+        if(datos != null){
+            this.idDIAGNOSTICO = datos.idDIAGNOSTICO
+            this.desc_diagnostico = datos.desc_diagnostico
+            this.id_interconsulta = datos.id_interconsulta
+        } 
+    }
+}
+
+export interface Medico{
+    idMEDICO:number
+    nombres_medico:string
+    apellidos_medico:string
+}
+
+export class Medico{
+    idMEDICO:number
+    nombres_medico:string
+    apellidos_medico:string
+
+    constructor(datos?:Medico){
+        if(datos != null){
+            this.idMEDICO = datos.idMEDICO
+            this.nombres_medico = datos.nombres_medico
+            this.apellidos_medico = datos.apellidos_medico
+        }
+    }
+}

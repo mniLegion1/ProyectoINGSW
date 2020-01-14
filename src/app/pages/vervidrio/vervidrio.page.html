@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color ="success">
       <ion-buttons slot="start">
-        <ion-button shape="round" routerLink="/pacientes"><ion-icon name="arrow-back"></ion-icon></ion-button>
+        <ion-button routerLink='/pacientes'><ion-icon name="arrow-back"></ion-icon></ion-button>
       </ion-buttons>
       <ion-title>Perfil paciente</ion-title>
     </ion-toolbar>
@@ -42,7 +42,5 @@
 
     <ion-button (click)="VerParientes(paciente)">Parientes</ion-button>
     <ion-button (click)="AgregarPariente(paciente)">Agregar pariente</ion-button>
-    <ion-button (click)="IngresarControl(paciente)">Ingresar control</ion-button>
-    <ion-button>Historial de examenes</ion-button>
-    <ion-button>Ingresar examen de laboratorio</ion-button>
+    <ion-button (click)="IngresarInterconsulta(paciente)">Iniciar interconsulta</ion-button>
 </ion-content>

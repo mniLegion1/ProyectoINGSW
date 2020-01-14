@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/servicios/api.service';
 import { Paciente, Pariente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-verparientes',
@@ -14,7 +15,7 @@ export class VerparientesPage implements OnInit {
   id_paciente:number
   pariente = new Array();
   
-  constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
     }
 
@@ -24,8 +25,12 @@ export class VerparientesPage implements OnInit {
     this.apiRest.VerParientes(this.id_paciente).subscribe(parientes =>{
       this.pariente = parientes;
     },error=>{
-      console.log(this.pariente)
     })
+  }
+
+  myBackButton(){
+    this.location.back();
+    console.log(this.location)
   }
 
 }

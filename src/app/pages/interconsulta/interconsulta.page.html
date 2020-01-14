@@ -1,9 +1,63 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>interconsulta</ion-title>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-row>
+      <ion-col>
+  <h3>&nbsp;&nbsp;Interconsulta</h3>
+</ion-col>
+<ion-col>
+  <ion-item>
+    <ion-label >Fecha: </ion-label>
+    <ion-input type="Date" [(ngModel)]="interconsulta.fec_intercon"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+</ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Paciente: {{paciente.nombres}} {{paciente.apellidos}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col>
+				<ion-item>
+					<ion-label position="floating">Motivo de la interconsulta: </ion-label>
+					<ion-input type="text" [(ngModel)]="interconsulta.motivo_intercon"></ion-input>
+				  </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+				<ion-item>
+          <ion-label>Medico tratante</ion-label>
+          <ion-select [(ngModel)]="interconsulta.id_medico" interface="popover">
+            <ion-select-option *ngFor="let medico of medico" [value]="medico.idMEDICO">
+              {{medico.nombres_medico}}{{' '}}{{medico.apellidos_medico}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        </ion-col>
+			<ion-col>
+				<ion-item>
+          <ion-label>Especialidad</ion-label>
+          <ion-select [(ngModel)]="interconsulta.id_especialidad" interface="popover">
+            <ion-select-option *ngFor="let especialidad of especialidad" [value]="especialidad.idESPECIALIDAD">
+              {{especialidad.desc_especialidad}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        </ion-col>
+</ion-row>
+		<ion-row>
+			<ion-col></ion-col>
+			<ion-button (click)="AddIndexPaciente(interconsulta)">Ingresar Control</ion-button>
+			<ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
+		</ion-row>
+	</ion-grid>
 </ion-content>

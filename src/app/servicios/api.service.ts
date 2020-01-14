@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from '../modelosapi/modelosapi.models';
-import { Paciente, Prevision, Sexo, Pariente, Parentezco } from '../modelosapi/modelosapi.models';
+import { User, Paciente, Prevision, Sexo, Pariente, Parentezco, Especialidad, Control, Diagnostico, Interconsulta,
+         Exlab, Medico, Indicacion } from '../modelosapi/modelosapi.models';
 import {  } from '../modelosapi/modelosapi.models';
 
 @Injectable({
@@ -34,23 +34,27 @@ export class ApiService {
     }
   }
 
-  VerPacientes(): Observable <Paciente[]> {
-    return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
-  }
-  VerParientes(rutpac:number): Observable <Pariente[]> {
-    return this.http.get<Pariente[]>("http://localhost:5000/parientes/" + rutpac);
+  
+  ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
+    return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
   }
   AgregarPaciente(Paciente: Paciente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
   }
+  EliminarPaciente(rutpac:number): Observable<any>{
+    return this.http.delete<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
+  }
+  VerPacientes(): Observable <Paciente[]> {
+    return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
+  }
   AgregarPariente(Pariente: Pariente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
   }
-  ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
-    return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
+  VerParientes(rutpac:number): Observable <Pariente[]> {
+    return this.http.get<Pariente[]>("http://localhost:5000/parientes/" + rutpac);
   }
-  EliminarPaciente(rutpac:number): Observable<any>{
-    return this.http.delete<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
+  AgregarInterconsulta(Interconsulta: Interconsulta): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarinterconsulta",Interconsulta);
   }
   Prevision():Observable <Prevision[]> {
     return this.http.get<Prevision[]>("http://localhost:5000/previsiones");
@@ -60,5 +64,11 @@ export class ApiService {
   }
   Parentezco():Observable <Parentezco[]> {
     return this.http.get<Parentezco[]>("http://localhost:5000/parentezcos");
+  }
+  Especialidad():Observable <Especialidad[]> {
+    return this.http.get<Especialidad[]>("http://localhost:5000/especialidades");
+  }
+  Medico():Observable <Medico[]> {
+    return this.http.get<Medico[]>("http://localhost:5000/medicos");
   }
 }

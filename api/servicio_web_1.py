@@ -32,13 +32,31 @@ def getPacientes():
         records = cursor.fetchall()
         print(records)
         connection.close()
-        pacientes = jsonify(records)
-        return pacientes
+        return jsonify(records)
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
+#GET Medicos
+@app.route('/medicos', methods=['GET'])
+def getMedicos():
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT * from medicinaingsw.medico
+                ORDER BY medicinaingsw.medico.apellidos_medico"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
-
+#GET Parientes(rut_paciente)
 @app.route('/parientes/<string:rut>', methods=['GET'])
 def getParientes(rut):
     try:
@@ -47,8 +65,8 @@ def getParientes(rut):
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT pariente.nombres, pariente.apellidos, pariente.id_parentezco, pariente.peso_pariente, pariente.talla_pariente,
-                pariente.fec_nac_pariente, pariente.sexo, pariente.vivo_pariente, pariente.id_paciente
+        query = """SELECT pariente.nombres, pariente.apellidos, pariente.peso_pariente, pariente.talla_pariente,
+                pariente.fec_nac_pariente, pariente.antec_enferm, pariente.vivo_pariente
                 FROM medicinaingsw.pariente JOIN medicinaingsw.paciente
                 WHERE paciente.rut_paciente = pariente.id_paciente AND paciente.rut_paciente = """ + rut
         cursor = connection.cursor(dictionary=True)
@@ -56,8 +74,7 @@ def getParientes(rut):
         records = cursor.fetchall()
         print(records)
         connection.close()
-        pacientes = jsonify(records)
-        return pacientes
+        return jsonify(records)
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
 
@@ -129,6 +146,35 @@ def postPariente():
                                              password='M1st2r.12354')
             query = "INSERT INTO medicinaingsw.pariente (nombres, apellidos, id_parentezco, peso_pariente, talla_pariente, fec_nac_pariente, sexo, vivo_pariente, antec_enferm, id_paciente) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             values = (nombres, apellidos, id_parentezco, peso_pariente, talla_pariente, fec_nac_pariente, sexo, vivo_pariente, antec_enferm, id_paciente)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Paciente creado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
+#POST Interconsulta
+@app.route('/pacientes/ingresarinterconsulta', methods=['POST'])
+def postInterconsulta():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        id_especialidad = data['id_especialidad']
+        motivo_intercon = data['motivo_intercon']
+        fec_intercon = data['fec_intercon']
+        id_paciente = data['id_paciente']
+        id_medico = data['id_medico']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = "INSERT INTO medicinaingsw.interconsulta (id_especialidad, motivo_intercon, fec_intercon, id_paciente, id_medico) VALUES (%s, %s, %s, %s, %s)"
+            values = (id_especialidad, motivo_intercon, fec_intercon, id_paciente,id_medico)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()
@@ -246,6 +292,25 @@ def getParentezcos():
                                              port='3306',
                                              password='M1st2r.12354')
         query = """SELECT * FROM medicinaingsw.tipo_parentezco"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
+
+#GET Especialidades
+@app.route('/especialidades', methods=['GET'])
+def getEspecialidades():
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT * FROM medicinaingsw.especialidad"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()

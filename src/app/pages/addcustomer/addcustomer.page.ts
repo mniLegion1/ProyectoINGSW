@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/servicios/api.service';
 import { Pariente, Paciente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, NavParams } from '@ionic/angular';
+import { Location } from "@angular/common";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class AddcustomerPage implements OnInit {
   id_paciente:number
   sexo = new Array();
 
-  constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
       this.apiRest.Parentezco().subscribe(parentezcos =>{
         this.parentezco = parentezcos;
@@ -35,9 +36,14 @@ export class AddcustomerPage implements OnInit {
     this.paciente = JSON.parse(this.acRoute.snapshot.params.pariente)
   }
 
+  myBackButton(){
+    this.location.back();
+    console.log(this.location)
+  }
+
   AgregarPariente(){
     this.apiRest.AgregarPariente(this.pariente).subscribe(res => {
-      this.router.navigateByUrl('/pacientes');
+      this.myBackButton()
     alert("El pariente se ha agregado con exito");
     }, err =>{
       alert("El paciente no pudo registrarse. Revise que todos los campos estén llenados.");
@@ -66,7 +72,7 @@ export class AddcustomerPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.router.navigateByUrl('/pacientes');
+            this.myBackButton()
           }
         }
       ]

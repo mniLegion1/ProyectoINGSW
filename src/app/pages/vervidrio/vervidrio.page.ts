@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/servicios/api.service';
 import { Paciente, Prevision } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-vervidrio',
@@ -14,7 +15,7 @@ export class VervidrioPage implements OnInit {
   sexo = new Array();
   prevision = new Array();
 
-  constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
       
   }
@@ -34,6 +35,11 @@ export class VervidrioPage implements OnInit {
     console.log(this.paciente)
   }
 
+  myBackButton(){
+    this.location.back();
+    console.log(this.location)
+  }
+
   AgregarPariente(Paciente:Paciente){
     this.router.navigate(['/antecedentespariente', {pariente: JSON.stringify(Paciente)}])
   }
@@ -42,8 +48,8 @@ export class VervidrioPage implements OnInit {
     this.router.navigate(['/verparientes', {par: JSON.stringify(Paciente)}])
   }
 
-  IngresarControl(Paciente:Paciente){
-    this.router.navigate(['/controlmedico', {pacControl: JSON.stringify(Paciente)}])
+  IngresarInterconsulta(Paciente:Paciente){
+    this.router.navigate(['/interconsulta', {pacIntercon: JSON.stringify(Paciente)}])
   }
 
 }

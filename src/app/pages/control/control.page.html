@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-row>
+      <ion-col>
+  <h3>&nbsp;&nbsp;Control</h3>
+</ion-col>
+<ion-col>
+  <ion-item>
+    <ion-label >Fecha: </ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+</ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-button (click)="AddIndexPaciente(interconsulta)">Ingresar Control</ion-button>
+    <ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
+  </ion-row>
+</ion-grid>
+</ion-content>

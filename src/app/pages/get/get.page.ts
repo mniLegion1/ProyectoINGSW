@@ -28,6 +28,9 @@ export class GetPage implements OnInit {
   }
 
   ngOnInit() {
+    this.paciente.edad_menarq=null
+    this.paciente.fec_menarq=null
+    console.log(this.paciente)
   }
 
   async presentAlertConfirm() {

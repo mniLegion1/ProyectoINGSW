@@ -19,11 +19,6 @@ export class VerpacientePage implements OnInit {
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })
-    /**this.apiRest.VerParientes().subscribe(parientes =>{
-      this.pariente = parientes;
-    },error=>{
-      console.log("Ha ocurrido un error durante la ejecucion")
-    })**/
   }
 
   ngOnInit() {

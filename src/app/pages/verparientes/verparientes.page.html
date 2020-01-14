@@ -1,27 +1,24 @@
 <ion-header>
   <ion-toolbar color="success">
       <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
+        <ion-button shape="round" (click)=myBackButton()><ion-icon name="arrow-back"></ion-icon></ion-button>
         </ion-buttons>
     <ion-title>Listado de Parientes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size=4.9>
-        <ion-title>
-        Nombre
-      </ion-title>
-      </ion-col>
-    </ion-row>
-  <ion-list>
-    <ion-item *ngFor="let pariente of pariente">
-      <ion-label>
-        {{pariente.nombres}} {{pariente.apellidos}} 
-      </ion-label>
-    </ion-item>
-</ion-list>
-</ion-grid>
+  <ion-card *ngFor="let pariente of pariente">
+    <ion-card-header>
+      <ion-card-title>{{pariente.nombres}}{{' '}}{{pariente.apellidos}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <strong>Fecha de nacimiento: </strong>{{pariente.fec_nac_pariente | date}}
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Peso:</strong>{{pariente.peso_pariente}}{{' '}}Kg
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Altura:</strong>{{pariente.talla_pariente}}{{' '}}m
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Antecedente de enfermedad: </strong>{{pariente.antec_enferm}}
+      
+    </ion-card-content>
+  </ion-card>
 </ion-content>
