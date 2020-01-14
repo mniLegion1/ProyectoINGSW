@@ -1,0 +1,184 @@
+<ion-header>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-row>
+      <ion-col>
+  <h3>Examen de laboratorio</h3>
+</ion-col>
+<ion-col>
+  <ion-item>
+    <ion-label >Fecha: </ion-label>
+    <ion-input type="Date" [(ngModel)]="exlab.fecha_examen"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+</ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <ion-item>
+              <ion-label position="floating">Hb</ion-label>
+              <ion-input type="text" [(ngModel)]="exlab.Hb"></ion-input>
+            </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+            <ion-label position="floating">T<sub>3</sub></ion-label>
+            <ion-input type="text" [(ngModel)]="exlab.T3"></ion-input>
+          </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+          <ion-label position="floating">CT</ion-label>
+          <ion-input type="text" [(ngModel)]="exlab.CT"></ion-input>
+        </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item>
+        <ion-label position="floating">PT</ion-label>
+        <ion-input type="text" [(ngModel)]="exlab.PT"></ion-input>
+      </ion-item>
+</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+              <ion-item>
+                  <ion-label position="floating">Hto</ion-label>
+                  <ion-input type="text" [(ngModel)]="exlab.Hto"></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+                <ion-label position="floating">T<sub>4</sub></ion-label>
+                <ion-input type="text" [(ngModel)]="exlab.T4"></ion-input>
+              </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+              <ion-label position="floating">T</ion-label>
+              <ion-input type="text" [(ngModel)]="exlab.T"></ion-input>
+            </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+            <ion-label position="floating">ALB</ion-label>
+            <ion-input type="text" [(ngModel)]="exlab.ALB"></ion-input>
+          </ion-item>
+    </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                  <ion-item>
+                      <ion-label position="floating">GR</ion-label>
+                      <ion-input type="text" [(ngModel)]="exlab.GR"></ion-input>
+                    </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                    <ion-label position="floating">TSH</ion-label>
+                    <ion-input type="text" [(ngModel)]="exlab.TSH"></ion-input>
+                  </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                  <ion-label position="floating">HDL</ion-label>
+                  <ion-input type="text" [(ngModel)]="exlab.HDL"></ion-input>
+                </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+                <ion-label position="floating">SG</ion-label>
+                <ion-input type="text" [(ngModel)]="exlab.SG"></ion-input>
+              </ion-item>
+        </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                      <ion-item>
+                          <ion-label position="floating">GB</ion-label>
+                          <ion-input type="text" [(ngModel)]="exlab.GB"></ion-input>
+                        </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                        <ion-label position="floating">F<sub>e</sub></ion-label>
+                        <ion-input type="text" [(ngModel)]="exlab.Fe"></ion-input>
+                      </ion-item>
+                </ion-col>
+                <ion-col>
+                  <ion-item>
+                      <ion-label position="floating">LDL</ion-label>
+                      <ion-input type="text" [(ngModel)]="exlab.LDL"></ion-input>
+                    </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                    <ion-label position="floating">Creatinina</ion-label>
+                    <ion-input type="text" [(ngModel)]="exlab.creatinina"></ion-input>
+                  </ion-item>
+            </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>
+                          <ion-item>
+                              <ion-label position="floating">EOS(%)</ion-label>
+                              <ion-input type="text" [(ngModel)]="exlab.EOS"></ion-input>
+                            </ion-item>
+                      </ion-col>
+                      <ion-col>
+                        <ion-item>
+                            <ion-label position="floating">Insulina</ion-label>
+                            <ion-input type="text" [(ngModel)]="exlab.insulina"></ion-input>
+                          </ion-item>
+                    </ion-col>
+                    <ion-col>
+                      <ion-item>
+                          <ion-label position="floating">Uremia</ion-label>
+                          <ion-input type="text" [(ngModel)]="exlab.uremia"></ion-input>
+                        </ion-item>
+                  </ion-col>
+                  <ion-col size=3></ion-col>
+                        </ion-row>
+                        <ion-row>
+                          <ion-col>
+                              <ion-item>
+                                  <ion-label position="floating">VHS</ion-label>
+                                  <ion-input type="text" [(ngModel)]="exlab.VHS"></ion-input>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col>
+                            <ion-item>
+                                <ion-label position="floating">Glicemia</ion-label>
+                                <ion-input type="text" [(ngModel)]="exlab.glicemia"></ion-input>
+                              </ion-item>
+                        </ion-col>
+                      <ion-col size=6></ion-col>
+                            </ion-row>
+                            <ion-item>
+                              <ion-label position="floating">Orina</ion-label>
+                              <ion-input type="text" [(ngModel)]="exlab.orina"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                              <ion-label position="floating">Parasitologico</ion-label>
+                              <ion-input type="text" [(ngModel)]="exlab.parasito"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                              <ion-label position="floating">Otros</ion-label>
+                              <ion-textarea [(ngModel)]="exlab.otros_exam"></ion-textarea>
+                            </ion-item>
+                            <ion-item>
+                              <ion-label position="floating">Radiografia</ion-label>
+                              <ion-textarea [(ngModel)]="exlab.radiografia"></ion-textarea>
+                            </ion-item>
+
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-button (click)="Print()">Aceptar</ion-button>
+              <ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
+            </ion-row>
+  </ion-grid>
+  </ion-content>

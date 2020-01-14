@@ -11,12 +11,8 @@ import { AlertController } from '@ionic/angular';
 })
 export class VervidrioPage implements OnInit {
   paciente:Paciente = new Paciente();
-  datos = new Array()
   sexo = new Array();
-  prevision : Prevision[];
-  prev:string
-  s:string
-  ind:number
+  prevision = new Array();
 
   constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
@@ -27,7 +23,6 @@ export class VervidrioPage implements OnInit {
     this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacPerfil))
     this.apiRest.Prevision().subscribe(previsiones =>{
       this.prevision = previsiones;
-      console.log(this.prevision)
     },error=>{
       console.log("No previsiones")
     })
@@ -36,8 +31,7 @@ export class VervidrioPage implements OnInit {
     }, error =>{
       console.log("No sexos")
     })
-    this.ind = this.paciente['id_prevision']
-    //this.nomPrev(this.paciente,this.prevision,this.ind)
+    console.log(this.paciente)
   }
 
   AgregarPariente(Paciente:Paciente){
@@ -48,8 +42,8 @@ export class VervidrioPage implements OnInit {
     this.router.navigate(['/verparientes', {par: JSON.stringify(Paciente)}])
   }
 
-  async nomPrev(paciente:Paciente,prevision:Prevision,ind:number){
-    console.log(paciente,prevision,ind)
+  IngresarControl(Paciente:Paciente){
+    this.router.navigate(['/controlmedico', {pacControl: JSON.stringify(Paciente)}])
   }
 
 }

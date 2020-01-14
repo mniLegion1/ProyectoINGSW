@@ -38,6 +38,7 @@ def getPacientes():
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
 
+
 @app.route('/parientes/<string:rut>', methods=['GET'])
 def getParientes(rut):
     try:
@@ -170,13 +171,10 @@ def updatePaciente(rut):
         comuna = data['comuna']
         fono = data['fono']
         id_prevision = data['id_prevision']
-        fec_nacim = data['fec_nacim']
         sexo = data['sexo']
         edad_menarq = data['edad_menarq']
-        fec_menarq = data['fec_menarq']
         actividad = data['actividad']
         deporte = data['deporte']
-        fec_ingreso = data['fec_ingreso']
         tiempo_libre = data['tiempo_libre']
         rendimiento = data['rendimiento']   
         prof_futuro = data['prof_futuro']
@@ -188,9 +186,9 @@ def updatePaciente(rut):
                                              port='3306',
                                              password='M1st2r.12354')
             query = """UPDATE medicinaingsw.paciente
-                    SET nombres = %s,apellidos = %s,direccion = %s,cor_elec = %s,comuna = %s,fono = %s,id_prevision = %s,fec_nacim = %s,sexo = %s,edad_menarq = %s,fec_menarq = %s,actividad = %s,deporte = %s,fec_ingreso = %s,tiempo_libre = %s,rendimiento = %s,prof_futuro = %s
+                    SET nombres = %s,apellidos = %s,direccion = %s,cor_elec = %s,comuna = %s,fono = %s,id_prevision = %s,sexo = %s,edad_menarq = %s,actividad = %s,deporte = %s,tiempo_libre = %s,rendimiento = %s,prof_futuro = %s
                     WHERE paciente.rut_paciente  = """ + rut
-            values = (nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,fec_nacim,sexo,edad_menarq,fec_menarq,actividad,deporte,fec_ingreso,tiempo_libre,rendimiento,prof_futuro)
+            values = (nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,sexo,edad_menarq,actividad,deporte,tiempo_libre,rendimiento,prof_futuro)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()

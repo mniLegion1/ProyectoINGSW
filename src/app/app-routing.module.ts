@@ -46,7 +46,13 @@ const routes: Routes = [
   },
   { path: 'verparientes',
     loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule'
-  },  { path: 'interconsulta', loadChildren: './pages/interconsulta/interconsulta.module#InterconsultaPageModule' }
+  },
+  { path: 'controlmedico',
+    loadChildren: './pages/interconsulta/interconsulta.module#InterconsultaPageModule'
+  },
+  { path: 'examenlaboratorio',
+    loadChildren: './pages/exlab/exlab.module#ExlabPageModule'
+  }
 
 ];
 

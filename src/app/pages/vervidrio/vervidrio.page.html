@@ -14,33 +14,35 @@
   </ion-header>
 
 <ion-content padding>
-  <h4><strong>RUT: </strong> {{paciente.rut_paciente}} {{'-'}} {{paciente.dig_verif}}</h4>
-  <ion-text>
+  <div *ngFor="let sexo of sexo"> <ng-container *ngIf="sexo.id_sexo === paciente.sexo">
+  <h4><strong>RUT: </strong> {{paciente.rut_paciente}} {{'-'}} {{paciente.dig_verif}}&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;<strong>Sexo:</strong>{{sexo.desc_sexo}}</h4></ng-container></div>
+
     <h4><strong>Direccion: </strong> {{paciente.direccion}} {{','}} {{paciente.comuna}}</h4>
-  </ion-text>
-  <ion-text>
+
     <h4><strong>Fecha de nacimiento:</strong>{{paciente.fec_nacim | date: 'dd/MM/yyyy'}}&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha de ingreso: </strong>{{paciente.fec_ingreso | date: 'dd/MM/yyyy'}}</h4>
-  </ion-text>
-  <ion-text>
+      &nbsp;&nbsp;&nbsp;<strong>Fecha de ingreso: </strong>{{paciente.fec_ingreso | date: 'dd/MM/yyyy'}}</h4>
+
+
     <h4><strong>Edad menarquia: </strong>{{paciente.edad_menarq}}&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fecha menarquia: </strong>{{paciente.fec_menarq | date: 'dd/MM/yyyy'}}</h4>
-        <h4><strong>Correo electronico: </strong>{{paciente.cor_elec}}&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Fono: </strong>{{'+'}}{{paciente.fono}}</h4>
+      &nbsp;&nbsp;&nbsp;<strong>Fecha menarquia: </strong>{{paciente.fec_menarq | date: 'dd/MM/yyyy'}}</h4>
+      
+        <h4>          
+          <div *ngFor="let prevision of prevision"> <ng-container *ngIf="prevision.idPREVISION === paciente.id_prevision">
+            <h4><strong>Correo electronico: </strong>{{paciente.cor_elec}}&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;<strong>Fono: </strong>{{'+'}}{{paciente.fono}}&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;<strong>Prevision: </strong>{{prevision.desc_prevision}}
+            </h4></ng-container> </div>
+          
+        </h4>
           <h4><strong>Actividad: </strong>{{paciente.actividad}}&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Deporte: </strong>{{paciente.deporte}}</h4>
+            &nbsp;&nbsp;&nbsp;<strong>Deporte: </strong>{{paciente.deporte}}</h4>
             <h4><strong>Tiempo libre: </strong>{{paciente.tiempo_libre}}&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Futuro: </strong>{{paciente.prof_futuro}}</h4>
-  </ion-text>
+              &nbsp;&nbsp;&nbsp;<strong>Futuro: </strong>{{paciente.prof_futuro}}</h4>
 
-
-
-
-
-
-    <ion-button (click)="AgregarPariente(paciente)">Agregar pariente</ion-button>
     <ion-button (click)="VerParientes(paciente)">Parientes</ion-button>
-    <ion-button (click)="IngresarInterconsulta">Ingresar interconsulta</ion-button>
+    <ion-button (click)="AgregarPariente(paciente)">Agregar pariente</ion-button>
+    <ion-button (click)="IngresarControl(paciente)">Ingresar control</ion-button>
     <ion-button>Historial de examenes</ion-button>
     <ion-button>Ingresar examen de laboratorio</ion-button>
 </ion-content>
