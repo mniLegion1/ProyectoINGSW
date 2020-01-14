@@ -59,7 +59,7 @@ export class InterconsultaPage implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Ingreso de registro del pariente',
-      message: 'Se cancelará el ingreso del registro del pariente. ¿Desea continuar?',
+      message: 'Se cancelará el registro de la interconsulta. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',

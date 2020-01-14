@@ -36,7 +36,7 @@ export class GetPage implements OnInit {
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Ingreso de registro del paciente',
-      message: 'Se cancelará el ingreso del registro del paciente. ¿Desea continuar?',
+      message: 'Se cancelará el registro del paciente. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',
