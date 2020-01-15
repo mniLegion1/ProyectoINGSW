@@ -28,6 +28,10 @@ const routes: Routes = [
     path: 'z',
     loadChildren: './pages/post/post.module#PostPageModule'
   },
+  {
+    path: 'actualizarpariente',
+    loadChildren: './pages/delete/delete.module#DeletePageModule'
+  },
   { path: 'pacientes',
   loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule'
     //canActivate: [AuthGuard]
@@ -55,7 +59,8 @@ const routes: Routes = [
   },
   { path: 'controlmedico',
     loadChildren: './pages/control/control.module#ControlPageModule'
-  },  { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' }
+  },
+  { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' }
 
 ];
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { Paciente, Pariente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
@@ -18,10 +18,6 @@ export class VerparientesPage implements OnInit {
   
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
-      this.apiRest.Parentezco().subscribe(parentezcos =>{
-        this.parentezco = parentezcos;
-      },error=>{
-      })
     }
 
   ngOnInit(){
@@ -72,6 +68,10 @@ export class VerparientesPage implements OnInit {
         alert("El registro del pariente ha sido eliminado")
         this.myBackButton()
     })
+  }
+
+  ActualizarPariente(Pariente:Pariente){
+    this.router.navigate(['/actualizarpariente', {parEditar: JSON.stringify(Pariente)}])
   }
 
 }

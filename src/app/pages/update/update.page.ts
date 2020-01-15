@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/servicios/api.service';
 import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-update',
@@ -14,7 +15,7 @@ export class UpdatePage implements OnInit {
   prevision = new Array();
   sexo = new Array();
 
-  constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
               private apiRest: ApiService, private router:Router) {
                 this.apiRest.Prevision().subscribe(previsiones =>{
                   this.prevision = previsiones;
@@ -33,6 +34,11 @@ export class UpdatePage implements OnInit {
     this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacEditar))
   }
 
+  myBackButton(){
+    this.location.back();
+    console.log(this.location)
+  }
+
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Actualizacion de registro del paciente',
@@ -48,7 +54,7 @@ export class UpdatePage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.router.navigateByUrl('/pacientes');
+            this.myBackButton()
           }
         }
       ]
@@ -64,6 +70,6 @@ export class UpdatePage implements OnInit {
   })
   alert("Datos del paciente actualizados")
   this.router.navigateByUrl('/menu')
-}
+  }
 
 }

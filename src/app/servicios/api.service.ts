@@ -33,6 +33,9 @@ export class ApiService {
       console.log('Error al registrar',error);
     }
   }
+  ActualizarPariente(Pariente:Pariente, rutpac:number): Observable<any>{
+    return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpariente/" + rutpac,Pariente)
+  }
   ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
     return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
   }

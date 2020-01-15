@@ -11,11 +11,6 @@ import jsonplus as json
 app = flask.Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-def listPacientes():
-    pacientes=[]
-    pacientes.append()
-    return pacientes
-
 #GET Pacientes
 @app.route('/pacientes', methods=['GET'])
 def getPacientes():
@@ -299,6 +294,40 @@ def updatePaciente(rut):
                     SET nombres = %s,apellidos = %s,direccion = %s,cor_elec = %s,comuna = %s,fono = %s,id_prevision = %s,sexo = %s,edad_menarq = %s,actividad = %s,deporte = %s,tiempo_libre = %s,rendimiento = %s,prof_futuro = %s
                     WHERE paciente.rut_paciente  = """ + rut
             values = (nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,sexo,edad_menarq,actividad,deporte,tiempo_libre,rendimiento,prof_futuro)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Paciente creado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
+#UPDATE Pariente
+@app.route('/pacientes/actualizarpariente/<string:rut>', methods=['PATCH'])
+def updatePariente(rut):
+    if request.method == 'PATCH':
+        data = request.get_json()
+        print(data)
+        antec_enferm = data['antec_enferm']
+        apellidos = data['apellidos']
+        id_parentezco = data['id_parentezco']
+        nombres = data['nombres']
+        peso_pariente = data['peso_pariente']
+        sexo = data['sexo']
+        talla_pariente = data['talla_pariente']
+        vivo_pariente = data['vivo_pariente']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = """UPDATE medicinaingsw.pariente
+                    SET nombres = %s, apellidos = %s, id_parentezco = %s,peso_pariente = %s,sexo = %s,talla_pariente = %s,vivo_pariente = %s
+                    WHERE pariente.id_pariente  = """ + rut
+            values = (nombres,apellidos,id_parentezco,peso_pariente,sexo,talla_pariente,vivo_pariente)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()
