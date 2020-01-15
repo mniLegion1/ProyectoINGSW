@@ -25,8 +25,9 @@ def getPacientes():
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT * from medicinaingsw.paciente
-                ORDER BY medicinaingsw.paciente.apellidos"""
+        query = """SELECT rut_paciente,dig_verif,nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,(DATE_ADD(fec_nacim, INTERVAL 1 DAY))fec_nacim,sexo,edad_menarq,DATE_ADD(fec_menarq, INTERVAL 1 DAY)fec_menarq,actividad,deporte,DATE_ADD(fec_ingreso, INTERVAL 1 DAY)fec_ingreso,tiempo_libre,rendimiento,prof_futuro
+                    FROM medicinaingsw.paciente
+                    ORDER BY paciente.apellidos"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()
@@ -65,8 +66,7 @@ def getParientes(rut):
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT pariente.nombres, pariente.apellidos, pariente.peso_pariente, pariente.talla_pariente,
-                pariente.fec_nac_pariente, pariente.antec_enferm, pariente.vivo_pariente
+        query = """SELECT pariente.id_pariente, pariente.nombres, pariente.apellidos, pariente.sexo, pariente.id_parentezco, pariente.peso_pariente, pariente.talla_pariente, pariente.vivo_pariente, pariente.antec_enferm,(DATE_ADD(pariente.fec_nac_pariente, INTERVAL 1 DAY))fec_nac_pariente
                 FROM medicinaingsw.pariente JOIN medicinaingsw.paciente
                 WHERE paciente.rut_paciente = pariente.id_paciente AND paciente.rut_paciente = """ + rut
         cursor = connection.cursor(dictionary=True)
@@ -81,6 +81,49 @@ def getParientes(rut):
 #POST Paciente
 @app.route('/pacientes/ingresarpaciente', methods=['POST'])
 def postPaciente():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        rut_paciente = data['rut_paciente']
+        dig_verif = data['dig_verif']
+        nombres = data['nombres']
+        apellidos = data['apellidos']
+        direccion = data['direccion']
+        cor_elec = data['cor_elec']
+        comuna = data['comuna']
+        fono = data['fono']
+        id_prevision = data['id_prevision']
+        fec_nacim = data['fec_nacim']
+        sexo = data['sexo']
+        edad_menarq = data['edad_menarq']
+        fec_menarq = data['fec_menarq']
+        actividad = data['actividad']
+        deporte = data['deporte']
+        fec_ingreso = data['fec_ingreso']
+        tiempo_libre = data['tiempo_libre']
+        rendimiento = data['rendimiento']
+        prof_futuro = data['prof_futuro']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = "INSERT INTO medicinaingsw.paciente (rut_paciente, dig_verif, nombres, apellidos, direccion, cor_elec, comuna, fono, id_prevision, fec_nacim, sexo, edad_menarq, fec_menarq, actividad, deporte, fec_ingreso, tiempo_libre, rendimiento, prof_futuro) VALUES (%s,%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = (rut_paciente,dig_verif,nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,fec_nacim,sexo,edad_menarq,fec_menarq,actividad,deporte,fec_ingreso,tiempo_libre,rendimiento,prof_futuro)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Paciente creado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
+#POST Paciente
+@app.route('/pacientes/ingresarpaciente', methods=['POST'])
+def postControl():
     if request.method == 'POST':
         data = request.get_json()
         print(data)
@@ -204,6 +247,27 @@ def deletePaciente(rut):
             print(inst)
             return {"message": "Error"}
 
+#DELETE Pariente(id_pariente)
+@app.route('/pacientes/eliminarpariente/<string:rut>', methods=['DELETE'])
+def deletePariente(rut):
+    if request.method == 'DELETE':
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = """DELETE FROM medicinaingsw.pariente
+                    WHERE pariente.id_pariente = """ + rut
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query)
+            connection.commit()
+            connection.close()
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
+
 #UPDATE Paciente
 @app.route('/pacientes/actualizarpaciente/<string:rut>', methods=['PATCH'])
 def updatePaciente(rut):
@@ -311,6 +375,27 @@ def getEspecialidades():
                                              port='3306',
                                              password='M1st2r.12354')
         query = """SELECT * FROM medicinaingsw.especialidad"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
+
+#GET LRInterconsulta
+@app.route('/lastrowIntercon', methods=['GET'])
+def getLastRowIntercon():
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT *
+                FROM medicinaingsw.interconsulta
+                ORDER BY idINTERCONSULTA DESC LIMIT 1"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()

@@ -51,8 +51,7 @@ export class AddcustomerPage implements OnInit {
   }
 
   AddIndexPaciente(indpac:Pariente){
-    this.id_paciente = this.paciente['rut_paciente']
-    indpac['id_paciente'] = this.id_paciente
+    indpac['id_paciente'] = this.paciente['rut_paciente']
     console.log(indpac)
     this.AgregarPariente()
   }

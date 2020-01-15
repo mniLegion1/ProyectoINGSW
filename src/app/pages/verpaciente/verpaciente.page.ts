@@ -14,14 +14,14 @@ export class VerpacientePage implements OnInit {
   pariente = new Array();
 
   constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
+  }
+
+  ngOnInit() {
     this.apiRest.VerPacientes().subscribe(pacientes =>{
       this.paciente = pacientes;
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })
-  }
-
-  ngOnInit() {
   }
 
   async presentAlertConfirm(rut_paciente:number) {

@@ -26,8 +26,8 @@
 
     <h4><strong>Edad menarquia: </strong>{{paciente.edad_menarq}}&nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;<strong>Fecha menarquia: </strong>{{paciente.fec_menarq | date: 'dd/MM/yyyy'}}</h4>
-      
-        <h4>          
+        <h4>
+                  
           <div *ngFor="let prevision of prevision"> <ng-container *ngIf="prevision.idPREVISION === paciente.id_prevision">
             <h4><strong>Correo electronico: </strong>{{paciente.cor_elec}}&nbsp;&nbsp;&nbsp;
               &nbsp;&nbsp;&nbsp;<strong>Fono: </strong>{{'+'}}{{paciente.fono}}&nbsp;&nbsp;&nbsp;

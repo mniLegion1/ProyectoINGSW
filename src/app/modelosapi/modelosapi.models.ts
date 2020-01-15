@@ -76,12 +76,13 @@ export class Paciente{
     }
 }
 
-export interface Pariente{    
+export interface Pariente{  
     antec_enferm:string
     apellidos:string
     fec_nac_pariente:Date
     id_paciente:number
-    id_parentezco:string
+    id_parentezco:number
+    id_pariente:number
     nombres:string
     peso_pariente:number
     talla_pariente:number
@@ -94,7 +95,8 @@ export class Pariente{
     apellidos:string 
     fec_nac_pariente:Date
     id_paciente:number
-    id_parentezco:string
+    id_parentezco:number
+    id_pariente:number
     nombres:string
     peso_pariente:number
     sexo:string
@@ -108,6 +110,7 @@ export class Pariente{
             this.fec_nac_pariente = datos.fec_nac_pariente
             this.id_paciente = datos.id_paciente
             this.id_parentezco = datos.id_parentezco
+            this.id_pariente = datos.id_pariente
             this.nombres = datos.nombres
             this.peso_pariente = datos.peso_pariente
             this.sexo = datos.sexo

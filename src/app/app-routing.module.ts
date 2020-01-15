@@ -55,7 +55,8 @@ const routes: Routes = [
   },
   { path: 'controlmedico',
     loadChildren: './pages/control/control.module#ControlPageModule'
-  }
+  },  { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' }
+
 ];
 
 @NgModule({

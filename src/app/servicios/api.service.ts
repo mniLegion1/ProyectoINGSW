@@ -33,8 +33,6 @@ export class ApiService {
       console.log('Error al registrar',error);
     }
   }
-
-  
   ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
     return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
   }
@@ -42,7 +40,10 @@ export class ApiService {
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
   }
   EliminarPaciente(rutpac:number): Observable<any>{
-    return this.http.delete<Paciente[]>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
+    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
+  }
+  EliminarPariente(rutpar:number): Observable<any>{
+    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpariente/" + rutpar)
   }
   VerPacientes(): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
@@ -70,5 +71,8 @@ export class ApiService {
   }
   Medico():Observable <Medico[]> {
     return this.http.get<Medico[]>("http://localhost:5000/medicos");
+  }
+  UltimaInterconsultaId(): Observable <Interconsulta[]> {
+    return this.http.get<Interconsulta[]>("http://localhost:5000/lastrowIntercon");
   }
 }
