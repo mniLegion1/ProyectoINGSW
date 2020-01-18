@@ -37,7 +37,7 @@ export class ControlPage implements OnInit {
     console.log(this.location)
   }
 
-  async presentAlertConfirm() {
+  async presentAlertConfirmExlab() {
     const alert = await this.alertController.create({
       header: 'Registro de control',
       message: 'Se cancelará el ingreso de este control. ¿Desea continuar?',
@@ -60,18 +60,61 @@ export class ControlPage implements OnInit {
     await alert.present();
   }
 
-  A(){
-    console.log(this.intercon)
+  async presentAlertConfirmAcep(Control:Control){
+    const alert = await this.alertController.create({
+      header: 'Registro de control',
+      message: 'No se ha ingresado un examen de laboratorio. ¿Desea continuar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.AddIndex(Control)
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
-  AddIndexInterconsulta(indpac:Control){
+
+  AgregarControlExlab(){
+    this.apiRest.AgregarControl(this.control).subscribe(res => {
+      this.IngresarExlab(this.control)
+    alert("El control se ha agregado con exito");
+    }, err =>{
+      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
+    })
+  }
+
+  AgregarControlAceptar(){
+    this.apiRest.AgregarControl(this.control).subscribe(res => {
+      alert("El control se ha agregado con exito");
+      this.myBackButton()
+    }, err =>{
+      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
+    })
+  }
+
+  AddIndexExlab(indpac:Control){
     indpac['id_interconsulta'] = this.intercon[0].idINTERCONSULTA
     console.log(indpac)
-    //this.AgregarPariente()
+    this.AgregarControlExlab()
+  }
+
+  AddIndex(indpac:Control){
+    indpac['id_interconsulta'] = this.intercon[0].idINTERCONSULTA
+    console.log(indpac)
+    this.AgregarControlAceptar()
   }
 
   IngresarExlab(Control:Control){
-    console.log(this.control)
-    //this.router.navigate(['/examenlaboratorio', {exlab_control: JSON.stringify(Control)}])
+    this.router.navigate(['/examenlaboratorio', {id_control: JSON.stringify(Control)}])
   }
 
   

@@ -116,31 +116,35 @@ def postPaciente():
             print(inst)
             return {"message": "Error"}
 
-#POST Paciente
-@app.route('/pacientes/ingresarpaciente', methods=['POST'])
+#POST Control
+@app.route('/pacientes/ingresarcontrol', methods=['POST'])
 def postControl():
     if request.method == 'POST':
         data = request.get_json()
         print(data)
-        rut_paciente = data['rut_paciente']
-        dig_verif = data['dig_verif']
-        nombres = data['nombres']
-        apellidos = data['apellidos']
-        direccion = data['direccion']
-        cor_elec = data['cor_elec']
-        comuna = data['comuna']
-        fono = data['fono']
-        id_prevision = data['id_prevision']
-        fec_nacim = data['fec_nacim']
-        sexo = data['sexo']
-        edad_menarq = data['edad_menarq']
-        fec_menarq = data['fec_menarq']
-        actividad = data['actividad']
-        deporte = data['deporte']
-        fec_ingreso = data['fec_ingreso']
-        tiempo_libre = data['tiempo_libre']
-        rendimiento = data['rendimiento']
-        prof_futuro = data['prof_futuro']
+        fec_control = data['fec_control']
+        evolucion = data['evolucion']
+        edad = data['edad']
+        peso = data['peso']
+        var_masa = data['var_masa']
+        veloc_masa = data['veloc_masa']
+        peso_acum = data['peso_acum']
+        talla = data['talla']
+        var_talla = data['var_talla']
+        veloc_talla = data['veloc_talla']
+        vello = data['vello']
+        test_izq = data['test_izq']
+        MG = data['MG']
+        MM = data['MM']
+        mama = data['mama']
+        test_der = data['test_der']
+        MB = data['MB']
+        GV = data['GV']
+        genital = data['genital']
+        agua = data['agua']
+        imc = data['imc']
+        observaciones = data['observaciones']
+        id_interconsulta = data['id_interconsulta']
 
         try:
             connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
@@ -148,8 +152,8 @@ def postControl():
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-            query = "INSERT INTO medicinaingsw.paciente (rut_paciente, dig_verif, nombres, apellidos, direccion, cor_elec, comuna, fono, id_prevision, fec_nacim, sexo, edad_menarq, fec_menarq, actividad, deporte, fec_ingreso, tiempo_libre, rendimiento, prof_futuro) VALUES (%s,%s,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            values = (rut_paciente,dig_verif,nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,fec_nacim,sexo,edad_menarq,fec_menarq,actividad,deporte,fec_ingreso,tiempo_libre,rendimiento,prof_futuro)
+            query = "INSERT INTO medicinaingsw.control (fec_control, evolucion, edad, peso, var_masa, veloc_masa, peso_acum, talla, var_talla, veloc_talla, vello, test_izq, MG, MM, mama, test_der, MB, GV, genital, agua, imc, observaciones, id_interconsulta) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = (fec_control, evolucion, edad, peso, var_masa, veloc_masa, peso_acum, talla, var_talla, veloc_talla, vello, test_izq, MG, MM, mama, test_der, MB, GV, genital, agua, imc, observaciones, id_interconsulta)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()
@@ -325,9 +329,9 @@ def updatePariente(rut):
                                              port='3306',
                                              password='M1st2r.12354')
             query = """UPDATE medicinaingsw.pariente
-                    SET nombres = %s, apellidos = %s, id_parentezco = %s,peso_pariente = %s,sexo = %s,talla_pariente = %s,vivo_pariente = %s
+                    SET antec_enferm = %s, nombres = %s, apellidos = %s, id_parentezco = %s,peso_pariente = %s,sexo = %s,talla_pariente = %s,vivo_pariente = %s
                     WHERE pariente.id_pariente  = """ + rut
-            values = (nombres,apellidos,id_parentezco,peso_pariente,sexo,talla_pariente,vivo_pariente)
+            values = (antec_enferm,nombres,apellidos,id_parentezco,peso_pariente,sexo,talla_pariente,vivo_pariente)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()
@@ -422,7 +426,7 @@ def getLastRowIntercon():
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT *
+        query = """SELECT idINTERCONSULTA
                 FROM medicinaingsw.interconsulta
                 ORDER BY idINTERCONSULTA DESC LIMIT 1"""
         cursor = connection.cursor(dictionary=True)
@@ -433,6 +437,28 @@ def getLastRowIntercon():
         return jsonify(records)
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
+
+#GET LRControl
+@app.route('/lastrowControl', methods=['GET'])
+def getLastRowControl():
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT id_control
+                FROM medicinaingsw.control
+                ORDER BY id_control DESC LIMIT 1"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
+
 
 if __name__ == '__main__':
     app.run(debug=True)

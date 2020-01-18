@@ -18,7 +18,7 @@ export class ExlabPage implements OnInit {
     private apiRest: ApiService, private router:Router) { }
 
   ngOnInit() {
-    this.control = new Control(JSON.parse(this.acRoute.snapshot.params.exlab_control))
+    this.control = new Control(JSON.parse(this.acRoute.snapshot.params.id_control))
     this.exlab.fecha_exam = this.control.fec_control
     console.log(this.exlab)
   }
@@ -30,8 +30,8 @@ export class ExlabPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Ingreso de registro del pariente',
-      message: 'Se cancelará el registro de la interconsulta. ¿Desea continuar?',
+      header: 'Ingreso de registro del examen de laboratorio',
+      message: 'Se cancelará el registro del examen de laboratorio. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',

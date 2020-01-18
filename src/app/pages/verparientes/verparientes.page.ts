@@ -66,7 +66,7 @@ export class VerparientesPage implements OnInit {
     this.apiRest.EliminarPariente(id).subscribe(data=>{
       }, error =>{
         alert("El registro del pariente ha sido eliminado")
-        this.myBackButton()
+        this.ngOnInit()
     })
   }
 

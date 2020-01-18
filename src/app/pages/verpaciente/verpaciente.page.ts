@@ -52,12 +52,13 @@ export class VerpacientePage implements OnInit {
     this.apiRest.EliminarPaciente(rut_paciente).subscribe(data=>{
       }, error =>{
         alert("El registro del paciente ha sido eliminado")
-        this.router.navigateByUrl('/menu')
+        this.ngOnInit()
     })
   }
 
   ActualizarPaciente(Paciente:Paciente){
     this.router.navigate(['/actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
+    this.ngOnInit()
     
   }
 

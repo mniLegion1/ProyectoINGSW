@@ -55,7 +55,10 @@
         </ion-col>
 </ion-row>
 		<ion-row>
-			<ion-col></ion-col>
+			<ion-col>
+        <ion-button (click)=routerlink>Diagnosticos</ion-button>
+        <ion-button (click)="AddIndexPaciente(interconsulta)">Indicaciones</ion-button>
+      </ion-col>
 			<ion-button (click)="AddIndexPaciente(interconsulta)">Ingresar Control</ion-button>
 			<ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
 		</ion-row>

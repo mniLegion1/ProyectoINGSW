@@ -4,7 +4,6 @@ import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User, Paciente, Prevision, Sexo, Pariente, Parentezco, Especialidad, Control, Diagnostico, Interconsulta,
          Exlab, Medico, Indicacion } from '../modelosapi/modelosapi.models';
-import {  } from '../modelosapi/modelosapi.models';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +32,7 @@ export class ApiService {
       console.log('Error al registrar',error);
     }
   }
+
   ActualizarPariente(Pariente:Pariente, rutpac:number): Observable<any>{
     return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpariente/" + rutpac,Pariente)
   }
@@ -41,6 +41,9 @@ export class ApiService {
   }
   AgregarPaciente(Paciente: Paciente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
+  }
+  AgregarControl(Control: Control): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarcontrol",Control);
   }
   EliminarPaciente(rutpac:number): Observable<any>{
     return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
@@ -77,5 +80,8 @@ export class ApiService {
   }
   UltimaInterconsultaId(): Observable <Interconsulta[]> {
     return this.http.get<Interconsulta[]>("http://localhost:5000/lastrowIntercon");
+  }
+  UltimoControlId(): Observable <Control[]> {
+    return this.http.get<Control[]>("http://localhost:5000/lastrowControl");
   }
 }
