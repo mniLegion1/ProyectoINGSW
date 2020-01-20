@@ -11,29 +11,34 @@ import { Location } from "@angular/common";
   styleUrls: ['./interconsulta.page.scss'],
 })
 export class InterconsultaPage implements OnInit {
-  paciente:Paciente
   interconsulta:Interconsulta = new Interconsulta()
   especialidad = new Array()
   medico = new Array()
-  id_paciente:number
+  rut_paciente
+  paciente
 
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
-      this.apiRest.Especialidad().subscribe(especialidades =>{
-        this.especialidad = especialidades;
-      },error=>{
-        console.log("No especialidades")
-      })
-      this.apiRest.Medico().subscribe(medicos =>{
-        this.medico = medicos;
-      },error=>{
-        console.log("No medicos")
-      })
+      
     }
 
   ngOnInit() {
-    this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacIntercon))
-    console.log(this.paciente)
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
+    this.apiRest.VerPerfilPaciente(this.rut_paciente).subscribe(pacientes =>{
+      this.paciente = pacientes;
+    },error=>{
+      console.log("No especialidades")
+    })
+    this.apiRest.Especialidad().subscribe(especialidades =>{
+      this.especialidad = especialidades;
+    },error=>{
+      console.log("No especialidades")
+    })
+    this.apiRest.Medico().subscribe(medicos =>{
+      this.medico = medicos;
+    },error=>{
+      console.log("No medicos")
+    })
   }
 
   myBackButton(){

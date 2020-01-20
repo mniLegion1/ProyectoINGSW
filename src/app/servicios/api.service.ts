@@ -54,6 +54,9 @@ export class ApiService {
   VerPacientes(): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
   }
+  VerPerfilPaciente(rut_pac:number): Observable <Paciente[]> {
+    return this.http.get<Paciente[]>("http://localhost:5000/pacientes/"+rut_pac);
+  }
   AgregarPariente(Pariente: Pariente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
   }

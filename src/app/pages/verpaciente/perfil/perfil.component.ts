@@ -5,12 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
 
+
 @Component({
-  selector: 'app-vervidrio',
-  templateUrl: './vervidrio.page.html',
-  styleUrls: ['./vervidrio.page.scss'],
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.scss'],
 })
-export class VervidrioPage implements OnInit {
+export class PerfilComponent implements OnInit {
   rut_paciente;
   pac = new Array()
   paciente
@@ -19,10 +20,9 @@ export class VervidrioPage implements OnInit {
 
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
-      
-  }
+    }
 
-  ngOnInit(){
+  ngOnInit() {
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
     this.apiRest.VerPerfilPaciente(this.rut_paciente).subscribe(pacientes =>{
       this.paciente = pacientes;
@@ -40,27 +40,8 @@ export class VervidrioPage implements OnInit {
       console.log("No sexos")
     })
   }
-
-  myBackButton(){
-    this.location.back();
-    console.log(this.location)
-  }
-
-  AgregarPariente(Paciente:Paciente){
-    this.router.navigate(['/antecedentespariente', {pariente: JSON.stringify(Paciente)}])
-  }
-
-  VerParientes(){
-    this.router.navigate(['pacientes',this.rut_paciente,'parientes'])
-  }
-  
-  ActualizarPaciente(Paciente:Paciente){
-    this.router.navigate(['pacientes',this.rut_paciente,'actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
     
+  VerParientes(Paciente:Paciente){
+    this.router.navigate(['/parientes', this.rut_paciente])
   }
-
-  IngresarInterconsulta(rut_paciente:number){
-    this.router.navigate(['pacientes',this.rut_paciente,'interconsulta'])
-  }
-
 }

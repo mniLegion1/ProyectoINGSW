@@ -11,19 +11,18 @@ import { Location } from "@angular/common";
   styleUrls: ['./verparientes.page.scss'],
 })
 export class VerparientesPage implements OnInit {
-  paciente:Paciente[];
-  id_paciente:number
+  paciente
   pariente = new Array();
   parentezco = new Array();
+  rut_paciente
   
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
     }
 
   ngOnInit(){
-    this.paciente = JSON.parse(this.acRoute.snapshot.params.par)
-    this.id_paciente = this.paciente['rut_paciente']
-    this.apiRest.VerParientes(this.id_paciente).subscribe(parientes =>{
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
+    this.apiRest.VerParientes(this.rut_paciente).subscribe(parientes =>{
       this.pariente = parientes;
     },error=>{
     })
@@ -70,8 +69,11 @@ export class VerparientesPage implements OnInit {
     })
   }
 
-  ActualizarPariente(Pariente:Pariente){
-    this.router.navigate(['/actualizarpariente', {parEditar: JSON.stringify(Pariente)}])
+  AgregarPariente(){
+    this.router.navigate(['pacientes',this.rut_paciente,'parientes','antecedentespariente'])
   }
 
+  ActualizarPariente(Pariente:Pariente){
+    this.router.navigate(['pacientes',this.rut_paciente,'parientes','actualizarpariente',{parEditar: JSON.stringify(Pariente)}])
+  }
 }

@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class VerpacientePage implements OnInit {
   paciente = new Array();
-  pariente = new Array();
+  perPaciente = new Array();
 
   constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
   }
@@ -55,16 +55,9 @@ export class VerpacientePage implements OnInit {
         this.ngOnInit()
     })
   }
-
-  ActualizarPaciente(Paciente:Paciente){
-    this.router.navigate(['/actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
-    this.ngOnInit()
-    
-  }
-
-  PerfilPaciente(Paciente:Paciente){
-    this.router.navigate(['/perfilpaciente', {pacPerfil: JSON.stringify(Paciente)}])
-    
+  
+  Paciente(rut_paciente:number){
+    this.router.navigate(['pacientes',rut_paciente])
   }
   
 }

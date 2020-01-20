@@ -14,26 +14,27 @@ import { Location } from "@angular/common";
 export class AddcustomerPage implements OnInit {
   pariente:Pariente = new Pariente();
   parentezco = new Array();
-  paciente: Paciente[];
-  id_paciente:number
   sexo = new Array();
+  rut_paciente
 
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
-      this.apiRest.Parentezco().subscribe(parentezcos =>{
-        this.parentezco = parentezcos;
-      },error=>{
-        console.log("No parentezcos")
-      })
-      this.apiRest.Sexo().subscribe(sexos =>{
-        this.sexo = sexos;
-      }, error =>{
-        console.log("No sexos")
-      })
+      
     }
 
   ngOnInit() {
-    this.paciente = JSON.parse(this.acRoute.snapshot.params.pariente)
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
+      console.log(this.rut_paciente)
+    this.apiRest.Parentezco().subscribe(parentezcos =>{
+      this.parentezco = parentezcos;
+    },error=>{
+      console.log("No parentezcos")
+    })
+    this.apiRest.Sexo().subscribe(sexos =>{
+      this.sexo = sexos;
+    }, error =>{
+      console.log("No sexos")
+    })
   }
 
   myBackButton(){
@@ -51,7 +52,7 @@ export class AddcustomerPage implements OnInit {
   }
 
   AddIndexPaciente(indpac:Pariente){
-    indpac['id_paciente'] = this.paciente['rut_paciente']
+    indpac['id_paciente'] = this.rut_paciente
     console.log(indpac)
     this.AgregarPariente()
   }

@@ -73,6 +73,27 @@ def getParientes(rut):
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
 
+#GET Datos del Paciente
+@app.route('/pacientes/<string:rut_paciente>', methods=['GET'])
+def getPerfilPaciente(rut_paciente):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT rut_paciente,dig_verif,nombres,apellidos,direccion,cor_elec,comuna,fono,id_prevision,(DATE_ADD(fec_nacim, INTERVAL 1 DAY))fec_nacim,sexo,edad_menarq,DATE_ADD(fec_menarq, INTERVAL 1 DAY)fec_menarq,actividad,deporte,DATE_ADD(fec_ingreso, INTERVAL 1 DAY)fec_ingreso,tiempo_libre,rendimiento,prof_futuro
+                    FROM medicinaingsw.paciente
+                    WHERE rut_paciente = """ + rut_paciente
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
+
 #POST Paciente
 @app.route('/pacientes/ingresarpaciente', methods=['POST'])
 def postPaciente():

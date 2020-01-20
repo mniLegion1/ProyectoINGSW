@@ -48,7 +48,7 @@ export class GetPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.router.navigate(['/menu']);
+            this.router.navigate(['/pacientes']);
           }
         }
       ]

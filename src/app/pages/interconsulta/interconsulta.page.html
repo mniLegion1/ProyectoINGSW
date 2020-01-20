@@ -18,7 +18,7 @@
 
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Paciente: {{paciente.nombres}} {{paciente.apellidos}}</ion-title>
+    <ion-title *ngFor="let paciente of paciente">Paciente: {{paciente.nombres}} {{paciente.apellidos}}</ion-title>
   </ion-toolbar>
 </ion-header>
 

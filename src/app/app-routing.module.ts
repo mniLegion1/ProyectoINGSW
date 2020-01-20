@@ -4,20 +4,25 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch: 'full'},
-  { path: 'home',
+  { 
+    path: 'home',
     loadChildren: './pages/test/test.module#TestPageModule'
   },
-  {
-    path: 'pie',
-    loadChildren: './pages/pie-chart/pie-chart.module#PieChartPageModule'
+  { 
+    path: 'register',
+    loadChildren: './pages/register/register.module#RegisterPageModule'
   },
-  { path: 'register',
-    loadChildren: './pages/register/register.module#RegisterPageModule'},
-  { path: 'login',
+  { 
+    path: 'login',
     loadChildren: './pages/login/login.module#LoginPageModule'
   },
-  { path: 'menu',
+  { 
+    path: 'menu',
     loadChildren: './pages/menu/menu.module#MenuPageModule',
+    //canActivate: [AuthGuard]
+  },
+  { path: 'pacientes',
+  loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule'
     //canActivate: [AuthGuard]
   },
   {
@@ -25,40 +30,39 @@ const routes: Routes = [
     loadChildren: './pages/get/get.module#GetPageModule',
   },
   {
+    path: 'pacientes/:rut_paciente/actualizarpaciente',
+    loadChildren: './pages/update/update.module#UpdatePageModule'
+  },
+  { path: 'pacientes/:rut_paciente/parientes',
+    loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule'
+  },
+  {
+    path: 'pacientes/:rut_paciente/parientes/antecedentespariente',
+    loadChildren: './pages/addcustomer/addcustomer.module#AddcustomerPageModule'
+  },
+  {
+    path: 'pacientes/:rut_paciente/parientes/actualizarpariente',
+    loadChildren: './pages/delete/delete.module#DeletePageModule'
+  },
+  {
     path: 'z',
     loadChildren: './pages/post/post.module#PostPageModule'
   },
-  {
-    path: 'actualizarpariente',
-    loadChildren: './pages/delete/delete.module#DeletePageModule'
-  },
-  { path: 'pacientes',
-  loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule'
-    //canActivate: [AuthGuard]
-  },
-  {
-    path: 'perfilpaciente',
-    loadChildren: './pages/vervidrio/vervidrio.module#VervidrioPageModule'
-  },
-  {
-    path: 'actualizarpaciente',
-    loadChildren: './pages/update/update.module#UpdatePageModule'
-  },
-  {
-    path: 'antecedentespariente',
-    loadChildren: './pages/addcustomer/addcustomer.module#AddcustomerPageModule'
-  },
-  { path: 'verparientes',
-    loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule'
-  },
-  { path: 'interconsulta',
+  { 
+    path: 'pacientes/:rut_paciente/interconsulta',
     loadChildren: './pages/interconsulta/interconsulta.module#InterconsultaPageModule'
   },
-  { path: 'examenlaboratorio',
+  { 
+    path: 'examenlaboratorio',
     loadChildren: './pages/exlab/exlab.module#ExlabPageModule'
   },
-  { path: 'controlmedico',
+  { 
+    path: 'controlmedico',
     loadChildren: './pages/control/control.module#ControlPageModule'
+  },
+  {
+    path: 'pie',
+    loadChildren: './pages/pie-chart/pie-chart.module#PieChartPageModule'
   },
   { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' },
   { path: 'diagnostico', loadChildren: './pages/diagnostico/diagnostico.module#DiagnosticoPageModule' }

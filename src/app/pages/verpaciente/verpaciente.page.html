@@ -13,9 +13,14 @@
       <ion-label>
         {{paciente.nombres}} {{paciente.apellidos}} 
       </ion-label>
-      <ion-button color="medium" size="small" (click)="PerfilPaciente(paciente)">Perfil</ion-button>
-      <ion-button color="primary" size="small" (click)="ActualizarPaciente(paciente)">Actualizar</ion-button>
+      <ion-button color="tertiary" size="small" (click)="Paciente(paciente.rut_paciente)">Perfil</ion-button>
       <ion-button color="danger" size="small" (click)="presentAlertConfirm(paciente.rut_paciente)">Borrar</ion-button>
+      
     </ion-item>
 </ion-list>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button routerLink="/antecedentespersonales">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 </ion-content>
