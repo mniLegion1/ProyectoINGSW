@@ -4,6 +4,7 @@ import { Exlab, Control } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-exlab',
@@ -12,15 +13,17 @@ import { Location } from "@angular/common";
 })
 export class ExlabPage implements OnInit {
   exlab:Exlab = new Exlab();
-  control:Control
+  control = new Array()
+  cont:Control
+  rut_paciente
+  id_interconsulta
 
-  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(public navCtrl: NavController, private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) { }
 
   ngOnInit() {
-    this.control = new Control(JSON.parse(this.acRoute.snapshot.params.id_control))
-    this.exlab.fecha_exam = this.control.fec_control
-    console.log(this.exlab)
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente')
+    this.id_interconsulta = this.acRoute.snapshot.paramMap.get('id_intercon')
   }
 
   myBackButton(){
@@ -30,8 +33,8 @@ export class ExlabPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Ingreso de registro del examen de laboratorio',
-      message: 'Se cancelará el registro del examen de laboratorio. ¿Desea continuar?',
+      header: 'Registro de examen laboratorio',
+      message: 'Se cancelará el ingreso del examen de laboratorio. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',
@@ -43,7 +46,7 @@ export class ExlabPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.myBackButton()
+            this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_interconsulta])
           }
         }
       ]
@@ -51,7 +54,29 @@ export class ExlabPage implements OnInit {
     await alert.present();
   }
 
-  Print(){
+  esperarControl(){
+    return new Promise((resolve,reject) =>{
+      setTimeout(() =>{
+        resolve(
+          this.exlab.idEX_LAB = this.control[0].id_control
+        )
+      }, 3000)
+    })
+  }
+
+  async AgregarExlab(){
+    this.apiRest.VerUltimoControl().subscribe(controles =>{
+      this.control = controles;
+    },error=>{
+      console.log("No idIntercon")
+    })
+    this.esperarControl().then(data => this.apiRest.AgregarExlab(this.exlab).subscribe(res => {
+      alert("El control se ha agregado con exito");
+      this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_interconsulta])
+    }, err =>{
+      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
+    }))
+    
     console.log(this.exlab)
   }
 

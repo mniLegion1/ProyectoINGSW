@@ -4,6 +4,7 @@ import { Paciente, Interconsulta, Especialidad } from 'src/app/modelosapi/modelo
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-interconsulta',
@@ -16,8 +17,10 @@ export class InterconsultaPage implements OnInit {
   medico = new Array()
   rut_paciente
   paciente
+  id_intercon
+  Interconsulta = new Array()
 
-  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(public navCtrl: NavController, private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
       
     }
@@ -46,20 +49,39 @@ export class InterconsultaPage implements OnInit {
     console.log(this.location)
   }
 
+  async esperarInterconsulta(){
+    return new Promise((resolve,reject) =>{
+      setTimeout(() =>{
+        resolve(
+          this.id_intercon = this.Interconsulta[0].idINTERCONSULTA
+        )
+      }, 2500)
+    })
+  }
+
   AgregarInterconsulta(){
     this.apiRest.AgregarInterconsulta(this.interconsulta).subscribe(res => {
-      this.IngresarControl(this.interconsulta)
+      this.apiRest.VerUltimaInterconsulta().subscribe(Interconsultas =>{
+        this.Interconsulta = Interconsultas
+        this.esperarInterconsulta().then(data => this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',data,'controlmedico']))
+        
+      },error=>{
+        console.log("No idINTERCONSULTA")
+      })
     }, err =>{
       alert("La interconsulta no pudo registrarse. Revise que todos los campos estén llenados.");
     })
     console.log(this.interconsulta)
+    
   }
 
   AddIndexPaciente(indpac:Interconsulta){
-    this.id_paciente = this.paciente['rut_paciente']
-    indpac['id_paciente'] = this.id_paciente
+    
+    indpac['id_paciente'] = this.rut_paciente
     this.AgregarInterconsulta()
   }
+
+  
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -76,16 +98,12 @@ export class InterconsultaPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.myBackButton()
+            this.router.navigate(['pacientes',this.rut_paciente])
           }
         }
       ]
     });
     await alert.present();
-  }
-
-  IngresarControl(Interconsulta:Interconsulta){
-    this.router.navigate(['/controlmedico', {id_interconsulta: JSON.stringify(Interconsulta)}])
   }
 
 }

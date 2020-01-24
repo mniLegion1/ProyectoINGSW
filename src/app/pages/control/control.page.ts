@@ -4,6 +4,7 @@ import { Interconsulta, Control } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { toASCII } from 'punycode';
 
 @Component({
   selector: 'app-control',
@@ -11,25 +12,20 @@ import { Location } from "@angular/common";
   styleUrls: ['./control.page.scss'],
 })
 export class ControlPage implements OnInit {
-  interconsulta:Interconsulta
   control:Control = new Control()
-  intercon:Interconsulta[]
   id_intercon:number
+  rut_paciente
+  inter:Interconsulta
 
 
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
-      this.apiRest.UltimaInterconsultaId().subscribe(intercons =>{
-        this.intercon = intercons;
-      },error=>{
-        console.log("No idIntercon")
-      })
     }
 
   ngOnInit() {
-    this.interconsulta = new Interconsulta(JSON.parse(this.acRoute.snapshot.params.id_interconsulta))
-    this.control.fec_control = this.interconsulta.fec_intercon
-    console.log(this.control)
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
+    this.id_intercon = parseInt(this.acRoute.snapshot.paramMap.get('data'));
+    this.control.id_interconsulta = this.id_intercon
   }
 
   myBackButton(){
@@ -37,7 +33,7 @@ export class ControlPage implements OnInit {
     console.log(this.location)
   }
 
-  async presentAlertConfirmExlab() {
+  async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Registro de control',
       message: 'Se cancelará el ingreso de este control. ¿Desea continuar?',
@@ -52,7 +48,7 @@ export class ControlPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.myBackButton()
+            this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon])
           }
         }
       ]
@@ -60,7 +56,7 @@ export class ControlPage implements OnInit {
     await alert.present();
   }
 
-  async presentAlertConfirmAcep(Control:Control){
+  async presentAlertConfirmAcep(){
     const alert = await this.alertController.create({
       header: 'Registro de control',
       message: 'No se ha ingresado un examen de laboratorio. ¿Desea continuar?',
@@ -75,7 +71,7 @@ export class ControlPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.AddIndex(Control)
+            this.AgregarControlAceptar()
           }
         }
       ]
@@ -83,40 +79,23 @@ export class ControlPage implements OnInit {
     await alert.present();
   }
 
-  AgregarControlExlab(){
-    this.apiRest.AgregarControl(this.control).subscribe(res => {
-      this.IngresarExlab(this.control)
-    alert("El control se ha agregado con exito");
-    }, err =>{
-      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
-    })
-  }
-
   AgregarControlAceptar(){
     this.apiRest.AgregarControl(this.control).subscribe(res => {
+      console.log(this.control)
       alert("El control se ha agregado con exito");
-      this.myBackButton()
+      this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon])
+    }, err =>{
+      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
+    })
+
+  }
+
+  AgregarExlab(){
+    this.apiRest.AgregarControl(this.control).subscribe(res => {
+      this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon,'controlmedico','examenlaboratorio'])
     }, err =>{
       alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
     })
   }
-
-  AddIndexExlab(indpac:Control){
-    indpac['id_interconsulta'] = this.intercon[0].idINTERCONSULTA
-    console.log(indpac)
-    this.AgregarControlExlab()
-  }
-
-  AddIndex(indpac:Control){
-    indpac['id_interconsulta'] = this.intercon[0].idINTERCONSULTA
-    console.log(indpac)
-    this.AgregarControlAceptar()
-  }
-
-  IngresarExlab(Control:Control){
-    this.router.navigate(['/examenlaboratorio', {id_control: JSON.stringify(Control)}])
-  }
-
-  
 
 }

@@ -45,6 +45,12 @@ export class ApiService {
   AgregarControl(Control: Control): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarcontrol",Control);
   }
+  AgregarPariente(Pariente: Pariente): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
+  }
+  AgregarExlab(Exlab:Exlab): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarexlab",Exlab);
+  }
   EliminarPaciente(rutpac:number): Observable<any>{
     return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
   }
@@ -57,11 +63,11 @@ export class ApiService {
   VerPerfilPaciente(rut_pac:number): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes/"+rut_pac);
   }
-  AgregarPariente(Pariente: Pariente): Observable<any>{
-    return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
-  }
   VerParientes(rutpac:number): Observable <Pariente[]> {
     return this.http.get<Pariente[]>("http://localhost:5000/parientes/" + rutpac);
+  }
+  VerInterconsulta(id_intercon:number):Observable <Interconsulta[]> {
+    return this.http.get<Interconsulta[]>("http://localhost:5000/lastInterconsulta/"+id_intercon);
   }
   AgregarInterconsulta(Interconsulta: Interconsulta): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarinterconsulta",Interconsulta);
@@ -81,10 +87,10 @@ export class ApiService {
   Medico():Observable <Medico[]> {
     return this.http.get<Medico[]>("http://localhost:5000/medicos");
   }
-  UltimaInterconsultaId(): Observable <Interconsulta[]> {
-    return this.http.get<Interconsulta[]>("http://localhost:5000/lastrowIntercon");
+  VerUltimaInterconsulta(): Observable <Interconsulta[]> {
+    return this.http.get<Interconsulta[]>("http://localhost:5000/lastIntercon");
   }
-  UltimoControlId(): Observable <Control[]> {
-    return this.http.get<Control[]>("http://localhost:5000/lastrowControl");
+  VerUltimoControl(): Observable <Control[]> {
+    return this.http.get<Control[]>("http://localhost:5000/lastControl");
   }
 }

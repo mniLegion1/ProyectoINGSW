@@ -143,7 +143,6 @@ def postControl():
     if request.method == 'POST':
         data = request.get_json()
         print(data)
-        fec_control = data['fec_control']
         evolucion = data['evolucion']
         edad = data['edad']
         peso = data['peso']
@@ -173,8 +172,8 @@ def postControl():
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-            query = "INSERT INTO medicinaingsw.control (fec_control, evolucion, edad, peso, var_masa, veloc_masa, peso_acum, talla, var_talla, veloc_talla, vello, test_izq, MG, MM, mama, test_der, MB, GV, genital, agua, imc, observaciones, id_interconsulta) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            values = (fec_control, evolucion, edad, peso, var_masa, veloc_masa, peso_acum, talla, var_talla, veloc_talla, vello, test_izq, MG, MM, mama, test_der, MB, GV, genital, agua, imc, observaciones, id_interconsulta)
+            query = "INSERT INTO medicinaingsw.control (evolucion, edad, peso, var_masa, veloc_masa, peso_acum, talla, var_talla, veloc_talla, vello, test_izq, MG, MM, mama, test_der, MB, GV, genital, agua, imc, observaciones, id_interconsulta) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            values = ( evolucion, edad, peso, var_masa, veloc_masa, peso_acum, talla, var_talla, veloc_talla, vello, test_izq, MG, MM, mama, test_der, MB, GV, genital, agua, imc, observaciones, id_interconsulta)
             cursor = connection.cursor(dictionary=True)
             cursor.execute(query, values)
             connection.commit()
@@ -247,6 +246,58 @@ def postInterconsulta():
             print(inst)
             return {"message": "Error"}
 
+#POST Examen Laboratorio
+@app.route('/pacientes/ingresarexlab', methods=['POST'])
+def postExlab():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        Hb = data['Hb']
+        T3 = data['T3']
+        CT = data['CT']
+        PT = data['PT']
+        Hto = data['Hto']
+        T4 = data['T4']
+        T = data['T']
+        ALB = data['ALB']
+        GR = data['GR']
+        TSH = data['TSH']
+        HDL = data['HDL']
+        SG = data['SG']
+        GB = data['GB']
+        Fe = data['Fe']
+        LDL = data['LDL']
+        creatinina = data['creatinina']
+        EOS = data['EOS']
+        insulina = data['insulina']
+        uremia = data['uremia']
+        VHS = data['VHS']
+        glicemia = data['glicemia']
+        orina = data['orina']
+        parasito = data['parasito']
+        otros_exam = data['otros_exam']
+        radiografia = data['radiografia']
+        idEX_LAB = data['idEX_LAB']
+
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = """INSERT INTO medicinaingsw.ex_lab (Hb,T3,CT,PT,Hto,T4,T,ALB,GR,TSH,HDL,SG,GB,Fe,LDL,creatinina,EOS,insulina,uremia,VHS,glicemia,orina,parasito,otros_exam,radiografia,idEX_LAB)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+            values = (Hb,T3,CT,PT,Hto,T4,T,ALB,GR,TSH,HDL,SG,GB,Fe,LDL,creatinina,EOS,insulina,uremia,VHS,glicemia,orina,parasito,otros_exam,radiografia,idEX_LAB)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Paciente creado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
 #DELETE Paciente
 @app.route('/pacientes/eliminarpaciente/<string:rut>', methods=['DELETE'])
 def deletePaciente(rut):
@@ -286,7 +337,6 @@ def deletePariente(rut):
         except Exception as inst:
             print(inst)
             return {"message": "Error"}
-
 
 #UPDATE Paciente
 @app.route('/pacientes/actualizarpaciente/<string:rut>', methods=['PATCH'])
@@ -438,8 +488,8 @@ def getEspecialidades():
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
-#GET LRInterconsulta
-@app.route('/lastrowIntercon', methods=['GET'])
+#GET LastInterconsultaID
+@app.route('/lastIntercon', methods=['GET'])
 def getLastRowIntercon():
     try:
         connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
@@ -460,7 +510,7 @@ def getLastRowIntercon():
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
 #GET LRControl
-@app.route('/lastrowControl', methods=['GET'])
+@app.route('/lastControl', methods=['GET'])
 def getLastRowControl():
     try:
         connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
@@ -480,6 +530,26 @@ def getLastRowControl():
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
+#GET LastInterconsulta
+@app.route('/lastInterconsulta/<string:id_intercon>', methods=['GET'])
+def getLastIntercon(id_intercon):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT idINTERCONSULTA,id_especialidad,motivo_intercon,(DATE_ADD(fec_intercon, INTERVAL 1 DAY))fec_intercon,id_medico
+                    FROM medicinaingsw.interconsulta
+                    WHERE interconsulta.idINTERCONSULTA = """ + id_intercon
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
 if __name__ == '__main__':
     app.run(debug=True)

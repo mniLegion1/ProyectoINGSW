@@ -122,7 +122,7 @@ export class Pariente{
 
 export interface Exlab{
     idEX_LAB:number
-    fecha_exam:Date
+    fecha_examen:Date
     Hb:number
     T3:number
     CT:number
@@ -148,12 +148,11 @@ export interface Exlab{
     parasito:string
     otros_exam:string
     radiografia:string
-    id_control:number
 }
 
 export class Exlab{
     idEX_LAB:number
-    fecha_exam:Date
+    fecha_examen:Date
     Hb:number
     T3:number
     CT:number
@@ -179,12 +178,11 @@ export class Exlab{
     parasito:string
     otros_exam:string
     radiografia:string
-    id_control:number
 
     constructor(datos?:Exlab){
         if(datos != null){
             this.idEX_LAB = datos.idEX_LAB
-            this.fecha_exam = datos.fecha_exam
+            this.fecha_examen = datos.fecha_examen
             this.Hb = datos.Hb
             this.T3 = datos.T3
             this.CT = datos.CT
@@ -210,7 +208,6 @@ export class Exlab{
             this.parasito = datos.parasito
             this.otros_exam = datos.otros_exam
             this.radiografia = datos.radiografia
-            this.id_control = datos.id_control
         }   
     }
 }
@@ -266,6 +263,7 @@ export class Parentezco{
 }
 
 export interface Control{
+    evolucion:string
     id_control:number
     fec_control:Date
     edad:number
@@ -277,9 +275,9 @@ export interface Control{
     imc:number
     peso:number
     talla:number
-    var_peso:number
+    var_masa:number
     var_talla:number
-    veloc_mas:number
+    veloc_masa:number
     veloc_talla:number
     peso_acum:number
     vello:number
@@ -293,6 +291,7 @@ export interface Control{
 }
 
 export class Control{
+    evolucion:string
     id_control:number
     fec_control:Date
     edad:number
@@ -304,7 +303,7 @@ export class Control{
     imc:number
     peso:number
     talla:number
-    var_peso:number
+    var_masa:number
     var_talla:number
     veloc_masa:number
     veloc_talla:number
@@ -330,7 +329,7 @@ export class Control{
             this.imc = datos.imc
             this.peso = datos.peso
             this.talla = datos.talla
-            this.var_peso = datos.var_peso
+            this.var_masa = datos.var_masa
             this.var_talla = datos.var_talla
             this.veloc_masa = datos.veloc_masa
             this.veloc_talla = datos.veloc_talla
@@ -342,6 +341,7 @@ export class Control{
             this.test_der = datos.test_der
             this.id_interconsulta = datos.id_interconsulta
             this.observaciones = datos.observaciones
+            this.evolucion = datos.evolucion
         }
     }
 }

@@ -44,28 +44,38 @@ const routes: Routes = [
     path: 'pacientes/:rut_paciente/parientes/actualizarpariente',
     loadChildren: './pages/delete/delete.module#DeletePageModule'
   },
-  {
-    path: 'z',
-    loadChildren: './pages/post/post.module#PostPageModule'
-  },
   { 
     path: 'pacientes/:rut_paciente/interconsulta',
     loadChildren: './pages/interconsulta/interconsulta.module#InterconsultaPageModule'
   },
   { 
-    path: 'examenlaboratorio',
-    loadChildren: './pages/exlab/exlab.module#ExlabPageModule'
+    path: 'pacientes/:rut_paciente/interconsulta/:data/controlmedico',
+    loadChildren: './pages/control/control.module#ControlPageModule'
   },
   { 
-    path: 'controlmedico',
-    loadChildren: './pages/control/control.module#ControlPageModule'
+    path: 'pacientes/:rut_paciente/interconsulta/:id_intercon/controlmedico/examenlaboratorio',
+    loadChildren: './pages/exlab/exlab.module#ExlabPageModule'
   },
   {
     path: 'pie',
     loadChildren: './pages/pie-chart/pie-chart.module#PieChartPageModule'
   },
-  { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' },
-  { path: 'diagnostico', loadChildren: './pages/diagnostico/diagnostico.module#DiagnosticoPageModule' }
+  { 
+    path: 'pacientes/:rut_paciente/interconsulta/:id_intercon', 
+    loadChildren: './pages/interconinfo/interconinfo.module#InterconinfoPageModule'
+  },
+  { 
+    path: 'pacientes/:rut_paciente/interconsultainfo/diagnostico', 
+    loadChildren: './pages/diagnostico/diagnostico.module#DiagnosticoPageModule' 
+  },
+  {
+    path: 'z',
+    loadChildren: './pages/post/post.module#PostPageModule'
+  },
+  { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' }
+  
+  
+
 
 
 ];

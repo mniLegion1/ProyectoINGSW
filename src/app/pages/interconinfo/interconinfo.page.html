@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      </ion-buttons>
+  <ion-title>Interconsulta</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title *ngFor="let paciente of paciente">
+   {{paciente.nombres}}{{' '}}{{paciente.apellidos}}  </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngFor="let interconinfo of interconinfo">
+  <ion-grid>
+  <h4>Fecha: {{interconinfo.fec_intercon | date: 'dd/MM/yyyy'}}</h4>
+  <h4>Motivo interconsulta: {{interconinfo.motivo_intercon}} </h4>
+  <div *ngFor="let medico of medico"><ng-container *ngIf="medico.idMEDICO === interconinfo.id_medico">
+    <div *ngFor="let especialidad of especialidad"><ng-container *ngIf="especialidad.idESPECIALIDAD === interconinfo.id_especialidad">
+    <h4>Medico: {{medico.nombres_medico}} {{medico.apellidos_medico}}  Especialidad: {{especialidad.desc_especialidad}}</h4>
+  </ng-container></div></ng-container></div>
+
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="Diagnosticar()">Diagnostico</ion-button>
+    <ion-button (click)="Cancelar()">Cancelar</ion-button>
+    </ion-col>
+    <ion-button (click)="AgregarNuevoControl()">Ingresar Nuevo Control</ion-button>
+  </ion-row>
+</ion-grid>
+</ion-content>
