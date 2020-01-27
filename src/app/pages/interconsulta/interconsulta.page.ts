@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Paciente, Interconsulta, Especialidad } from 'src/app/modelosapi/modelosapi.models';
+import { Interconsulta } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
-import { NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-interconsulta',
@@ -20,7 +19,7 @@ export class InterconsultaPage implements OnInit {
   id_intercon
   Interconsulta = new Array()
 
-  constructor(public navCtrl: NavController, private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
       
     }
@@ -63,7 +62,7 @@ export class InterconsultaPage implements OnInit {
     this.apiRest.AgregarInterconsulta(this.interconsulta).subscribe(res => {
       this.apiRest.VerUltimaInterconsulta().subscribe(Interconsultas =>{
         this.Interconsulta = Interconsultas
-        this.esperarInterconsulta().then(data => this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',data,'controlmedico']))
+        this.esperarInterconsulta().then(data => this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',data]))
         
       },error=>{
         console.log("No idINTERCONSULTA")

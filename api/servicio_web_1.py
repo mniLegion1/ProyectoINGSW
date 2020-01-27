@@ -246,6 +246,58 @@ def postInterconsulta():
             print(inst)
             return {"message": "Error"}
 
+#POST Diagnostico
+@app.route('/pacientes/ingresardiagnostico', methods=['POST'])
+def postDiagnostico():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        desc_diagnostico = data['desc_diagnostico']
+        id_interconsulta = data['id_interconsulta']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = "INSERT INTO medicinaingsw.diagnostico (desc_diagnostico, id_interconsulta) VALUES (%s, %s)"
+            values = (desc_diagnostico, id_interconsulta)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Diagnostico agregedado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
+#POST Indicacion
+@app.route('/pacientes/ingresarindicacion', methods=['POST'])
+def postIndicacion():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(data)
+        desc_indicacion = data['desc_indicacion']
+        id_interconsulta = data['id_interconsulta']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = "INSERT INTO medicinaingsw.indicacion (desc_indicacion, id_interconsulta) VALUES (%s, %s)"
+            values = (desc_indicacion, id_interconsulta)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Indicacion agregada"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
 #POST Examen Laboratorio
 @app.route('/pacientes/ingresarexlab', methods=['POST'])
 def postExlab():
@@ -338,6 +390,26 @@ def deletePariente(rut):
             print(inst)
             return {"message": "Error"}
 
+#DELETE Interconsulta(idINTERCONSULTA)
+@app.route('/pacientes/eliminarinterconsulta/<string:id_intercon>', methods=['DELETE'])
+def deleteInterconsulta(id_intercon):
+    if request.method == 'DELETE':
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = """DELETE FROM medicinaingsw.interconsulta
+                    WHERE interconsulta.idINTERCONSULTA = """ + id_intercon
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query)
+            connection.commit()
+            connection.close()
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
 #UPDATE Paciente
 @app.route('/pacientes/actualizarpaciente/<string:rut>', methods=['PATCH'])
 def updatePaciente(rut):
@@ -374,6 +446,34 @@ def updatePaciente(rut):
             connection.commit()
             connection.close()
             return {"message": "Paciente creado"}
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
+#UPDATE InterconComent(idINTERCONSULTA)
+@app.route('/pacientes/addcommentintercon/<string:id_intercon>', methods=['PATCH'])
+def updateInterComent(id_intercon):
+    if request.method == 'PATCH':
+        data = request.get_json()
+        print(data)
+        id_paciente = data['id_paciente']
+        coment_interconsulta = data['coment_interconsulta']
+
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = """UPDATE medicinaingsw.interconsulta
+                    SET id_paciente = %s, coment_interconsulta = %s
+                    WHERE interconsulta.idINTERCONSULTA = """ + id_intercon
+            values = (id_paciente, coment_interconsulta)
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query, values)
+            connection.commit()
+            connection.close()
+            return {"message": "Comentario agregado"}
         except Exception as inst:
             print(inst)
             return {"message": "Error"}

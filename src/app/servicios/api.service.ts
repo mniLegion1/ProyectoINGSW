@@ -39,6 +39,9 @@ export class ApiService {
   ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
     return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
   }
+  AgregarComentIntercon(i:Interconsulta,id_intercon:number): Observable<any>{
+    return this.http.patch<any>("http://localhost:5000/pacientes/addcommentintercon/"+id_intercon,i);
+  }
   AgregarPaciente(Paciente: Paciente): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarpaciente",Paciente);
   }
@@ -51,11 +54,20 @@ export class ApiService {
   AgregarExlab(Exlab:Exlab): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarexlab",Exlab);
   }
+  AgregarDiagnostico(Diagnostico:Diagnostico): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresardiagnostico",Diagnostico);
+  }
+  AgregarIndicacion(Indicacion:Indicacion): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/pacientes/ingresarindicacion",Indicacion);
+  }
   EliminarPaciente(rutpac:number): Observable<any>{
     return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
   }
   EliminarPariente(rutpar:number): Observable<any>{
     return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpariente/" + rutpar)
+  }
+  EliminarInterconsulta(idintercon:number): Observable<any>{
+    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarinterconsulta/" + idintercon)
   }
   VerPacientes(): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes");

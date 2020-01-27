@@ -24,10 +24,19 @@
 
   <ion-row>
     <ion-col>
-      <ion-button (click)="Diagnosticar()">Diagnostico</ion-button>
+      <ion-item>
+        <ion-label position="floating">Comentarios: </ion-label>
+        <ion-textarea type="text" [(ngModel)]="i.coment_interconsulta"></ion-textarea>
+        </ion-item>
     <ion-button (click)="Cancelar()">Cancelar</ion-button>
+    <ion-button (click)="Terminar()">Terminar</ion-button>
     </ion-col>
-    <ion-button (click)="AgregarNuevoControl()">Ingresar Nuevo Control</ion-button>
+    <ion-col>
+      <ion-button (click)="AgregarNuevoControl()">Ingresar Nuevo Control</ion-button>
+        <ion-button (click)="Diagnostico()">Diagnostico</ion-button>
+        <ion-button (click)="Indicacion()">Indicaciones</ion-button>
+      </ion-col>
+    
   </ion-row>
 </ion-grid>
 </ion-content>

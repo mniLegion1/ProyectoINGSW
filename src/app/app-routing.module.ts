@@ -57,7 +57,7 @@ const routes: Routes = [
     loadChildren: './pages/exlab/exlab.module#ExlabPageModule'
   },
   {
-    path: 'pie',
+    path: 'pacientes/:rut_paciente/interconsulta/:id_intercon/indicacion',
     loadChildren: './pages/pie-chart/pie-chart.module#PieChartPageModule'
   },
   { 
@@ -65,14 +65,17 @@ const routes: Routes = [
     loadChildren: './pages/interconinfo/interconinfo.module#InterconinfoPageModule'
   },
   { 
-    path: 'pacientes/:rut_paciente/interconsultainfo/diagnostico', 
+    path: 'pacientes/:rut_paciente/interconsulta/:id_intercon/diagnostico', 
     loadChildren: './pages/diagnostico/diagnostico.module#DiagnosticoPageModule' 
+  },
+  { 
+    path: 'pacientes/:rut_paciente/historial',
+    loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' 
   },
   {
     path: 'z',
     loadChildren: './pages/post/post.module#PostPageModule'
-  },
-  { path: 'verhistorial', loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' }
+  }
   
   
 

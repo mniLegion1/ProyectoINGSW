@@ -369,6 +369,7 @@ export interface Interconsulta{
     motivo_intercon:string
     fec_intercon:Date
     id_paciente:number
+    coment_interconsulta:string
 }
 
 export class Interconsulta{
@@ -377,6 +378,7 @@ export class Interconsulta{
     motivo_intercon:string
     fec_intercon:Date
     id_paciente:number
+    coment_interconsulta:string
 
     constructor(datos?:Interconsulta){
         if(datos != null){
@@ -385,6 +387,7 @@ export class Interconsulta{
             this.motivo_intercon = datos.motivo_intercon
             this.fec_intercon = datos.fec_intercon
             this.id_paciente = datos.id_paciente
+            this.coment_interconsulta = datos.coment_interconsulta
         }
     }
 }

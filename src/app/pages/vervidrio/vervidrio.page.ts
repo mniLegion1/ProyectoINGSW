@@ -46,21 +46,25 @@ export class VervidrioPage implements OnInit {
     console.log(this.location)
   }
 
-  AgregarPariente(Paciente:Paciente){
+  async AgregarPariente(Paciente:Paciente){
     this.router.navigate(['/antecedentespariente', {pariente: JSON.stringify(Paciente)}])
   }
 
-  VerParientes(){
+  async VerParientes(){
     this.router.navigate(['pacientes',this.rut_paciente,'parientes'])
   }
   
-  ActualizarPaciente(Paciente:Paciente){
+  async ActualizarPaciente(Paciente:Paciente){
     this.router.navigate(['pacientes',this.rut_paciente,'actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
     
   }
 
-  IngresarInterconsulta(rut_paciente:number){
+  async IngresarInterconsulta(rut_paciente:number){
     this.router.navigate(['pacientes',this.rut_paciente,'interconsulta'])
+  }
+
+  async VerHistorial(){
+    this.router.navigate(['pacientes',this.rut_paciente,'historial'])
   }
 
 }

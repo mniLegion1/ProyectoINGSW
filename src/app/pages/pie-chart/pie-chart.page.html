@@ -3,42 +3,17 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Examen de Laboratorio</ion-title>
+    <ion-title>Indicaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-      <ion-label>
-        <ion-grid>
-          <h3><strong> Fecha de exámen: </strong>{{exlab.fecha.exam}}</h3>
-          <h3><strong> Hb: </strong>{{exlab.Hb}}</h3>
-          <h3><strong> T3: </strong>{{exlab.T3}}</h3>
-          <h3><strong> CT: </strong>{{exlab.CT}}</h3>
-          <h3><strong> PT: </strong>{{exlab.PT}}</h3>
-          <h3><strong> Hto: </strong>{{exlab.Hto}}</h3>
-          <h3><strong> T4: </strong>{{exlab.T4}}</h3>
-          <h3><strong> T: </strong>{{exlab.T}}</h3>
-          <h3><strong> ALB: </strong>{{exlab.ALB}}</h3>
-          <h3><strong> GR: </strong>{{exlab.GR}}</h3>
-          <h3><strong> TSH: </strong>{{exlab.TSH}}</h3>
-          <h3><strong> HDL: </strong>{{exlab.HDL}}</h3>
-          <h3><strong> SG: </strong>{{exlab.SG}}</h3>
-          <h3><strong> Fe: </strong>{{exlab.Fe}}</h3>
-          <h3><strong> LDL: </strong>{{exlab.LDL}}</h3>
-          <h3><strong> Creatinina: </strong>{{exlab.creatinina}}</h3>
-          <h3><strong> EOS: </strong>{{exlab.EOS}}</h3>
-          <h3><strong> Insulina: </strong>{{exlab.insulina}}</h3>
-          <h3><strong> Uremia: </strong>{{exlab.uremia}}</h3>
-          <h3><strong> VHS: </strong>{{exlab.VHS}}</h3>
-          <h3><strong> Glicemia: </strong>{{exlab.glicemia}}</h3>
-          <h3><strong> Orina: </strong>{{exlab.orina}}</h3>
-          <h3><strong> Parasito: </strong>{{exlab.parasito}}</h3>
-          <h3><strong> Otros exámenes: </strong>{{exlab.otros_exam}}</h3>
-          <h3><strong> Radiografía: </strong>{{exlab.radiografia}}</h3>
-        </ion-grid>
-      </ion-label>
-      <ion-button color="medium  " size="small" (click)="goEliminarLab(exlab.id)">Borrar</ion-button>
-</ion-list>
-<ion-button color="primary" size="small" routerLink='/'>Volver</ion-button>
+<ion-content padding>
+  <ion-item>
+    <ion-label position="floating">Indicacion: </ion-label>
+    <ion-textarea type="text" [(ngModel)]="indicacion.desc_indicacion"></ion-textarea>
+    </ion-item>
+    <ion-button (click)="Indicacion()">Agregar otra indicacion</ion-button>
+    <ion-button (click)=" AgregaryVolver()">Agregar y volver</ion-button>
+    <ion-button (click)=" Volver()">Volver</ion-button>
+  
 </ion-content>

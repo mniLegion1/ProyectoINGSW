@@ -14,10 +14,7 @@
       <ion-col>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <ion-button (click)="ActualizarPaciente(paciente)">Actualizar Perfil</ion-button></ion-col></ion-title>
+        <ion-button color="success" (click)="ActualizarPaciente(paciente)">Actualizar Perfil</ion-button></ion-col></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -50,4 +47,5 @@
             
   <ion-button (click)="VerParientes()">Parientes</ion-button>
   <ion-button (click)="IngresarInterconsulta(rut_paciente)">Iniciar interconsulta</ion-button>
+  <ion-button (click)="VerHistorial()">Historial</ion-button>
 </ion-content>
