@@ -24,6 +24,13 @@ export class ExlabPage implements OnInit {
   ngOnInit() {
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente')
     this.id_interconsulta = this.acRoute.snapshot.paramMap.get('id_intercon')
+    this.apiRest.VerUltimoControl(this.id_interconsulta).subscribe(controles =>{
+      this.control = controles;
+    },error=>{
+      console.log("No idIntercon")
+    })
+    this.esperarControl().then(data =>{console.log('control.id_control: ',this.control[0].id_control)
+    })
   }
 
   myBackButton(){
@@ -33,8 +40,8 @@ export class ExlabPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Registro de examen laboratorio',
-      message: 'Se cancelará el ingreso del examen de laboratorio. ¿Desea continuar?',
+      header: 'Registro de control',
+      message: 'Se cancelará el ingreso del control. ¿Desea continuar?',
       buttons: [
         {
           text: 'Cancelar',
@@ -46,7 +53,7 @@ export class ExlabPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_interconsulta])
+            this.EliminarControl()
           }
         }
       ]
@@ -58,18 +65,13 @@ export class ExlabPage implements OnInit {
     return new Promise((resolve,reject) =>{
       setTimeout(() =>{
         resolve(
-          this.exlab.idEX_LAB = this.control[0].id_control
         )
       }, 3000)
     })
   }
 
   async AgregarExlab(){
-    this.apiRest.VerUltimoControl().subscribe(controles =>{
-      this.control = controles;
-    },error=>{
-      console.log("No idIntercon")
-    })
+    this.exlab.idEX_LAB = this.control[0].id_control
     this.esperarControl().then(data => this.apiRest.AgregarExlab(this.exlab).subscribe(res => {
       alert("El control se ha agregado con exito");
       this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_interconsulta])
@@ -78,6 +80,14 @@ export class ExlabPage implements OnInit {
     }))
     
     console.log(this.exlab)
+  }
+
+  async EliminarControl(){
+      this.apiRest.EliminarControl(this.control[0].id_control).subscribe(data=>{
+      }, error =>{
+        alert("El control actual ha sido cancelado")
+        this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_interconsulta])
+      })
   }
 
 }

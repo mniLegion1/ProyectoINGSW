@@ -73,9 +73,15 @@ const routes: Routes = [
     loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' 
   },
   {
-    path: 'z',
+    path: 'pacientes/:rut_paciente/historial/:idINTERCONSULTA',
     loadChildren: './pages/post/post.module#PostPageModule'
-  }
+  },
+  { 
+    path: 'pacientes/:rut_paciente/historial/:idINTERCONSULTA/controlmedico', 
+    loadChildren: './pages/vercontrol/vercontrol.module#VercontrolPageModule' 
+  },
+  { path: 'verexlab', loadChildren: './pages/verexlab/verexlab.module#VerexlabPageModule' }
+
   
   
 

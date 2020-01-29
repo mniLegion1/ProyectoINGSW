@@ -69,6 +69,9 @@ export class ApiService {
   EliminarInterconsulta(idintercon:number): Observable<any>{
     return this.http.delete<any>("http://localhost:5000/pacientes/eliminarinterconsulta/" + idintercon)
   }
+  EliminarControl(idcontrol:number): Observable<any>{
+    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarcontrol/"+idcontrol)
+  }
   VerPacientes(): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
   }
@@ -78,8 +81,8 @@ export class ApiService {
   VerParientes(rutpac:number): Observable <Pariente[]> {
     return this.http.get<Pariente[]>("http://localhost:5000/parientes/" + rutpac);
   }
-  VerInterconsulta(id_intercon:number):Observable <Interconsulta[]> {
-    return this.http.get<Interconsulta[]>("http://localhost:5000/lastInterconsulta/"+id_intercon);
+  VerInterconsulta(rut_pac:number,id_intercon:number):Observable <Interconsulta[]> {
+    return this.http.get<Interconsulta[]>("http://localhost:5000/lastInterconsulta/"+rut_pac+"/"+id_intercon);
   }
   AgregarInterconsulta(Interconsulta: Interconsulta): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarinterconsulta",Interconsulta);
@@ -102,7 +105,19 @@ export class ApiService {
   VerUltimaInterconsulta(): Observable <Interconsulta[]> {
     return this.http.get<Interconsulta[]>("http://localhost:5000/lastIntercon");
   }
-  VerUltimoControl(): Observable <Control[]> {
-    return this.http.get<Control[]>("http://localhost:5000/lastControl");
+  VerUltimoControl(id_intercon): Observable <Control[]> {
+    return this.http.get<Control[]>("http://localhost:5000/lastControl/"+id_intercon);
+  }
+  VerHistorial(rut_pac:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/historial/"+rut_pac);
+  }
+  VerDiagnostico(id_intercon:number): Observable <Diagnostico[]> {
+    return this.http.get<Diagnostico[]>("http://localhost:5000/historial/diagnostico/"+id_intercon);
+  }
+  VerIndicacion(id_intercon:number): Observable <Indicacion[]> {
+    return this.http.get<Indicacion[]>("http://localhost:5000/historial/indicacion/"+id_intercon);
+  }
+  VerInterconsultaHistorial(rut_pac:number,id_intercon:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/historial/"+rut_pac+"/"+id_intercon);
   }
 }

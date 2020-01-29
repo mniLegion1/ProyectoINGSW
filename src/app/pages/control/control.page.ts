@@ -56,40 +56,6 @@ export class ControlPage implements OnInit {
     await alert.present();
   }
 
-  async presentAlertConfirmAcep(){
-    const alert = await this.alertController.create({
-      header: 'Registro de control',
-      message: 'No se ha ingresado un examen de laboratorio. ¿Desea continuar?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            this.AgregarControlAceptar()
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  AgregarControlAceptar(){
-    this.apiRest.AgregarControl(this.control).subscribe(res => {
-      console.log(this.control)
-      alert("El control se ha agregado con exito");
-      this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon])
-    }, err =>{
-      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
-    })
-
-  }
-
   AgregarExlab(){
     this.apiRest.AgregarControl(this.control).subscribe(res => {
       this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon,'controlmedico','examenlaboratorio'])

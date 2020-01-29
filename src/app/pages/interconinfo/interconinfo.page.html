@@ -24,10 +24,12 @@
 
   <ion-row>
     <ion-col>
+      <ng-container *ngIf="!comentario">
       <ion-item>
         <ion-label position="floating">Comentarios: </ion-label>
         <ion-textarea type="text" [(ngModel)]="i.coment_interconsulta"></ion-textarea>
         </ion-item>
+      </ng-container>
     <ion-button (click)="Cancelar()">Cancelar</ion-button>
     <ion-button (click)="Terminar()">Terminar</ion-button>
     </ion-col>

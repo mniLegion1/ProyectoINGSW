@@ -73,6 +73,121 @@ def getParientes(rut):
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
 
+#GET Control(idINTERCONSULTA)
+@app.route('/control/<string:id_intercon>', methods=['GET'])
+def getControl(id_intercon):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT * 
+                FROM medicinaingsw.control JOIN medicinaingsw.interconsulta
+                WHERE interconsulta.idINTERCONSULTA=control.id_interconsulta AND interconsulta.idINTERCONSULTA = """ + id_intercon
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
+
+#GET Historial(rut)
+@app.route('/historial/<string:rut>', methods=['GET'])
+def Historial(rut):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT interconsulta.idINTERCONSULTA,interconsulta.motivo_intercon,
+                CONCAT(medico.nombres_medico,' ',medico.apellidos_medico)Medico,especialidad.desc_especialidad,
+                (DATE_ADD(interconsulta.fec_intercon, INTERVAL 1 DAY))fec_intercon,interconsulta.coment_interconsulta 
+                FROM medicinaingsw.paciente JOIN medicinaingsw.interconsulta JOIN medicinaingsw.especialidad JOIN medicinaingsw.medico 
+                WHERE paciente.rut_paciente = interconsulta.id_paciente AND interconsulta.id_especialidad = especialidad.idESPECIALIDAD
+                AND interconsulta.id_medico = medico.idMEDICO
+                AND paciente.rut_paciente = """ + rut + """ ORDER BY interconsulta.fec_intercon"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
+
+#GET Interconsulta(rut,id_intercon)
+@app.route('/historial/<string:rut>/<string:id_intercon>', methods=['GET'])
+def DatosInterconsulta(rut,id_intercon):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT interconsulta.idINTERCONSULTA,interconsulta.motivo_intercon,
+                CONCAT(medico.nombres_medico,' ',medico.apellidos_medico)Medico,especialidad.desc_especialidad,
+                (DATE_ADD(interconsulta.fec_intercon, INTERVAL 1 DAY))fec_intercon,interconsulta.coment_interconsulta 
+                FROM medicinaingsw.paciente JOIN medicinaingsw.interconsulta JOIN medicinaingsw.especialidad JOIN medicinaingsw.medico 
+                WHERE paciente.rut_paciente = interconsulta.id_paciente AND interconsulta.id_especialidad = especialidad.idESPECIALIDAD
+                AND interconsulta.id_medico = medico.idMEDICO
+                AND paciente.rut_paciente = """ + rut + """ AND interconsulta.idINTERCONSULTA = """ + id_intercon + """ ORDER BY interconsulta.fec_intercon"""
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
+
+#GET Diagnostico(id_intercon)
+@app.route('/historial/diagnostico/<string:id_intercon>', methods=['GET'])
+def Diagnostico(id_intercon):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT diagnostico.desc_diagnostico
+                FROM medicinaingsw.interconsulta JOIN medicinaingsw.diagnostico
+                WHERE interconsulta.idINTERCONSULTA=diagnostico.id_interconsulta
+                AND interconsulta.idINTERCONSULTA = """ + id_intercon
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
+
+#GET Indicacion(id_intercon)
+@app.route('/historial/indicacion/<string:id_intercon>', methods=['GET'])
+def Indicacion(id_intercon):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT indicacion.desc_indicacion
+                FROM medicinaingsw.interconsulta JOIN medicinaingsw.indicacion
+                WHERE interconsulta.idINTERCONSULTA=indicacion.id_interconsulta
+                AND interconsulta.idINTERCONSULTA = """ + id_intercon
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
+
 #GET Datos del Paciente
 @app.route('/pacientes/<string:rut_paciente>', methods=['GET'])
 def getPerfilPaciente(rut_paciente):
@@ -390,6 +505,26 @@ def deletePariente(rut):
             print(inst)
             return {"message": "Error"}
 
+#DELETE Control(id_control)
+@app.route('/pacientes/eliminarcontrol/<string:rut>', methods=['DELETE'])
+def deleteControl(rut):
+    if request.method == 'DELETE':
+        try:
+            connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+            query = """DELETE FROM medicinaingsw.control
+                    WHERE control.id_control = """ + rut
+            cursor = connection.cursor(dictionary=True)
+            cursor.execute(query)
+            connection.commit()
+            connection.close()
+        except Exception as inst:
+            print(inst)
+            return {"message": "Error"}
+
 #DELETE Interconsulta(idINTERCONSULTA)
 @app.route('/pacientes/eliminarinterconsulta/<string:id_intercon>', methods=['DELETE'])
 def deleteInterconsulta(id_intercon):
@@ -609,18 +744,18 @@ def getLastRowIntercon():
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
-#GET LRControl
-@app.route('/lastControl', methods=['GET'])
-def getLastRowControl():
+#GET LRControl(id_intercon)
+@app.route('/lastControl/<string:id_intercon>', methods=['GET'])
+def getLastRowControl(id_intercon):
     try:
         connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
                                              database='medicinaingsw',
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT id_control
-                FROM medicinaingsw.control
-                ORDER BY id_control DESC LIMIT 1"""
+        query = """SELECT control.id_control
+                FROM medicinaingsw.control JOIN medicinaingsw.interconsulta
+                WHERE interconsulta.idINTERCONSULTA = control.id_interconsulta AND interconsulta.idINTERCONSULTA = """ + id_intercon + """ ORDER BY id_control DESC LIMIT 1"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()
@@ -631,17 +766,17 @@ def getLastRowControl():
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
 #GET LastInterconsulta
-@app.route('/lastInterconsulta/<string:id_intercon>', methods=['GET'])
-def getLastIntercon(id_intercon):
+@app.route('/lastInterconsulta/<string:rut_pac>/<string:id_intercon>', methods=['GET'])
+def getLastIntercon(rut_pac,id_intercon):
     try:
         connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
                                              database='medicinaingsw',
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT idINTERCONSULTA,id_especialidad,motivo_intercon,(DATE_ADD(fec_intercon, INTERVAL 1 DAY))fec_intercon,id_medico
+        query = """SELECT idINTERCONSULTA,id_especialidad,motivo_intercon,(DATE_ADD(fec_intercon, INTERVAL 1 DAY))fec_intercon,id_medico,coment_interconsulta
                     FROM medicinaingsw.interconsulta
-                    WHERE interconsulta.idINTERCONSULTA = """ + id_intercon
+                    WHERE interconsulta.idINTERCONSULTA = """ + id_intercon + """ AND interconsulta.id_paciente = """ + rut_pac
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()

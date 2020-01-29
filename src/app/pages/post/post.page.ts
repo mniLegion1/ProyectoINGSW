@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-post',
@@ -8,35 +10,49 @@ import { ApiService } from 'src/app/servicios/api.service';
   styleUrls: ['./post.page.scss'],
 })
 export class PostPage implements OnInit {
-  customYearValues = [2020, 2016, 2008, 2004, 2000, 1996];
-  customDayShortNames = ['s\u00f8n', 'man', 'tir', 'ons', 'tor', 'fre', 'l\u00f8r'];
-  customPickerOptions: any;
+  idINTERCONSULTA
+  rut_paciente
+  diagnostico = new Array()
+  indicacion = new Array()
+  interconsulta = new Array()
 
-  constructor() {
-    this.customPickerOptions = {
-      buttons: [{
-        text: 'Save',
-        handler: () => console.log('Clicked Save!')
-      }, {
-        text: 'Log',
-        handler: () => {
-          console.log('Clicked Log. Do not Dismiss.');
-          return false;
-        }
-      }]
-    }
-  }
+  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
+    private apiRest: ApiService, private router:Router) { }
 
   ngOnInit() {
+    this.idINTERCONSULTA = this.acRoute.snapshot.paramMap.get('idINTERCONSULTA');
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
+    
+    this.apiRest.VerInterconsultaHistorial(this.rut_paciente,this.idINTERCONSULTA).subscribe(interconsultas =>{
+      this.interconsulta = interconsultas;
+    },error=>{
+    })
+    this.apiRest.VerDiagnostico(this.idINTERCONSULTA).subscribe(diagnosticos =>{
+      this.diagnostico = diagnosticos;
+    },error=>{
+    })
+    this.apiRest.VerIndicacion(this.idINTERCONSULTA).subscribe(indicaciones =>{
+      this.indicacion = indicaciones;
+    },error=>{
+    })
+    this.esperarInterconsulta().then(data => console.log(this.interconsulta,this.diagnostico,this.indicacion))
   }
 
-  doRefresh(event) {
-    console.log('Begin async operation');
+  async esperarInterconsulta(){
+    return new Promise((resolve,reject) =>{
+      setTimeout(() =>{
+        resolve(
+        )
+      }, 2700)
+    })
+  }
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+  async Volver(){
+    this.router.navigate(['pacientes',this.rut_paciente,'historial'])
+  }
+
+  async Control(){
+    this.router.navigate(['pacientes',this.rut_paciente,'historial',this.idINTERCONSULTA,'controlmedico'])
   }
 
 }

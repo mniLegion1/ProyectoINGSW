@@ -1,10 +1,41 @@
-<ion-content padding>
-  <!-- fab placed to the top end -->
-  <ion-fab horizontal="end" slot="fixed">
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<ion-header>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      <ion-button (click)="Volver()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Interconsulta: {{idINTERCONSULTA}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
   
+<ion-content padding *ngFor="let interconsulta of interconsulta">
+
+  <h5><strong>Medico: </strong> {{interconsulta.Medico}}&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;<strong>Especialidad: </strong>{{interconsulta.desc_especialidad}}&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;</h5>
+
+  <h5><strong>Fecha: </strong> {{interconsulta.fec_intercon | date: 'dd/MM/yyyy'}}&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;<strong>Motivo de la interconsulta: </strong>{{interconsulta.motivo_intercon}}</h5>
+
+    <h5><strong>Fecha: </strong> {{interconsulta.fec_intercon | date: 'dd/MM/yyyy'}}&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;<strong>Motivo de la interconsulta: </strong>{{interconsulta.motivo_intercon}}</h5>
+      
+    <h5><strong>Comentarios: </strong> {{interconsulta.motivo_intercon}}</h5>
+
+    <div><ng-container>
+    <ion-item text-wrap>
+      <ion-button size="medium" (click)="Control()">Control</ion-button>
+      </ion-item></ng-container></div>
+      <ion-grid>
+        <ion-row>
+          <ion-col><h5><strong>Diagnostico(s): </strong></h5></ion-col>
+            <ion-col><h5 *ngFor="let diagnostico of diagnostico">{{diagnostico.desc_diagnostico}}</h5></ion-col>
+            <ion-col></ion-col><ion-col><h5><strong>Indicacion(es): </strong></h5></ion-col>
+            <ion-col><h5 *ngFor="let indicacion of indicacion">{{indicacion.desc_indicacion}}</h5></ion-col>
+            <ion-col></ion-col><ion-col></ion-col><ion-col></ion-col><ion-col></ion-col><ion-col></ion-col>
+            <ion-col></ion-col><ion-col></ion-col>
+          
+        </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -1,8 +1,25 @@
 <ion-header>
   <ion-toolbar color ="success">
     <ion-buttons slot="start">
-      <ion-button routerLink='/pacientes'><ion-icon name="arrow-back"></ion-icon></ion-button>
+      <ion-button (click)="Volver()"><ion-icon name="arrow-back"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title>Historial</ion-title>
   </ion-toolbar>
 </ion-header>
+
+<ion-content padding>
+  <ion-card color ="tertiary" button (click)="GoIntercon(interconsulta.idINTERCONSULTA)" *ngFor="let interconsulta of interconsulta">
+    <ion-card-header>
+      <ion-card-title>Interconsulta: {{interconsulta.idINTERCONSULTA}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h4><strong>Fecha de interconsulta: </strong>{{interconsulta.fec_intercon | date: 'dd/MM/yyyy'}}
+        &nbsp;&nbsp;&nbsp;&nbsp;<strong>Medico: </strong>{{interconsulta.Medico}}
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Especialidad: </strong>{{interconsulta.desc_especialidad}}
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Motivo interconsulta: </strong>{{interconsulta.motivo_intercon}}
+      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Comentarios: </strong>{{interconsulta.coment_interconsulta}}</h4>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
