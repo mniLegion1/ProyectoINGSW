@@ -127,7 +127,6 @@ export class InterconinfoPage implements OnInit {
     this.i.id_paciente = this.rut_paciente
     this.apiRest.AgregarComentIntercon(this.i,this.id_intercon).subscribe(res => {
     }, err =>{
-      alert("El comentario no pudo ingresarse.");
     })
   }
 

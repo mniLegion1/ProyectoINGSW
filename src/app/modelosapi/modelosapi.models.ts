@@ -122,7 +122,6 @@ export class Pariente{
 
 export interface Exlab{
     idEX_LAB:number
-    fecha_examen:Date
     Hb:number
     T3:number
     CT:number
@@ -152,7 +151,6 @@ export interface Exlab{
 
 export class Exlab{
     idEX_LAB:number
-    fecha_examen:Date
     Hb:number
     T3:number
     CT:number
@@ -182,7 +180,6 @@ export class Exlab{
     constructor(datos?:Exlab){
         if(datos != null){
             this.idEX_LAB = datos.idEX_LAB
-            this.fecha_examen = datos.fecha_examen
             this.Hb = datos.Hb
             this.T3 = datos.T3
             this.CT = datos.CT
@@ -265,7 +262,6 @@ export class Parentezco{
 export interface Control{
     evolucion:string
     id_control:number
-    fec_control:Date
     edad:number
     MG:number
     MM:number
@@ -293,7 +289,6 @@ export interface Control{
 export class Control{
     evolucion:string
     id_control:number
-    fec_control:Date
     edad:number
     MG:number
     MM:number
@@ -319,7 +314,6 @@ export class Control{
     constructor(datos?:Control){
         if(datos != null){
             this.id_control = datos.id_control
-            this.fec_control = datos.fec_control
             this.edad = datos.edad
             this.MG = datos.MG
             this.MM = datos.MM

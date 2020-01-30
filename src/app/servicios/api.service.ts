@@ -120,4 +120,10 @@ export class ApiService {
   VerInterconsultaHistorial(rut_pac:number,id_intercon:number): Observable <any> {
     return this.http.get<any>("http://localhost:5000/historial/"+rut_pac+"/"+id_intercon);
   }
+  ListarCtrles(id_intercon:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/control/"+id_intercon);
+  }
+  ExlabCtrl(id_control:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/exlab/"+id_control);
+  }
 }

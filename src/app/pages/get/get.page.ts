@@ -59,7 +59,7 @@ export class GetPage implements OnInit {
 
   AgregarPaciente(){
     this.apiRest.AgregarPaciente(this.paciente).subscribe(res => {
-      this.router.navigateByUrl('/pacientes');
+      this.router.navigateByUrl('/menu');
     alert("El paciente se ha agregado con exito");
     }, err =>{
       alert("El paciente no pudo registrarse. Revise que todos los campos estén llenados.");

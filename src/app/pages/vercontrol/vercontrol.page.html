@@ -1,9 +1,183 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>vercontrol</ion-title>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+      <ion-button (click)="Volver()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
+    <ion-title>Control</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngFor="let exlab of exlab">
+  <ion-grid>
+  <ion-item>
+    <ion-label  position="floating">Evolucion</ion-label>
+    <ion-textarea readonly type="text" [(ngModel)]="control.evolucion"></ion-textarea>
+  </ion-item>
+  <ion-row>
+    <ion-col size=3>
+      <ion-item>
+        <ion-label position="floating">Edad (años)</ion-label>
+        <ion-input readonly type="number" [(ngModel)]="control.edad"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Peso (Kg)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.peso"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Variacion (Kg)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.var_masa"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Velocidad (Kg/año)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.veloc_masa"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Peso acumulado (Kg)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.peso_acum"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Talla (cm)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.talla"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Variacion (cm)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.var_talla"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Velocidad (cm/año)</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.veloc_talla"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col size=3>
+    </ion-col>
+  </ion-row>
 
+  <ion-row>
+    <ion-col size=5.9>
+  <ion-header>
+    <ion-toolbar color ="tertiary">
+      <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-title>Tanner</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-col>
+<ion-col size=0.2></ion-col>
+<ion-col size=5.9>
+  <ion-header>
+    <ion-toolbar color ="tertiary">
+      <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-title>Composicion corporal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size=2.95>
+      <ion-item>
+        <ion-label position="floating">Vello</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.vello"></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label position="floating">T.I.</ion-label>
+      <ion-input readonly type="text" [(ngModel)]="control.test_izq"></ion-input>
+    </ion-item>
+</ion-col>
+  <ion-col size=0.2></ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label position="floating">MG</ion-label>
+      <ion-input readonly type="text" [(ngModel)]="control.MG"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=2.95>
+  <ion-item>
+    <ion-label position="floating">MM</ion-label>
+    <ion-input readonly type="text" [(ngModel)]="control.MM"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size=2.95>
+      <ion-item>
+        <ion-label position="floating">Mama</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.mama"></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label position="floating">T.D.</ion-label>
+      <ion-input readonly type="text" [(ngModel)]="control.test_der"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=0.2></ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label position="floating">MB</ion-label>
+      <ion-input readonly type="text" [(ngModel)]="control.MB"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=2.95>
+  <ion-item>
+    <ion-label position="floating">GV</ion-label>
+    <ion-input readonly type="text" [(ngModel)]="control.GV"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size=2.95>
+      <ion-item>
+        <ion-label position="floating">Genital</ion-label>
+        <ion-input readonly type="text" [(ngModel)]="control.genital"></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col size=3.15></ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label position="floating">Agua</ion-label>
+      <ion-input readonly type="text" [(ngModel)]="control.agua"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=2.95>
+  <ion-item>
+    <ion-label position="floating">IMC</ion-label>
+    <ion-input readonly type="text" [(ngModel)]="control.imc"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col>
+    <ion-item>
+      <ion-label position="floating">Observaciones</ion-label>
+      <ion-textarea readonly [(ngModel)]="control.observaciones"></ion-textarea>
+    </ion-item>
+  </ion-col>
+</ion-row>
+  
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-button (click)="Exlab(exlab,id_control)">Examen de Laboratorio</ion-button>
+  </ion-row>
+</ion-grid>
 </ion-content>

@@ -33,11 +33,6 @@ export class ExlabPage implements OnInit {
     })
   }
 
-  myBackButton(){
-    this.location.back();
-    console.log(this.location)
-  }
-
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Registro de control',

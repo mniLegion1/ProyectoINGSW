@@ -82,9 +82,30 @@ def getControl(id_intercon):
                                              user='admin1',
                                              port='3306',
                                              password='M1st2r.12354')
-        query = """SELECT * 
+        query = """SELECT *
                 FROM medicinaingsw.control JOIN medicinaingsw.interconsulta
                 WHERE interconsulta.idINTERCONSULTA=control.id_interconsulta AND interconsulta.idINTERCONSULTA = """ + id_intercon
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute(query)
+        records = cursor.fetchall()
+        print(records)
+        connection.close()
+        return jsonify(records)
+    except:
+        return {"message": "Error en conexion a base de datos de BD (GET-parientes)"}
+
+#GET Exlab(id_control)
+@app.route('/exlab/<string:id_control>', methods=['GET'])
+def getExlab(id_control):
+    try:
+        connection = mysql.connector.connect(host='medicingsw.cxlfelfkaohe.us-east-1.rds.amazonaws.com',
+                                             database='medicinaingsw',
+                                             user='admin1',
+                                             port='3306',
+                                             password='M1st2r.12354')
+        query = """SELECT ex_lab.idEX_LAB,ex_lab.Hb,ex_lab.T3,ex_lab.CT,ex_lab.PT,ex_lab.Hto,ex_lab.T4,ex_lab.T,ex_lab.ALB,ex_lab.GR,ex_lab.TSH,ex_lab.HDL,ex_lab.SG,ex_lab.GB,Fe,LDL,ex_lab.creatinina,ex_lab.EOS,ex_lab.insulina,ex_lab.uremia,ex_lab.VHS,ex_lab.glicemia,ex_lab.orina,ex_lab.parasito,ex_lab.otros_exam,ex_lab.radiografia
+                FROM medicinaingsw.ex_lab JOIN medicinaingsw.control
+                WHERE ex_lab.idEX_LAB = control.id_control AND ex_lab.idEX_LAB = """ + id_control
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()
@@ -156,7 +177,7 @@ def Diagnostico(id_intercon):
         query = """SELECT diagnostico.desc_diagnostico
                 FROM medicinaingsw.interconsulta JOIN medicinaingsw.diagnostico
                 WHERE interconsulta.idINTERCONSULTA=diagnostico.id_interconsulta
-                AND interconsulta.idINTERCONSULTA = """ + id_intercon
+                AND interconsulta.idINTERCONSULTA = """ + id_intercon + """ ORDER BY diagnostico.idDIAGNOSTICO"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()
@@ -178,7 +199,7 @@ def Indicacion(id_intercon):
         query = """SELECT indicacion.desc_indicacion
                 FROM medicinaingsw.interconsulta JOIN medicinaingsw.indicacion
                 WHERE interconsulta.idINTERCONSULTA=indicacion.id_interconsulta
-                AND interconsulta.idINTERCONSULTA = """ + id_intercon
+                AND interconsulta.idINTERCONSULTA = """ + id_intercon + """ ORDER BY indicacion.idINDICACION"""
         cursor = connection.cursor(dictionary=True)
         cursor.execute(query)
         records = cursor.fetchall()
@@ -209,7 +230,7 @@ def getPerfilPaciente(rut_paciente):
     except:
         return {"message": "Error en conexion a base de datos de BD (GET-pacientes)"}
 
-#POST Paciente
+#POST Pacientee
 @app.route('/pacientes/ingresarpaciente', methods=['POST'])
 def postPaciente():
     if request.method == 'POST':

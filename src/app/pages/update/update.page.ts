@@ -14,6 +14,7 @@ export class UpdatePage implements OnInit {
   paciente:Paciente = new Paciente();
   prevision = new Array();
   sexo = new Array();
+  rut_paciente
 
   constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
               private apiRest: ApiService, private router:Router, private location:Location) {
@@ -21,6 +22,7 @@ export class UpdatePage implements OnInit {
               }
 
   ngOnInit() {
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
     console.log(JSON.parse(this.acRoute.snapshot.params.pacEditar))
     this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacEditar))
     this.apiRest.Prevision().subscribe(previsiones =>{
@@ -67,10 +69,11 @@ export class UpdatePage implements OnInit {
 
   ActualizarPaciente(pac:Paciente,rut:number){
     this.apiRest.ActualizarPaciente(pac,rut).subscribe(data=>{
+      alert("Datos del paciente actualizados")
+      this.router.navigate(['pacientes',])
     }, error =>{
       alert("Error al actualizar los datos del paciente")
   })
-  alert("Datos del paciente actualizados")
-  this.myBackButton()
+  
   }
 }

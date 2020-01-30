@@ -16,22 +16,35 @@
 
   <h5><strong>Fecha: </strong> {{interconsulta.fec_intercon | date: 'dd/MM/yyyy'}}&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;<strong>Motivo de la interconsulta: </strong>{{interconsulta.motivo_intercon}}</h5>
-
-    <h5><strong>Fecha: </strong> {{interconsulta.fec_intercon | date: 'dd/MM/yyyy'}}&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;<strong>Motivo de la interconsulta: </strong>{{interconsulta.motivo_intercon}}</h5>
       
-    <h5><strong>Comentarios: </strong> {{interconsulta.motivo_intercon}}</h5>
+    <div><ng-container *ngIf="!noCom">
+    <h5><strong>Comentarios: </strong> No se registraron comentarios</h5>
+  </ng-container></div>
 
-    <div><ng-container>
+  <div><ng-container *ngIf="noCom">
+    <h5><strong>Comentarios: </strong> {{interconsulta.coment_interconsulta}}</h5>
+  </ng-container></div>
+
     <ion-item text-wrap>
-      <ion-button size="medium" (click)="Control()">Control</ion-button>
-      </ion-item></ng-container></div>
+      <ion-button  *ngFor="let idctrl of idctrl" size="medium" (click)="Control(idctrl,idctrl.id_control)">Control {{idctrl.id_control}}</ion-button>
+      </ion-item>
       <ion-grid>
         <ion-row>
           <ion-col><h5><strong>Diagnostico(s): </strong></h5></ion-col>
-            <ion-col><h5 *ngFor="let diagnostico of diagnostico">{{diagnostico.desc_diagnostico}}</h5></ion-col>
+          <div *ngIf="!diagnostico || diagnostico.length === 0">
+            <ion-col><h5>No se registraron diagnosticos</h5>
+            </ion-col></div>
+          <div *ngIf="diagnostico || diagnostico.length > 0">
+            <ion-col><h5 *ngFor="let diagnostico of diagnostico">{{diagnostico.desc_diagnostico}}</h5>
+            </ion-col></div>
+          
             <ion-col></ion-col><ion-col><h5><strong>Indicacion(es): </strong></h5></ion-col>
-            <ion-col><h5 *ngFor="let indicacion of indicacion">{{indicacion.desc_indicacion}}</h5></ion-col>
+            <div *ngIf="!indicacion || indicacion.length === 0">
+              <ion-col><h5>No se registraron indicaciones</h5>
+              </ion-col></div>
+            <div *ngIf="indicacion || indicacion.length > 0">
+              <ion-col><h5 *ngFor="let indicacion of indicacion">{{indicacion.desc_indicacion}}</h5>
+              </ion-col></div>
             <ion-col></ion-col><ion-col></ion-col><ion-col></ion-col><ion-col></ion-col><ion-col></ion-col>
             <ion-col></ion-col><ion-col></ion-col>
           

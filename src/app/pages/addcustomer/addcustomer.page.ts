@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Pariente, Paciente } from 'src/app/modelosapi/modelosapi.models';
+import { Pariente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, NavParams } from '@ionic/angular';
 import { Location } from "@angular/common";
@@ -44,7 +44,7 @@ export class AddcustomerPage implements OnInit {
 
   AgregarPariente(){
     this.apiRest.AgregarPariente(this.pariente).subscribe(res => {
-      this.myBackButton()
+      this.router.navigate(['pacientes',this.rut_paciente])
     alert("El pariente se ha agregado con exito");
     }, err =>{
       alert("El paciente no pudo registrarse. Revise que todos los campos estén llenados.");

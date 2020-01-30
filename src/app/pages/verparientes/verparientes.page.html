@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let pariente of pariente">
+  <div *ngIf="pariente || pariente.length > 0"><ion-card *ngFor="let pariente of pariente">
     <ion-card-header>
       <ion-card-title>{{pariente.nombres}}{{' '}}{{pariente.apellidos}}</ion-card-title>
     </ion-card-header>
@@ -24,7 +24,11 @@
     <ion-button color="primary" size="small" (click)="ActualizarPariente(pariente)">Actualizar</ion-button>
       <ion-button color="danger" size="small" (click)="presentAlertConfirm(pariente.id_pariente)">Borrar</ion-button>      
     </ion-card-content>
-  </ion-card>
+  </ion-card></div>
+
+  <div *ngIf="!pariente || pariente.length === 0">
+    <h5>No hay parientes registrados</h5>
+  </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="AgregarPariente()">
       <ion-icon name="add"></ion-icon>
