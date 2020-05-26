@@ -25,23 +25,6 @@ export class PieChartPage implements OnInit {
     this.indicacion.id_interconsulta = this.id_intercon
   }
 
-  async Indicacion(){
-    console.log(this.indicacion)
-    this.apiRest.AgregarIndicacion(this.indicacion).subscribe(res => {
-      this.ngOnInit()
-    }, err =>{
-      alert("No hay ingresado ninguna indicacion.");
-    })
-  }
-
-  async AgregaryVolver(){
-    this.apiRest.AgregarIndicacion(this.indicacion).subscribe(res => {
-      alert("Las indicaciones fueron agregadas con exito");
-      this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon])
-      }, err =>{
-        alert("No hay ingresado ninguna indicacion.");
-      })
-  }
 
   Volver(){
     this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon])

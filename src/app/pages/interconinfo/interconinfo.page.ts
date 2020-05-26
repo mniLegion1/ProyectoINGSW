@@ -26,26 +26,6 @@ export class InterconinfoPage implements OnInit {
   ngOnInit() {
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente')
     this.id_intercon = this.acRoute.snapshot.paramMap.get('id_intercon')
-    this.apiRest.VerPerfilPaciente(this.rut_paciente).subscribe(pacientes =>{
-      this.paciente = pacientes;
-    },error=>{
-      console.log("No especialidades")
-    })
-    this.apiRest.VerInterconsulta(this.rut_paciente,this.id_intercon).subscribe(interconinfos => {
-      this.interconinfo = interconinfos
-    }), error =>{
-      console.log("No interconsulta")
-    }
-    this.apiRest.Especialidad().subscribe(especialidades =>{
-      this.especialidad = especialidades;
-    },error=>{
-      console.log("No especialidades")
-    })
-    this.apiRest.Medico().subscribe(medicos =>{
-      this.medico = medicos;
-    },error=>{
-      console.log("No medicos")
-    })
     this.esperarInterconsulta().then(data =>{
       if(this.interconinfo[0].coment_interconsulta === null){
         this.comentario = false
@@ -83,20 +63,12 @@ export class InterconinfoPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.EliminarInterconsulta()
+
           }
         }
       ]
     });
     await alert.present();
-  }
-
-  async EliminarInterconsulta(){
-    this.apiRest.EliminarInterconsulta(this.id_intercon).subscribe(data=>{
-    }, error =>{
-      alert("La interconsulta actual ha sido cancelada")
-      this.router.navigate(['pacientes',this.rut_paciente])
-    })
   }
 
   async Terminar() {

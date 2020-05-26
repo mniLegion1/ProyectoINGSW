@@ -48,7 +48,7 @@ export class ExlabPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.EliminarControl()
+           
           }
         }
       ]
@@ -75,14 +75,6 @@ export class ExlabPage implements OnInit {
     }))
     
     console.log(this.exlab)
-  }
-
-  async EliminarControl(){
-      this.apiRest.EliminarControl(this.control[0].id_control).subscribe(data=>{
-      }, error =>{
-        alert("El control actual ha sido cancelado")
-        this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_interconsulta])
-      })
   }
 
 }

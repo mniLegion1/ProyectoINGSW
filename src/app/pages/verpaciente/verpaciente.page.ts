@@ -1,7 +1,6 @@
 import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -11,7 +10,6 @@ import { AlertController } from '@ionic/angular';
 })
 export class VerpacientePage implements OnInit {
   paciente = new Array();
-  perPaciente = new Array();
 
   constructor(public alertController: AlertController, private apiRest: ApiService, private router:Router) {
   }
@@ -22,6 +20,7 @@ export class VerpacientePage implements OnInit {
     },error=>{
       console.log("Ha ocurrido un error durante la ejecucion")
     })
+    console.log(this.paciente)
   }
 
   async presentAlertConfirm(rut_paciente:number) {

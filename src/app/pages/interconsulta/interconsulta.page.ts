@@ -26,21 +26,6 @@ export class InterconsultaPage implements OnInit {
 
   ngOnInit() {
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-    this.apiRest.VerPerfilPaciente(this.rut_paciente).subscribe(pacientes =>{
-      this.paciente = pacientes;
-    },error=>{
-      console.log("No especialidades")
-    })
-    this.apiRest.Especialidad().subscribe(especialidades =>{
-      this.especialidad = especialidades;
-    },error=>{
-      console.log("No especialidades")
-    })
-    this.apiRest.Medico().subscribe(medicos =>{
-      this.medico = medicos;
-    },error=>{
-      console.log("No medicos")
-    })
   }
 
   myBackButton(){
@@ -57,29 +42,6 @@ export class InterconsultaPage implements OnInit {
       }, 2500)
     })
   }
-
-  AgregarInterconsulta(){
-    this.apiRest.AgregarInterconsulta(this.interconsulta).subscribe(res => {
-      this.apiRest.VerUltimaInterconsulta().subscribe(Interconsultas =>{
-        this.Interconsulta = Interconsultas
-        this.esperarInterconsulta().then(data => this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',data]))
-        
-      },error=>{
-        console.log("No idINTERCONSULTA")
-      })
-    }, err =>{
-      alert("La interconsulta no pudo registrarse. Revise que todos los campos estén llenados.");
-    })
-    console.log(this.interconsulta)
-    
-  }
-
-  AddIndexPaciente(indpac:Interconsulta){
-    
-    indpac['id_paciente'] = this.rut_paciente
-    this.AgregarInterconsulta()
-  }
-
   
 
   async presentAlertConfirm() {

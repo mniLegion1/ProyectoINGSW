@@ -2,20 +2,35 @@
   <ion-toolbar color ="success">
     <ion-buttons slot="start">
     </ion-buttons>
-    <ion-title>Control</ion-title>
+    <ion-row>
+    <ion-col><h4>&nbsp;&nbsp; Control N°{{nro}}</h4></ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label >Fecha:</ion-label>
+        <ion-input readonly required type="text" [(ngModel)]="control.fecha_ctrl"></ion-input>
+      </ion-item>
+    </ion-col></ion-row>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
+    <ion-row>
+      <ion-col size=8>
   <ion-item>
-    <ion-label position="floating">Evolucion</ion-label>
-    <ion-textarea type="text" [(ngModel)]="control.evolucion"></ion-textarea>
+    <ion-textarea autoGrow autofocus [(ngModel)]="control.evolucion">Evolucion:</ion-textarea>
   </ion-item>
+</ion-col>
+<ion-col size=1> </ion-col>
+<ion-col>
+  <ion-button (click)="Exlab()">Examenes Laboratorio</ion-button>
+</ion-col>
+</ion-row>
   <ion-row>
     <ion-col size=3>
       <ion-item>
-        <ion-label position="floating">Edad (años)</ion-label>
+        <ion-label >Edad (años): </ion-label>
         <ion-input type="number" [(ngModel)]="control.edad"></ion-input>
       </ion-item>
     </ion-col>
@@ -23,25 +38,25 @@
   <ion-row>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Peso (Kg)</ion-label>
+        <ion-label >Peso (Kg): </ion-label>
         <ion-input type="text" [(ngModel)]="control.peso"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Variacion (Kg)</ion-label>
+        <ion-label >Variacion (Kg): </ion-label>
         <ion-input type="text" [(ngModel)]="control.var_masa"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Velocidad (Kg/año)</ion-label>
+        <ion-label >Velocidad (Kg/año): </ion-label>
         <ion-input type="text" [(ngModel)]="control.veloc_masa"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Peso acumulado (Kg)</ion-label>
+        <ion-label >Peso acumulado (Kg): </ion-label>
         <ion-input type="text" [(ngModel)]="control.peso_acum"></ion-input>
       </ion-item>
     </ion-col>
@@ -49,19 +64,19 @@
   <ion-row>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Talla (cm)</ion-label>
+        <ion-label >Talla (cm): </ion-label>
         <ion-input type="text" [(ngModel)]="control.talla"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Variacion (cm)</ion-label>
+        <ion-label >Variacion (cm): </ion-label>
         <ion-input type="text" [(ngModel)]="control.var_talla"></ion-input>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item>
-        <ion-label position="floating">Velocidad (cm/año)</ion-label>
+        <ion-label >Velocidad (cm/año): </ion-label>
         <ion-input type="text" [(ngModel)]="control.veloc_talla"></ion-input>
       </ion-item>
     </ion-col>
@@ -93,26 +108,26 @@
 <ion-row>
   <ion-col size=2.95>
       <ion-item>
-        <ion-label position="floating">Vello</ion-label>
+        <ion-label >Vello: </ion-label>
         <ion-input type="text" [(ngModel)]="control.vello"></ion-input>
       </ion-item>
   </ion-col>
   <ion-col size=2.95>
     <ion-item>
-      <ion-label position="floating">T.I.</ion-label>
+      <ion-label >T.I.: </ion-label>
       <ion-input type="text" [(ngModel)]="control.test_izq"></ion-input>
     </ion-item>
 </ion-col>
   <ion-col size=0.2></ion-col>
   <ion-col size=2.95>
     <ion-item>
-      <ion-label position="floating">MG</ion-label>
+      <ion-label >MG: </ion-label>
       <ion-input type="text" [(ngModel)]="control.MG"></ion-input>
     </ion-item>
 </ion-col>
 <ion-col size=2.95>
   <ion-item>
-    <ion-label position="floating">MM</ion-label>
+    <ion-label >MM: </ion-label>
     <ion-input type="text" [(ngModel)]="control.MM"></ion-input>
   </ion-item>
 </ion-col>
@@ -120,26 +135,26 @@
 <ion-row>
   <ion-col size=2.95>
       <ion-item>
-        <ion-label position="floating">Mama</ion-label>
+        <ion-label >Mama: </ion-label>
         <ion-input type="text" [(ngModel)]="control.mama"></ion-input>
       </ion-item>
   </ion-col>
   <ion-col size=2.95>
     <ion-item>
-      <ion-label position="floating">T.D.</ion-label>
+      <ion-label >T.D.: </ion-label>
       <ion-input type="text" [(ngModel)]="control.test_der"></ion-input>
     </ion-item>
 </ion-col>
 <ion-col size=0.2></ion-col>
   <ion-col size=2.95>
     <ion-item>
-      <ion-label position="floating">MB</ion-label>
+      <ion-label >MB: </ion-label>
       <ion-input type="text" [(ngModel)]="control.MB"></ion-input>
     </ion-item>
 </ion-col>
 <ion-col size=2.95>
   <ion-item>
-    <ion-label position="floating">GV</ion-label>
+    <ion-label >GV: </ion-label>
     <ion-input type="text" [(ngModel)]="control.GV"></ion-input>
   </ion-item>
 </ion-col>
@@ -147,37 +162,37 @@
 <ion-row>
   <ion-col size=2.95>
       <ion-item>
-        <ion-label position="floating">Genital</ion-label>
+        <ion-label >Genital: </ion-label>
         <ion-input type="text" [(ngModel)]="control.genital"></ion-input>
       </ion-item>
   </ion-col>
   <ion-col size=3.15></ion-col>
   <ion-col size=2.95>
     <ion-item>
-      <ion-label position="floating">Agua</ion-label>
+      <ion-label >Agua: </ion-label>
       <ion-input type="text" [(ngModel)]="control.agua"></ion-input>
     </ion-item>
 </ion-col>
 <ion-col size=2.95>
   <ion-item>
-    <ion-label position="floating">IMC</ion-label>
+    <ion-label >IMC: </ion-label>
     <ion-input type="text" [(ngModel)]="control.imc"></ion-input>
   </ion-item>
 </ion-col>
 </ion-row>
 <ion-row>
-  <ion-col>
-    <ion-item>
-      <ion-label position="floating">Observaciones</ion-label>
-      <ion-textarea [(ngModel)]="control.observaciones"></ion-textarea>
-    </ion-item>
-  </ion-col>
+  <ion-col size=8>
+<ion-item>
+<ion-textarea autoGrow autofocus [(ngModel)]="control.observaciones">Observaciones:</ion-textarea>
+</ion-item>
+</ion-col>
 </ion-row>
   
   <ion-row>
     <ion-col></ion-col>
-    <ion-button (click)="AgregarExlab()">Examen de Laboratorio</ion-button>
-    <ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
+    <ion-button (click)="presentAlertConfirm()">Atras</ion-button>
+    <ion-button >Siguiente</ion-button>
+    
   </ion-row>
 </ion-grid>
 </ion-content>

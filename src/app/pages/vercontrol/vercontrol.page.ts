@@ -41,8 +41,4 @@ export class VercontrolPage implements OnInit {
   async Exlab(Exlab:Exlab,id_control:number){
     this.router.navigate(['pacientes',this.rut_paciente,'historial',this.idINTERCONSULTA,'controlmedico',id_control,'examenlaboratorio', {interExlab: JSON.stringify(Exlab)}])
   }
-
-  async A(){
-    console.log(this.exlab)
-  }
 }

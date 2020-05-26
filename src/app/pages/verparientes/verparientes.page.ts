@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Paciente, Pariente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { ExFisico } from 'src/app/modelosapi/modelosapi.models';
 
 @Component({
   selector: 'app-verparientes',
@@ -11,10 +11,14 @@ import { Location } from "@angular/common";
   styleUrls: ['./verparientes.page.scss'],
 })
 export class VerparientesPage implements OnInit {
-  paciente
-  pariente = new Array();
-  parentezco = new Array();
+  exfisico:ExFisico = new ExFisico(null)
+  exf
   rut_paciente
+  edad
+  tatalla
+  iemece
+  esActualizar:boolean
+  guardado:boolean = false
   
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
@@ -22,58 +26,78 @@ export class VerparientesPage implements OnInit {
 
   ngOnInit(){
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-    this.apiRest.VerParientes(this.rut_paciente).subscribe(parientes =>{
-      this.pariente = parientes;
-    },error=>{
-    })
-    this.apiRest.Parentezco().subscribe(parentezcos =>{
-      this.parentezco = parentezcos;
-    },error=>{
-    })
-  }
-
-  async presentAlertConfirm(id:number) {
-    const alert = await this.alertController.create({
-      header: 'Ingreso de registro del pariente',
-      message: 'Se eliminará el registro del pariente. ¿Desea continuar?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            this.EliminarPariente(id)
-          }
+    this.apiRest.VerExfisico(this.rut_paciente).subscribe(exfisicos =>{
+      this.exf = exfisicos
+        if(this.exf[0]){
+          this.esActualizar = true
+          this.exfisico = this.exf[0]
+          console.log(this.exfisico)
         }
-      ]
-    });
-    await alert.present();
+        else{
+          this.esActualizar = false
+          this.apiRest.Edad(this.rut_paciente).subscribe(edades =>{
+            this.edad = edades
+            this.exfisico.edad = this.edad[0].edad.toFixed(3)
+            console.log(this.edad)
+          },error=>{
+            console.log("Ha ocurrido un error durante la ejecucion")
+          })
+        }
+    },error=>{
+      console.log("Ha ocurrido un error durante la ejecucion")
+    })
   }
 
-  myBackButton(){
+  async esperarExFisico(){
+    return new Promise((resolve,reject) =>{
+      setTimeout(() =>{
+        resolve(
+          
+        )
+      }, 2000)
+    })
+  }
+
+  async Siguiente(){
+    this.router.navigate(['paciente',this.rut_paciente,'controlmedico',1])
+  }
+
+  async Atras(){
     this.location.back();
     console.log(this.location)
   }
 
-  EliminarPariente(id:number){
-    console.log(id)
-    this.apiRest.EliminarPariente(id).subscribe(data=>{
-      }, error =>{
-        alert("El registro del pariente ha sido eliminado")
-        this.ngOnInit()
-    })
+  async Imc(){
+    if(this.exfisico.peso == null || this.exfisico.talla == null){
+      alert('Ingrese valores validos de peso y talla del paciente')
+    }
+    else{
+      this.tatalla = this.exfisico.talla/100
+      console.log(this.tatalla,this.exfisico.peso)
+      this.iemece = this.exfisico.peso/(this.tatalla * this.tatalla)
+      this.exfisico.imc = this.iemece.toFixed(3)
+      console.log(this.exfisico.imc)
+    }
   }
 
-  AgregarPariente(){
-    this.router.navigate(['pacientes',this.rut_paciente,'parientes','antecedentespariente'])
+  async Guardar(){
+    this.guardado = true
+    this.exfisico.idEX_FISICO = this.rut_paciente
+    this.exfisico.ctrl_existe = false
+    this.apiRest.AgregarExfisico(this.exfisico).subscribe(res => {
+      alert("El examen fisico se ha agregado con exito");
+      }, err =>{
+        alert("El examen fisico no pudo registrarse. Revise que todos los campos estén llenados.");
+      })
+    console.log(this.exfisico)
   }
 
-  ActualizarPariente(Pariente:Pariente){
-    this.router.navigate(['pacientes',this.rut_paciente,'parientes','actualizarpariente',{parEditar: JSON.stringify(Pariente)}])
+  async Actualizar1(){
+    if(this.guardado == false)
+      alert('No hay datos ingresados para poder actualizar. Primero guarde los datos.')
+  }
+
+  async Actualizar2(){
+
   }
 }

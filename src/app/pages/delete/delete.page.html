@@ -2,88 +2,27 @@
   <ion-toolbar color ="success">
     <ion-buttons slot="start">
     </ion-buttons>
-    <ion-title>Antecedentes pariente</ion-title>
+    <ion-title>Motivo de consulta y anamnesis</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-<ion-grid>
-  <ion-row>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">Nombres</ion-label>
-        <ion-input type="text" [(ngModel)]="pariente.nombres"></ion-input>
-        </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label position="floating">Apellidos</ion-label>
-        <ion-input type="text" [(ngModel)]="pariente.apellidos"></ion-input>
-        </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item>
-        <ion-label>Sexo</ion-label>
-        <ion-select [(ngModel)]="pariente.sexo" interface="popover">
-          <ion-select-option *ngFor="let sexo of sexo" [value]="sexo.id_sexo">
-            {{sexo.desc_sexo}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-col>
-    </ion-row>
+<ion-content padding *ngFor="let data of data">
+  <ion-grid>
     <ion-row>
-        <ion-col>
-        <ion-item>
-          <ion-label>Tipo de parentezco</ion-label>
-          <ion-select [(ngModel)]="pariente.id_parentezco" interface="popover">
-            <ion-select-option *ngFor="let parentezco of parentezco" [value]="parentezco.idTIPO_PARENTEZCO">
-              {{parentezco.desc_parentezco}}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-      <ion-item>
-        <ion-label position="floating">Peso (Kg)</ion-label>
-        <ion-input type="number" [(ngModel)]="pariente.peso_pariente"></ion-input>
-        </ion-item>
-    </ion-col>
-    <ion-col>
-    <ion-item>
-              <ion-label position="floating">Altura(m)</ion-label>
-              <ion-input type="number" [(ngModel)]="pariente.talla_pariente"></ion-input>
-      </ion-item>
-    </ion-col>
-    <ion-row>
-      <ion-col>
-      </ion-col>
-    </ion-row>
-    </ion-row>
-   <ion-row> 
-    <ion-col>
-    <ion-item>
-    <ion-label>Defuncion</ion-label>
-    <ion-select [(ngModel)]="pariente.vivo_pariente" interface="popover">
-      <ion-select-option value=1>Vivo</ion-select-option>
-      <ion-select-option value=0>Muerto</ion-select-option>
-    </ion-select>
+<ion-col>
+  <ion-item>
+    <ion-textarea autoGrow autofocus [(ngModel)]="data.anamnesis">Anamnesis:</ion-textarea>
   </ion-item>
 </ion-col>
 <ion-col>
   <ion-item>
-    <ion-label position="floating">Antecedente de enfermedad</ion-label>
-    <ion-input type="text" [(ngModel)]="pariente.antec_enferm"></ion-input>
-    </ion-item>
-  </ion-col>
-
+    <ion-textarea autoGrow autofocus [(ngModel)]="data.antec_morbidos">Antecedentes morbidos:</ion-textarea>
+  </ion-item>
+</ion-col>
 </ion-row>
-  <ion-row>
-    <ion-col></ion-col>
-    <ion-button (click)="ActualizarPariente(pariente,pariente.id_pariente)">Actualizar pariente</ion-button>
-    <ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
-  </ion-row>
 </ion-grid>
+
+<ion-row>
+  <ion-col><ion-button (click)="Actualizar()">Volver</ion-button></ion-col>
+</ion-row>
 </ion-content>

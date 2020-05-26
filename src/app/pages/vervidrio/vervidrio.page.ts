@@ -24,7 +24,7 @@ export class VervidrioPage implements OnInit {
 
   ngOnInit(){
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-    this.apiRest.VerPerfilPaciente(this.rut_paciente).subscribe(pacientes =>{
+    this.apiRest.VerAPPaciente(this.rut_paciente).subscribe(pacientes =>{
       this.paciente = pacientes;
     }, error =>{
       console.log("No perfil")
@@ -39,28 +39,6 @@ export class VervidrioPage implements OnInit {
     }, error =>{
       console.log("No sexos")
     })
-  }
-
-  myBackButton(){
-    this.location.back();
-    console.log(this.location)
-  }
-
-  async AgregarPariente(Paciente:Paciente){
-    this.router.navigate(['/antecedentespariente', {pariente: JSON.stringify(Paciente)}])
-  }
-
-  async VerParientes(){
-    this.router.navigate(['pacientes',this.rut_paciente,'parientes'])
-  }
-  
-  async ActualizarPaciente(Paciente:Paciente){
-    this.router.navigate(['pacientes',this.rut_paciente,'actualizarpaciente', {pacEditar: JSON.stringify(Paciente)}])
-    
-  }
-
-  async IngresarInterconsulta(rut_paciente:number){
-    this.router.navigate(['pacientes',this.rut_paciente,'interconsulta'])
   }
 
   async VerHistorial(){

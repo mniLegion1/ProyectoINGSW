@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo:'home', pathMatch: 'full'},
+  { path: '', redirectTo:'login', pathMatch: 'full'},
   { 
     path: 'home',
     loadChildren: './pages/test/test.module#TestPageModule'
@@ -19,85 +19,89 @@ const routes: Routes = [
   { 
     path: 'menu',
     loadChildren: './pages/menu/menu.module#MenuPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { path: 'pacientes',
-  loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule',
-    canActivate: [AuthGuard]
+    loadChildren: './pages/verpaciente/verpaciente.module#VerpacientePageModule',
+    //canActivate: [AuthGuard]
+  },
+  { path: 'pacientes/:rut_paciente',
+    loadChildren: './pages/vervidrio/vervidrio.module#VervidrioPageModule',
+    //canActivate: [AuthGuard]
   },
   {
     path: 'antecedentespersonales',
     loadChildren: './pages/get/get.module#GetPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
-    path: 'pacientes/:rut_paciente/actualizarpaciente',
-    loadChildren: './pages/update/update.module#UpdatePageModule',
-    canActivate: [AuthGuard]
-  },
-  { path: 'pacientes/:rut_paciente/parientes',
-    loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule',
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'pacientes/:rut_paciente/parientes/antecedentespariente',
+    path: 'buscador',
     loadChildren: './pages/addcustomer/addcustomer.module#AddcustomerPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
-    path: 'pacientes/:rut_paciente/parientes/actualizarpariente',
+    path: 'paciente/:rut_paciente',
+    loadChildren: './pages/update/update.module#UpdatePageModule',
+    //canActivate: [AuthGuard]
+  },
+  { path: 'paciente/:rut_paciente/examenfisico',
+    loadChildren: './pages/verparientes/verparientes.module#VerparientesPageModule',
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'paciente/:rut_paciente/antecmorbidosanamnesis',
     loadChildren: './pages/delete/delete.module#DeletePageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
     path: 'pacientes/:rut_paciente/interconsulta',
     loadChildren: './pages/interconsulta/interconsulta.module#InterconsultaPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
-    path: 'pacientes/:rut_paciente/interconsulta/:data/controlmedico',
+    path: 'paciente/:rut_paciente/controlmedico/:nro',
     loadChildren: './pages/control/control.module#ControlPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
-    path: 'pacientes/:rut_paciente/interconsulta/:id_intercon/controlmedico/examenlaboratorio',
+    path: 'paciente/:rut_paciente/controlmedico/:nro/examenlaboratorio',
     loadChildren: './pages/exlab/exlab.module#ExlabPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'pacientes/:rut_paciente/interconsulta/:id_intercon/indicacion',
     loadChildren: './pages/pie-chart/pie-chart.module#PieChartPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
     path: 'pacientes/:rut_paciente/interconsulta/:id_intercon', 
     loadChildren: './pages/interconinfo/interconinfo.module#InterconinfoPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
     path: 'pacientes/:rut_paciente/interconsulta/:id_intercon/diagnostico', 
     loadChildren: './pages/diagnostico/diagnostico.module#DiagnosticoPageModule' ,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
     path: 'pacientes/:rut_paciente/historial',
     loadChildren: './pages/verhistorial/verhistorial.module#VerhistorialPageModule' ,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'pacientes/:rut_paciente/historial/:idINTERCONSULTA',
     loadChildren: './pages/post/post.module#PostPageModule',
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   { 
     path: 'pacientes/:rut_paciente/historial/:idINTERCONSULTA/controlmedico/:id_control', 
     loadChildren: './pages/vercontrol/vercontrol.module#VercontrolPageModule',
-    canActivate: [AuthGuard] 
+    //canActivate: [AuthGuard] 
   },
   { 
     path: 'pacientes/:rut_paciente/historial/:idINTERCONSULTA/controlmedico/:id_control/examenlaboratorio', 
     loadChildren: './pages/verexlab/verexlab.module#VerexlabPageModule',
-    canActivate: [AuthGuard] 
+    //canActivate: [AuthGuard] 
   }
 ];
 

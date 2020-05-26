@@ -4,30 +4,33 @@ import { Paciente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-update',
   templateUrl: './update.page.html',
   styleUrls: ['./update.page.scss'],
 })
-export class UpdatePage implements OnInit {
-  paciente:Paciente = new Paciente();
-  prevision = new Array();
+export class UpdatePage implements OnInit { 
+  paciente = new Array()
   sexo = new Array();
+  prevision = new Array();
   rut_paciente
 
   constructor(private acRoute:ActivatedRoute, public alertController: AlertController,
               private apiRest: ApiService, private router:Router, private location:Location) {
-                
               }
 
   ngOnInit() {
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-    console.log(JSON.parse(this.acRoute.snapshot.params.pacEditar))
-    this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacEditar))
+    this.apiRest.VerAPPaciente(this.rut_paciente).subscribe(pacientes =>{
+      this.paciente = pacientes
+      console.log(this.paciente)
+    })
+    //this.paciente = new Paciente(JSON.parse(this.acRoute.snapshot.params.pacEditar))
     this.apiRest.Prevision().subscribe(previsiones =>{
       this.prevision = previsiones;
-    },error=>{
+    }, error =>{
       console.log("No previsiones")
     })
     this.apiRest.Sexo().subscribe(sexos =>{
@@ -38,15 +41,10 @@ export class UpdatePage implements OnInit {
     
   }
 
-  myBackButton(){
-    this.location.back();
-    console.log(this.location)
-  }
-
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Actualizacion de registro del paciente',
-      message: 'Se cancelará la actualización del registro del paciente. ¿Desea continuar?',
+      header: 'Antecedentes personales',
+      message: '¿Está seguro que desea volver?',
       buttons: [
         {
           text: 'Cancelar',
@@ -58,7 +56,7 @@ export class UpdatePage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.myBackButton()
+            this.router.navigateByUrl('/buscador')
           }
         }
       ]
@@ -67,13 +65,20 @@ export class UpdatePage implements OnInit {
     await alert.present();
   }
 
-  ActualizarPaciente(pac:Paciente,rut:number){
-    this.apiRest.ActualizarPaciente(pac,rut).subscribe(data=>{
+  ActualizarPaciente(){
+    console.log(this.paciente[0])
+    this.apiRest.ActualizarPaciente(this.paciente[0],this.rut_paciente).subscribe(data=>{
       alert("Datos del paciente actualizados")
-      this.router.navigate(['pacientes',])
     }, error =>{
       alert("Error al actualizar los datos del paciente")
   })
-  
+  }
+
+  async ExamenFisico(){
+    this.router.navigate(['paciente',this.rut_paciente,'examenfisico'])
+  }
+
+  async AntecAnam(){
+    this.router.navigate(['paciente',this.rut_paciente,'antecmorbidosanamnesis'])
   }
 }

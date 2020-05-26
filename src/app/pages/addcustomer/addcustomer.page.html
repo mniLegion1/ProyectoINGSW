@@ -1,95 +1,39 @@
 <ion-header>
     <ion-toolbar color ="success">
       <ion-buttons slot="start">
+		<ion-button (click)="presentAlertConfirm()"><ion-icon name="arrow-back"></ion-icon></ion-button>
       </ion-buttons>
-      <ion-title>Antecedentes pariente</ion-title>
+      <ion-title>Buscador</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content padding>
-	<ion-grid>
-		<ion-row>
-			<ion-col>
-				<ion-item>
-					<ion-label position="floating">Nombres</ion-label>
-					<ion-input type="text" [(ngModel)]="pariente.nombres"></ion-input>
-				  </ion-item>
-			</ion-col>
-			<ion-col>
-				<ion-item>
-					<ion-label position="floating">Apellidos</ion-label>
-					<ion-input type="text" [(ngModel)]="pariente.apellidos"></ion-input>
-				  </ion-item>
-			</ion-col>
-			<ion-col>
-				<ion-item>
-					<ion-label>Sexo</ion-label>
-					<ion-select [(ngModel)]="pariente.sexo" interface="popover">
-					  <ion-select-option *ngFor="let sexo of sexo" [value]="sexo.id_sexo">
-						  {{sexo.desc_sexo}}
-					  </ion-select-option>
-					</ion-select>
-				</ion-item>
-			</ion-col>
-		  </ion-row>
+	  <ion-grid>
 		  <ion-row>
-				  <ion-col>
-					<ion-item>
-					  <ion-label >Fecha nacimiento</ion-label>
-					  <ion-input type="Date" [(ngModel)]="pariente.fec_nac_pariente " value="1900-01-01"></ion-input>
-					</ion-item>
-				  </ion-col>
-				  <ion-col>
-					<ion-item>
-						<ion-label>Tipo de parentezco</ion-label>
-						<ion-select [(ngModel)]="pariente.id_parentezco" interface="popover">
-						  <ion-select-option *ngFor="let parentezco of parentezco" [value]="parentezco.idTIPO_PARENTEZCO">
-							  {{parentezco.desc_parentezco}}
-						  </ion-select-option>
-						</ion-select>
-					</ion-item>
-				</ion-col>
-		  </ion-row>
-		  <ion-row>
-		  	<ion-col>
+			  <ion-col size=2.25>
 				<ion-item>
-					<ion-label position="floating">Peso (Kg)</ion-label>
-					<ion-input type="number" [(ngModel)]="pariente.peso_pariente"></ion-input>
+					<ion-label >RUT del paciente: </ion-label>
+					<ion-input maxlength=8 required type="text" [(ngModel)]="rut_pacientee"></ion-input>
 				  </ion-item>
-			</ion-col>
-			<ion-col>
-			<ion-item>
-                <ion-label position="floating">Altura(m)</ion-label>
-                <ion-input type="number" [(ngModel)]="pariente.talla_pariente"></ion-input>
-			  </ion-item>
-			</ion-col>
-		  <ion-row>
-			  <ion-col>
+			  </ion-col>
+			  <ion-col size=1.3>
+				<ion-item>
+					<ion-label >-</ion-label>
+					<div text-uppercase>
+					<ion-input maxlength=1 required type="string" [(ngModel)]="dig_verif"></ion-input>
+					</div>
+				  </ion-item>
 			  </ion-col>
 		  </ion-row>
-		  </ion-row>
-		 <ion-row> 
-		  <ion-col>
-		  <ion-item>
-			<ion-label>Defuncion</ion-label>
-			<ion-select [(ngModel)]="pariente.vivo_pariente" interface="popover">
-			  <ion-select-option value=1>Vivo</ion-select-option>
-			  <ion-select-option value=0>Muerto</ion-select-option>
-			</ion-select>
-		</ion-item>
-	</ion-col>
-	<ion-col>
-		<ion-item>
-			<ion-label position="floating">Antecedente de enfermedad</ion-label>
-			<ion-input type="text" [(ngModel)]="pariente.antec_enferm"></ion-input>
-		  </ion-item>
-		</ion-col>
-	
-</ion-row>
 		<ion-row>
-			<ion-col></ion-col>
-			<ion-button (click)="AddIndexPaciente(pariente)">Agregar pariente</ion-button>
-			<ion-button (click)="presentAlertConfirm()">Cancelar</ion-button>
+			<ion-button (click)="BuscarPaciente()">Buscar paciente</ion-button>
 		</ion-row>
+			<ion-card button color="tertiary" *ngFor="let paciente of paciente" (click)=Paciente()><ng-container *ngIf="paciente!=NULL">
+				<ion-card-header>
+				  <ion-card-title>{{paciente.nombres}} {{paciente.apellidos}}</ion-card-title>
+				</ion-card-header>
+				<ion-card-content>
+				</ion-card-content>
+			</ng-container></ion-card>
 	</ion-grid>
 </ion-content>

@@ -10,11 +10,7 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-title *ngFor="let paciente of paciente">
-      <ion-col>{{paciente.nombres}}{{' '}}{{paciente.apellidos}}</ion-col>
-      <ion-col>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <ion-button color="success" (click)="ActualizarPaciente(paciente)">Actualizar Perfil</ion-button></ion-col></ion-title>
+      <ion-col>{{paciente.nombres}}{{' '}}{{paciente.apellidos}}</ion-col></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -45,7 +41,5 @@
           <h4><strong>Tiempo libre: </strong>{{paciente.tiempo_libre}}&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;<strong>Futuro: </strong>{{paciente.prof_futuro}}</h4>
             
-  <ion-button (click)="VerParientes()">Parientes</ion-button>
-  <ion-button (click)="IngresarInterconsulta(rut_paciente)">Iniciar interconsulta</ion-button>
-  <ion-button (click)="VerHistorial()">Historial</ion-button>
+  <ion-button (click)="VerHistorial()">Controles</ion-button>
 </ion-content>

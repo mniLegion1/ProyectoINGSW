@@ -27,25 +27,7 @@ export class PostPage implements OnInit {
     private apiRest: ApiService, private router:Router) { }
 
   ngOnInit() {
-    this.idINTERCONSULTA = this.acRoute.snapshot.paramMap.get('idINTERCONSULTA');
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-    
-    this.apiRest.VerInterconsultaHistorial(this.rut_paciente,this.idINTERCONSULTA).subscribe(interconsultas =>{
-      this.interconsulta = interconsultas;
-    },error=>{
-    })
-    this.apiRest.ListarCtrles(this.idINTERCONSULTA).subscribe(idctrlas =>{
-      this.idctrl = idctrlas;
-    },error=>{
-    })
-    this.apiRest.VerDiagnostico(this.idINTERCONSULTA).subscribe(diagnosticos =>{
-      this.diagnostico = diagnosticos;
-    },error=>{
-    })
-    this.apiRest.VerIndicacion(this.idINTERCONSULTA).subscribe(indicaciones =>{
-      this.indicacion = indicaciones;
-    },error=>{
-    })
     this.esperarInterconsulta().then(data =>{ 
       if(this.interconsulta[0].coment_interconsulta === null){
         this.noCom = false

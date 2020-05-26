@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User, Paciente, Prevision, Sexo, Pariente, Parentezco, Especialidad, Control, Diagnostico, Interconsulta,
-         Exlab, Medico, Indicacion } from '../modelosapi/modelosapi.models';
+import { User, Paciente, Prevision, Sexo, Control, Diagnostico, Interconsulta,
+         Exlab, ExFisico } from '../modelosapi/modelosapi.models';
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +32,7 @@ export class ApiService {
       console.log('Error al registrar',error);
     }
   }
-
-  ActualizarPariente(Pariente:Pariente, rutpac:number): Observable<any>{
-    return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpariente/" + rutpac,Pariente)
-  }
-  ActualizarPaciente(Paciente:Paciente, rutpac:number): Observable<any>{
+  ActualizarPaciente(Paciente:any, rutpac:number): Observable<any>{
     return this.http.patch<any>("http://localhost:5000/pacientes/actualizarpaciente/" + rutpac,Paciente)
   }
   AgregarComentIntercon(i:Interconsulta,id_intercon:number): Observable<any>{
@@ -48,59 +44,26 @@ export class ApiService {
   AgregarControl(Control: Control): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarcontrol",Control);
   }
-  AgregarPariente(Pariente: Pariente): Observable<any>{
-    return this.http.post<any>("http://localhost:5000/pacientes/ingresarpariente",Pariente);
-  }
   AgregarExlab(Exlab:Exlab): Observable<any>{
     return this.http.post<any>("http://localhost:5000/pacientes/ingresarexlab",Exlab);
-  }
-  AgregarDiagnostico(Diagnostico:Diagnostico): Observable<any>{
-    return this.http.post<any>("http://localhost:5000/pacientes/ingresardiagnostico",Diagnostico);
-  }
-  AgregarIndicacion(Indicacion:Indicacion): Observable<any>{
-    return this.http.post<any>("http://localhost:5000/pacientes/ingresarindicacion",Indicacion);
   }
   EliminarPaciente(rutpac:number): Observable<any>{
     return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpaciente/" + rutpac)
   }
-  EliminarPariente(rutpar:number): Observable<any>{
-    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarpariente/" + rutpar)
-  }
-  EliminarInterconsulta(idintercon:number): Observable<any>{
-    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarinterconsulta/" + idintercon)
-  }
-  EliminarControl(idcontrol:number): Observable<any>{
-    return this.http.delete<any>("http://localhost:5000/pacientes/eliminarcontrol/"+idcontrol)
-  }
   VerPacientes(): Observable <Paciente[]> {
     return this.http.get<Paciente[]>("http://localhost:5000/pacientes");
   }
-  VerPerfilPaciente(rut_pac:number): Observable <Paciente[]> {
-    return this.http.get<Paciente[]>("http://localhost:5000/pacientes/"+rut_pac);
+  VerExfisico(rut_pac:number):Observable <ExFisico[]> {
+    return this.http.get<ExFisico[]>("http://localhost:5000/historial/exfisico/"+rut_pac);
   }
-  VerParientes(rutpac:number): Observable <Pariente[]> {
-    return this.http.get<Pariente[]>("http://localhost:5000/parientes/" + rutpac);
-  }
-  VerInterconsulta(rut_pac:number,id_intercon:number):Observable <Interconsulta[]> {
-    return this.http.get<Interconsulta[]>("http://localhost:5000/lastInterconsulta/"+rut_pac+"/"+id_intercon);
-  }
-  AgregarInterconsulta(Interconsulta: Interconsulta): Observable<any>{
-    return this.http.post<any>("http://localhost:5000/pacientes/ingresarinterconsulta",Interconsulta);
+  AgregarExfisico(ExFisico: ExFisico): Observable<any>{
+    return this.http.post<any>("http://localhost:5000/paciente/ingresarexfisico",ExFisico);
   }
   Prevision():Observable <Prevision[]> {
     return this.http.get<Prevision[]>("http://localhost:5000/previsiones");
   }
   Sexo():Observable <Sexo[]> {
     return this.http.get<Sexo[]>("http://localhost:5000/sexos");
-  }
-  Parentezco():Observable <Parentezco[]> {
-    return this.http.get<Parentezco[]>("http://localhost:5000/parentezcos");
-  }
-  Especialidad():Observable <Especialidad[]> {
-    return this.http.get<Especialidad[]>("http://localhost:5000/especialidades");
-  }
-  Medico():Observable <Medico[]> {
-    return this.http.get<Medico[]>("http://localhost:5000/medicos");
   }
   VerUltimaInterconsulta(): Observable <Interconsulta[]> {
     return this.http.get<Interconsulta[]>("http://localhost:5000/lastIntercon");
@@ -114,16 +77,28 @@ export class ApiService {
   VerDiagnostico(id_intercon:number): Observable <Diagnostico[]> {
     return this.http.get<Diagnostico[]>("http://localhost:5000/historial/diagnostico/"+id_intercon);
   }
-  VerIndicacion(id_intercon:number): Observable <Indicacion[]> {
-    return this.http.get<Indicacion[]>("http://localhost:5000/historial/indicacion/"+id_intercon);
+  VerPaciente(rut_pac:number,dig_verif:string): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/paciente/"+rut_pac+"/"+dig_verif);
   }
-  VerInterconsultaHistorial(rut_pac:number,id_intercon:number): Observable <any> {
-    return this.http.get<any>("http://localhost:5000/historial/"+rut_pac+"/"+id_intercon);
+  VerAPPaciente(rut_pac:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/appaciente/"+rut_pac);
   }
-  ListarCtrles(id_intercon:number): Observable <any> {
-    return this.http.get<any>("http://localhost:5000/control/"+id_intercon);
+  AntecAnam(rut_pac:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/antecanampaciente/"+rut_pac);
+  }
+  ActualizarAntec(Antec:any,rut_pac:number){
+    return this.http.patch<any>("http://localhost:5000/pacientes/actualizarantec/" + rut_pac,Antec)
+  }
+  Controles(id_paciente:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/control/"+id_paciente);
   }
   ExlabCtrl(id_control:number): Observable <any> {
     return this.http.get<any>("http://localhost:5000/exlab/"+id_control);
+  }
+  Fecha(): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/date");
+  }
+  Edad(rut_pac:number): Observable <any> {
+    return this.http.get<any>("http://localhost:5000/age/"+rut_pac);
   }
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Pariente } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, NavParams } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Location } from "@angular/common";
-
 
 @Component({
   selector: 'app-addcustomer',
@@ -12,71 +10,58 @@ import { Location } from "@angular/common";
   styleUrls: ['./addcustomer.page.scss'],
 })
 export class AddcustomerPage implements OnInit {
-  pariente:Pariente = new Pariente();
-  parentezco = new Array();
-  sexo = new Array();
-  rut_paciente
+  rut_paciente:number
+  rut_pacientee:number
+  dig_verif:string
+  paciente = new Array()
+  load
 
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
-    private apiRest: ApiService, private router:Router) {
-      
+    private apiRest: ApiService, private router:Router,public loadingController: LoadingController) {
     }
 
   ngOnInit() {
-    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-      console.log(this.rut_paciente)
-    this.apiRest.Parentezco().subscribe(parentezcos =>{
-      this.parentezco = parentezcos;
-    },error=>{
-      console.log("No parentezcos")
-    })
-    this.apiRest.Sexo().subscribe(sexos =>{
-      this.sexo = sexos;
-    }, error =>{
-      console.log("No sexos")
-    })
-  }
-
-  myBackButton(){
-    this.location.back();
-    console.log(this.location)
-  }
-
-  AgregarPariente(){
-    this.apiRest.AgregarPariente(this.pariente).subscribe(res => {
-      this.router.navigate(['pacientes',this.rut_paciente])
-    alert("El pariente se ha agregado con exito");
-    }, err =>{
-      alert("El paciente no pudo registrarse. Revise que todos los campos estén llenados.");
-    })
-  }
-
-  AddIndexPaciente(indpac:Pariente){
-    indpac['id_paciente'] = this.rut_paciente
-    console.log(indpac)
-    this.AgregarPariente()
   }
 
   async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: 'Ingreso de registro del pariente',
-      message: 'Se cancelará el registro del pariente. ¿Desea continuar?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            this.myBackButton()
-          }
-        }
-      ]
+    this.router.navigate(['/menu'])
+  }
+
+  async presentLoading(message: any) {
+    this.load = await this.loadingController.create({
+      message,
+      translucent: true,
+      cssClass: 'custom-class custom-loading',
+      backdropDismiss: true,
     });
-    await alert.present();
+    return this.load.present();
+    
+  }
+
+  async BuscarPaciente(){
+    if(this.rut_pacientee != null)
+      this.rut_paciente = this.rut_pacientee
+    if(this.rut_pacientee == null || this.dig_verif == null)
+      alert('Ingrese los datos para realizar la busqueda')
+    else{
+      this.presentLoading('Buscando paciente...')
+      this.apiRest.VerPaciente(this.rut_pacientee,this.dig_verif).subscribe(pacientes =>{
+      this.paciente = pacientes;
+      this.load.dismiss(
+        this.rut_pacientee = null,
+        this.dig_verif = null)
+      if(this.paciente[0] == null){
+        alert('Los datos ingresados no corresponden a ningun paciente');
+      }
+      else
+        console.log(this.paciente)
+        console.log('RUT Paciente: ',this.rut_paciente)
+    },error=>{
+    })}
+    
+  }
+
+  async Paciente(){
+    this.router.navigate(['paciente',this.rut_paciente])
   }
 }

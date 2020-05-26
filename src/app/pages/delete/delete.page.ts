@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Pariente, Parentezco } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { Location } from "@angular/common";
 
 @Component({
@@ -11,34 +10,22 @@ import { Location } from "@angular/common";
   styleUrls: ['./delete.page.scss'],
 })
 export class DeletePage implements OnInit {
-  pariente:Pariente = new Pariente();
-  sexo = new Array();
-  parentezco = new Array()
+  rut_paciente
+  data = new Array()
 
-  constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
+  constructor(private loadingController:LoadingController,private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
     private apiRest: ApiService, private router:Router) {
-      this.apiRest.Sexo().subscribe(sexos =>{
-        this.sexo = sexos;
-      }, error =>{
-        console.log("No sexos")
-      })
-      this.apiRest.Parentezco().subscribe(parentezcos =>{
-        this.parentezco = parentezcos;
-      }, error =>{
-        console.log("No parentezcos")
-      })
     }
 
   ngOnInit() {
-    this.pariente = new Pariente(JSON.parse(this.acRoute.snapshot.params.parEditar))
+    this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
+    this.apiRest.AntecAnam(this.rut_paciente).subscribe(datas =>{
+      this.data = datas;
+      console.log(this.data)
+    })
   }
 
-  myBackButton(){
-    this.location.back();
-    console.log(this.location)
-  }
-
-  async presentAlertConfirm() {
+  /*async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Actualizacion de registro del paciente',
       message: 'Se cancelará la actualización del registro del pariente. ¿Desea continuar?',
@@ -60,16 +47,30 @@ export class DeletePage implements OnInit {
     });
 
     await alert.present();
-  }
-  
-  ActualizarPariente(Par:Pariente,id:number){
-    console.log(Par)
-    this.apiRest.ActualizarPariente(Par,id).subscribe(data=>{
+  }*/
+
+  async Actualizar(){
+    console.log(this.data)
+    this.apiRest.ActualizarAntec(this.data[0],this.rut_paciente).subscribe(data=>{
     }, error =>{
-      alert("Error al actualizar los datos del pariente")
-  })
-  alert("Datos del pariente actualizados")
-  this.myBackButton()
-  
+      alert("Error al actualizar los datos del paciente")
+    })
+    this.router.navigate(['paciente',this.rut_paciente])
   }
+
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: null,
+      duration: 5000,
+      message: 'Click the backdrop to dismiss early...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading',
+      backdropDismiss: true
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed with role:', role);
+  }
+  
 }

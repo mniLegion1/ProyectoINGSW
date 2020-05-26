@@ -29,27 +29,16 @@ export class MenuPage implements OnInit {
   ngOnInit() {
   }
 
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: 'Ingreso de registro del pariente',
-      message: 'Se cancelará el registro de la interconsulta. ¿Desea continuar?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            this.router.navigate(['pacientes',this.rut_paciente])
-          }
-        }
-      ]
-    });
-    await alert.present();
+  async Buscador(){
+    this.router.navigateByUrl('/buscador')
+  }
+
+  async Pacientes(){
+    this.router.navigateByUrl('/pacientes')
+  }
+
+  async AntecedentesPersonales(){
+    this.router.navigateByUrl('/antecedentespersonales')
   }
 
 }

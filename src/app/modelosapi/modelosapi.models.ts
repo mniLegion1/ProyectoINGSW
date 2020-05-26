@@ -7,12 +7,15 @@ export class User{
     password:string;
 }
 
-
 export interface Paciente{
     actividad:string
+    anamnesis:string
+    antec_morbidos:string
     apellidos:string
     comuna:string
     cor_elec:string
+    acompanante:string
+    cor_elec_acomp:string
     deporte:string
     dig_verif:string
     direccion:string
@@ -32,9 +35,13 @@ export interface Paciente{
 
 export class Paciente{
     actividad:string
+    anamnesis:string
+    antec_morbidos:string
     apellidos:string
     comuna:string
     cor_elec:string
+    acompanante:string
+    cor_elec_acomp:string
     deporte:string
     dig_verif:string
     direccion:string
@@ -54,9 +61,13 @@ export class Paciente{
     constructor(datos?: Paciente ){
         if(datos != null){
             this.actividad = datos.actividad;
+            this.anamnesis = datos.anamnesis
+            this.antec_morbidos = datos.antec_morbidos
             this.apellidos = datos.apellidos;
             this.comuna = datos.comuna;
             this.cor_elec = datos.cor_elec;
+            this.acompanante = datos.acompanante;
+            this.cor_elec_acomp = datos.cor_elec_acomp;
             this.deporte = datos.deporte;
             this.dig_verif = datos.dig_verif;
             this.direccion = datos.direccion;
@@ -73,50 +84,6 @@ export class Paciente{
             this.sexo = datos.sexo;
             this.tiempo_libre = datos.tiempo_libre;
         }
-    }
-}
-
-export interface Pariente{  
-    antec_enferm:string
-    apellidos:string
-    fec_nac_pariente:Date
-    id_paciente:number
-    id_parentezco:number
-    id_pariente:number
-    nombres:string
-    peso_pariente:number
-    talla_pariente:number
-    sexo:string
-    vivo_pariente:boolean
-}
-
-export class Pariente{
-    antec_enferm:string
-    apellidos:string 
-    fec_nac_pariente:Date
-    id_paciente:number
-    id_parentezco:number
-    id_pariente:number
-    nombres:string
-    peso_pariente:number
-    sexo:string
-    talla_pariente:number
-    vivo_pariente:boolean
-
-    constructor(datos?:Pariente){
-        if(datos != null){
-            this.antec_enferm = datos.antec_enferm
-            this.apellidos = datos.apellidos
-            this.fec_nac_pariente = datos.fec_nac_pariente
-            this.id_paciente = datos.id_paciente
-            this.id_parentezco = datos.id_parentezco
-            this.id_pariente = datos.id_pariente
-            this.nombres = datos.nombres
-            this.peso_pariente = datos.peso_pariente
-            this.sexo = datos.sexo
-            this.talla_pariente = datos.talla_pariente
-            this.vivo_pariente = datos.vivo_pariente
-        }   
     }
 }
 
@@ -283,6 +250,7 @@ export interface Control{
     test_der:number
     id_interconsulta:number
     observaciones:string
+    fecha_ctrl:Date
 
 }
 
@@ -310,6 +278,7 @@ export class Control{
     test_der:number
     id_interconsulta:number
     observaciones:string
+    fecha_ctrl:Date
 
     constructor(datos?:Control){
         if(datos != null){
@@ -336,6 +305,7 @@ export class Control{
             this.id_interconsulta = datos.id_interconsulta
             this.observaciones = datos.observaciones
             this.evolucion = datos.evolucion
+            this.fecha_ctrl = datos.fecha_ctrl
         }
     }
 }
@@ -443,5 +413,76 @@ export class Medico{
             this.nombres_medico = datos.nombres_medico
             this.apellidos_medico = datos.apellidos_medico
         }
+    }
+}
+
+export interface ExFisico{
+    idEX_FISICO:number
+    edad:number
+    MG:number
+    MB:number
+    MM:number
+    GV:number
+    agua:number
+    imc:number
+    peso:number
+    talla:number
+    vello:number
+    mama:number
+    genital:number
+    test_izq:number
+    test_der:number
+    diagnostico:string
+    indicacion:string
+    sig_visita:Date
+    observacion:string
+    ctrl_existe:boolean
+}
+
+export class ExFisico{
+    idEX_FISICO:number
+    edad:number
+    MG:number
+    MB:number
+    MM:number
+    GV:number
+    agua:number
+    imc:number
+    peso:number
+    talla:number
+    vello:number
+    mama:number
+    genital:number
+    test_izq:number
+    test_der:number
+    diagnostico:string
+    indicacion:string
+    sig_visita:Date
+    observacion:string
+    ctrl_existe:boolean
+
+    constructor(datos?:ExFisico){
+        if(datos != null){
+            this.idEX_FISICO = datos.idEX_FISICO
+            this.edad = datos.edad
+            this.MG = datos.MG
+            this.MB = datos.MB
+            this.MM = datos.MM
+            this.GV = datos.GV
+            this.agua = datos.agua
+            this.imc = datos.imc
+            this.peso = datos.peso
+            this.talla = datos.talla
+            this.vello = datos.vello
+            this.mama = datos.mama
+            this.genital = datos.genital
+            this.test_izq = datos.test_izq
+            this.test_der = datos.test_der
+            this.diagnostico = datos.diagnostico
+            this.indicacion = datos.indicacion
+            this.sig_visita = datos.sig_visita
+            this.observacion = datos.observacion
+            this.ctrl_existe = datos.ctrl_existe
+        }    
     }
 }

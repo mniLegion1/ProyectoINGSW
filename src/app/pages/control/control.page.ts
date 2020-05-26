@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
-import { Interconsulta, Control } from 'src/app/modelosapi/modelosapi.models';
+import { Control } from 'src/app/modelosapi/modelosapi.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Location } from "@angular/common";
-import { toASCII } from 'punycode';
 
 @Component({
   selector: 'app-control',
@@ -13,9 +12,11 @@ import { toASCII } from 'punycode';
 })
 export class ControlPage implements OnInit {
   control:Control = new Control()
+  ctrl
   id_intercon:number
   rut_paciente
-  inter:Interconsulta
+  nro
+  NoCtrl: boolean
 
 
   constructor(private location:Location, private acRoute:ActivatedRoute, public alertController: AlertController,
@@ -24,8 +25,24 @@ export class ControlPage implements OnInit {
 
   ngOnInit() {
     this.rut_paciente = this.acRoute.snapshot.paramMap.get('rut_paciente');
-    this.id_intercon = parseInt(this.acRoute.snapshot.paramMap.get('data'));
-    this.control.id_interconsulta = this.id_intercon
+    this.nro = this.acRoute.snapshot.paramMap.get('nro');
+    this.apiRest.Controles(this.rut_paciente).subscribe(ctrles =>{
+      this.ctrl = ctrles;
+      if(this.ctrl[0] == null){
+        this.NoCtrl = true
+        this.apiRest.Fecha().subscribe(fechas =>{
+          this.control.fecha_ctrl = fechas[0].fec_real
+        },
+          error=>{
+    
+          })
+      }
+      else
+        this.NoCtrl = false
+    },error=>{
+      console.log("No previsiones")
+    })
+    
   }
 
   myBackButton(){
@@ -54,14 +71,6 @@ export class ControlPage implements OnInit {
       ]
     });
     await alert.present();
-  }
-
-  AgregarExlab(){
-    this.apiRest.AgregarControl(this.control).subscribe(res => {
-      this.router.navigate(['pacientes',this.rut_paciente,'interconsulta',this.id_intercon,'controlmedico','examenlaboratorio'])
-    }, err =>{
-      alert("El control no pudo registrarse. Revise que todos los campos estén llenados.");
-    })
   }
 
 }

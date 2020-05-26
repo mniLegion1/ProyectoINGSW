@@ -1,20 +1,33 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Menu</ion-title>
+    <ion-title>Consulta Dr. Peter McColl Calvo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-button class="sectest" routerLink="/pacientes">Pacientes</ion-button>
-      </ion-col>
+      <ion-col></ion-col>
+      <ion-col><ion-button (click)="AntecedentesPersonales()">Nuevo</ion-button></ion-col>
+      <ion-col></ion-col>
+      <ion-col><ion-button (click)="Buscador()">Control</ion-button></ion-col>
+      <ion-col></ion-col>
+      <ion-col><ion-button (click)="Pacientes()">Pacientes</ion-button></ion-col>
+      <ion-col></ion-col>      
     </ion-row>
+    <ion-row><ion-col></ion-col></ion-row>
     <ion-row>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+      <ion-col size=1.9></ion-col>
       <ion-col>
-        <ion-button class="sectest" (click)=onLogout()>Salir</ion-button>
+        <ion-button (click)=onLogout()>Salir</ion-button>
       </ion-col>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+      <ion-col></ion-col>      
     </ion-row>
   </ion-grid>
     </ion-content>
+
+    

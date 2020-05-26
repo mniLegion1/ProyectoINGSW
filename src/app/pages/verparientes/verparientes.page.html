@@ -1,37 +1,190 @@
 <ion-header>
-  <ion-toolbar color="success">
-      <ion-buttons slot="start">
-        <ion-button shape="round" (click)=myBackButton()><ion-icon name="arrow-back"></ion-icon></ion-button>
-        </ion-buttons>
-    <ion-title>Parientes</ion-title>
+  <ion-toolbar color ="success">
+    <ion-buttons slot="start">
+    </ion-buttons>
+    <ion-title>Examen Fisico</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div *ngIf="pariente || pariente.length > 0"><ion-card *ngFor="let pariente of pariente">
-    <ion-card-header>
-      <ion-card-title>{{pariente.nombres}}{{' '}}{{pariente.apellidos}}</ion-card-title>
-    </ion-card-header>
+<ion-content padding >
+  <ion-grid>
+    <ion-row>
+      <ion-col size=8>
+  <ion-item>
+    <ion-textarea autoGrow autofocus [(ngModel)]="exfisico.observacion">Observaciones:</ion-textarea>
+  </ion-item>
+</ion-col>
+<ion-col size=1> </ion-col>
+<ion-col size=3>
+</ion-col>
+</ion-row>
+  <ion-row>
+    <ion-col size=3>
+      <ion-item>
+        <ion-label  >Edad: </ion-label>
+        <ion-input readonly type="string" [(ngModel)]="exfisico.edad"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label >Peso(Kg): </ion-label>
+        <ion-input type="number" [(ngModel)]="exfisico.peso"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label >Talla(cm): </ion-label>
+        <ion-input type="number" [(ngModel)]="exfisico.talla"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-button (click)="Imc()">calcular imc</ion-button>
+  </ion-row>
 
-    <ion-card-content>
-      <div *ngFor="let parentezco of parentezco"> <ng-container *ngIf="parentezco.idTIPO_PARENTEZCO === pariente.id_parentezco">
-      <h4><strong>Fecha de nacimiento: </strong>{{pariente.fec_nac_pariente | date: 'dd/MM/yyyy'}}
-        &nbsp;&nbsp;&nbsp;&nbsp;<strong>Parentezco: </strong>{{parentezco.desc_parentezco}}{{' '}}
-      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Peso: </strong>{{pariente.peso_pariente}}{{' '}}Kg
-      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Altura: </strong>{{pariente.talla_pariente}}{{' '}}m
-      &nbsp;&nbsp;&nbsp;&nbsp;<strong>Antecedente de enfermedad: </strong>{{pariente.antec_enferm}}</h4>
-    </ng-container> </div>
-    <ion-button color="primary" size="small" (click)="ActualizarPariente(pariente)">Actualizar</ion-button>
-      <ion-button color="danger" size="small" (click)="presentAlertConfirm(pariente.id_pariente)">Borrar</ion-button>      
-    </ion-card-content>
-  </ion-card></div>
+  <ion-row>
+    <ion-col size=5.9>
+  <ion-header>
+    <ion-toolbar color ="tertiary">
+      <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-title>Tanner</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-col>
+<ion-col size=0.2></ion-col>
+<ion-col size=5.9>
+  <ion-header>
+    <ion-toolbar color ="tertiary">
+      <ion-buttons slot="start">
+      </ion-buttons>
+      <ion-title>Composicion corporal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size=2.95>
+      <ion-item>
+        <ion-label >Vello: </ion-label>
+        <ion-input type="text" [(ngModel)]="exfisico.vello"></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label >T.I.: </ion-label>
+      <ion-input type="text" [(ngModel)]="exfisico.test_izq"></ion-input>
+    </ion-item>
+</ion-col>
+  <ion-col size=0.2></ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label >MG: </ion-label>
+      <ion-input type="text" [(ngModel)]="exfisico.MG"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=2.95>
+  <ion-item>
+    <ion-label >MM: </ion-label>
+    <ion-input type="text" [(ngModel)]="exfisico.MM"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size=2.95>
+      <ion-item>
+        <ion-label >Mama: </ion-label>
+        <ion-input type="text" [(ngModel)]="exfisico.mama"></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label >T.D.: </ion-label>
+      <ion-input type="text" [(ngModel)]="exfisico.test_der"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=0.2></ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label >MB: </ion-label>
+      <ion-input type="text" [(ngModel)]="exfisico.MB"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=2.95>
+  <ion-item>
+    <ion-label >GV: </ion-label>
+    <ion-input type="text" [(ngModel)]="exfisico.GV"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <ion-col size=2.95>
+      <ion-item>
+        <ion-label >Genital: </ion-label>
+        <ion-input type="text" [(ngModel)]="exfisico.genital"></ion-input>
+      </ion-item>
+  </ion-col>
+  <ion-col size=3.15></ion-col>
+  <ion-col size=2.95>
+    <ion-item>
+      <ion-label >Agua: </ion-label>
+      <ion-input type="text" [(ngModel)]="exfisico.agua"></ion-input>
+    </ion-item>
+</ion-col>
+<ion-col size=2.95>
+  <ion-item>
+    <ion-label >IMC: </ion-label>
+    <ion-input readonly type="text" [(ngModel)]="exfisico.imc"></ion-input>
+  </ion-item>
+</ion-col>
+</ion-row>
+<ion-row>
+  <h4>&#8203;</h4>
+</ion-row>
+<ion-row>
+  <ion-col size=5.9>
+<ion-item>
+<ion-textarea autoGrow autofocus [(ngModel)]="exfisico.diagnostico">Diagnosticos:</ion-textarea>
+</ion-item>
+</ion-col>
+<ion-col size=0.2></ion-col>
+<ion-col size=5.9>
+  <ion-item>
+  <ion-textarea autoGrow autofocus [(ngModel)]="exfisico.indicacion">Indicaciones:</ion-textarea>
+  </ion-item>
+  </ion-col>
+</ion-row>
+<ion-row>
+  
+</ion-row>
+<ion-row><ion-col size=3>
+  <ion-item>
+    <ion-label >Fecha siguiente visita: </ion-label>
+    <ion-datetime displayFormat="DD - MM - YYYY" max="2100-12-31" [(ngModel)]="exfisico.sig_visita"></ion-datetime>
+  </ion-item>
+</ion-col>
+<ion-col></ion-col>
+</ion-row>
 
-  <div *ngIf="!pariente || pariente.length === 0">
-    <h5>No hay parientes registrados</h5>
-  </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="AgregarPariente()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<div *ngIf="esActualizar">
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="Actualizar2()">Actualizar datos</ion-button>
+    </ion-col>
+    <ion-button (click)="Siguiente()">Controles</ion-button>
+    <ion-button (click)="Atras()">Atras</ion-button>
+  </ion-row>
+</div>
+
+<div *ngIf="!esActualizar">
+  <ion-row>
+    <ion-col>
+      <ion-button (click)="Guardar()">Guardar</ion-button>
+      <ion-button (click)="Actualizar1()">Actualizar Datos</ion-button>
+    </ion-col>
+    <ion-button (click)="Siguiente()">Controles</ion-button>
+    <ion-button (click)="Atras()">Atras</ion-button>
+  </ion-row>
+</div>
+</ion-grid>
 </ion-content>
